@@ -16,6 +16,35 @@
 		3807E70116B4BA5500A116A0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70016B4BA5500A116A0 /* Default.png */; };
 		3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70216B4BA5500A116A0 /* Default@2x.png */; };
 		3807E70516B4BA5500A116A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70416B4BA5500A116A0 /* Default-568h@2x.png */; };
+		3807E78F16B4C49300A116A0 /* KMTreasureAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78A16B4C49300A116A0 /* KMTreasureAnnotation.m */; };
+		3807E79016B4C49300A116A0 /* KMTreasureHunterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */; };
+		3807E79116B4C49300A116A0 /* KMVaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78E16B4C49300A116A0 /* KMVaults.m */; };
+		3807E79D16B4C54300A116A0 /* 120815c.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79416B4C54300A116A0 /* 120815c.png */; };
+		3807E79E16B4C54300A116A0 /* icon.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79516B4C54300A116A0 /* icon.psd */; };
+		3807E79F16B4C54300A116A0 /* Shine1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79616B4C54300A116A0 /* Shine1.png */; };
+		3807E7A016B4C54300A116A0 /* Shine2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79716B4C54300A116A0 /* Shine2.png */; };
+		3807E7A116B4C54300A116A0 /* Shine3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79816B4C54300A116A0 /* Shine3.png */; };
+		3807E7A216B4C54300A116A0 /* Shine4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79916B4C54300A116A0 /* Shine4.png */; };
+		3807E7A316B4C54300A116A0 /* Shine5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79A16B4C54300A116A0 /* Shine5.png */; };
+		3807E7A416B4C54300A116A0 /* Shine6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79B16B4C54300A116A0 /* Shine6.png */; };
+		3807E7A516B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79C16B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png */; };
+		3807E7B716B4C54E00A116A0 /* keywordList.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7A716B4C54E00A116A0 /* keywordList.png */; };
+		3807E7B816B4C54E00A116A0 /* keywordList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7A816B4C54E00A116A0 /* keywordList@2x.png */; };
+		3807E7B916B4C54E00A116A0 /* KMKeywordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7AA16B4C54E00A116A0 /* KMKeywordListController.m */; };
+		3807E7BA16B4C54E00A116A0 /* KMLandmarkInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7AC16B4C54E00A116A0 /* KMLandmarkInfoViewController.m */; };
+		3807E7BB16B4C54E00A116A0 /* KMLandmarkListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7AE16B4C54E00A116A0 /* KMLandmarkListController.m */; };
+		3807E7BC16B4C54E00A116A0 /* KMLandmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7B016B4C54E00A116A0 /* KMLandmarkViewController.m */; };
+		3807E7BD16B4C54E00A116A0 /* KMVaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */; };
+		3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B316B4C54E00A116A0 /* landmarkList.png */; };
+		3807E7BF16B4C54E00A116A0 /* landmarkList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */; };
+		3807E7C016B4C54E00A116A0 /* vaults-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B516B4C54E00A116A0 /* vaults-Info.plist */; };
+		3807E7C616B4C56400A116A0 /* KMTreasureAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */; };
+		3807E7C716B4C56400A116A0 /* KMTreasureHunterAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7C516B4C56400A116A0 /* KMTreasureHunterAnnotationView.m */; };
+		3807E7CB16B4C5CC00A116A0 /* KMQuizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7CA16B4C5CC00A116A0 /* KMQuizeViewController.m */; };
+		3807E7CF16B4C5DA00A116A0 /* KMLever.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7CE16B4C5DA00A116A0 /* KMLever.m */; };
+		3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */; };
+		3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D216B4C5EF00A116A0 /* MapKit.framework */; };
+		3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D416B4C5F400A116A0 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +61,48 @@
 		3807E70016B4BA5500A116A0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		3807E70216B4BA5500A116A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3807E70416B4BA5500A116A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3807E78916B4C49300A116A0 /* KMTreasureAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMTreasureAnnotation.h; path = models/KMTreasureAnnotation.h; sourceTree = "<group>"; };
+		3807E78A16B4C49300A116A0 /* KMTreasureAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMTreasureAnnotation.m; path = models/KMTreasureAnnotation.m; sourceTree = "<group>"; };
+		3807E78B16B4C49300A116A0 /* KMTreasureHunterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMTreasureHunterAnnotation.h; path = models/KMTreasureHunterAnnotation.h; sourceTree = "<group>"; };
+		3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMTreasureHunterAnnotation.m; path = models/KMTreasureHunterAnnotation.m; sourceTree = "<group>"; };
+		3807E78D16B4C49300A116A0 /* KMVaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMVaults.h; path = models/KMVaults.h; sourceTree = "<group>"; };
+		3807E78E16B4C49300A116A0 /* KMVaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMVaults.m; path = models/KMVaults.m; sourceTree = "<group>"; };
+		3807E79416B4C54300A116A0 /* 120815c.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120815c.png; sourceTree = "<group>"; };
+		3807E79516B4C54300A116A0 /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
+		3807E79616B4C54300A116A0 /* Shine1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine1.png; sourceTree = "<group>"; };
+		3807E79716B4C54300A116A0 /* Shine2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine2.png; sourceTree = "<group>"; };
+		3807E79816B4C54300A116A0 /* Shine3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine3.png; sourceTree = "<group>"; };
+		3807E79916B4C54300A116A0 /* Shine4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine4.png; sourceTree = "<group>"; };
+		3807E79A16B4C54300A116A0 /* Shine5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine5.png; sourceTree = "<group>"; };
+		3807E79B16B4C54300A116A0 /* Shine6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shine6.png; sourceTree = "<group>"; };
+		3807E79C16B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vx_chara07_b_cvt_0_1.png; sourceTree = "<group>"; };
+		3807E7A716B4C54E00A116A0 /* keywordList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keywordList.png; sourceTree = "<group>"; };
+		3807E7A816B4C54E00A116A0 /* keywordList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keywordList@2x.png"; sourceTree = "<group>"; };
+		3807E7A916B4C54E00A116A0 /* KMKeywordListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMKeywordListController.h; sourceTree = "<group>"; };
+		3807E7AA16B4C54E00A116A0 /* KMKeywordListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMKeywordListController.m; sourceTree = "<group>"; };
+		3807E7AB16B4C54E00A116A0 /* KMLandmarkInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkInfoViewController.h; sourceTree = "<group>"; };
+		3807E7AC16B4C54E00A116A0 /* KMLandmarkInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkInfoViewController.m; sourceTree = "<group>"; };
+		3807E7AD16B4C54E00A116A0 /* KMLandmarkListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkListController.h; sourceTree = "<group>"; };
+		3807E7AE16B4C54E00A116A0 /* KMLandmarkListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkListController.m; sourceTree = "<group>"; };
+		3807E7AF16B4C54E00A116A0 /* KMLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkViewController.h; sourceTree = "<group>"; };
+		3807E7B016B4C54E00A116A0 /* KMLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkViewController.m; sourceTree = "<group>"; };
+		3807E7B116B4C54E00A116A0 /* KMVaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMVaultViewController.h; sourceTree = "<group>"; };
+		3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMVaultViewController.m; sourceTree = "<group>"; };
+		3807E7B316B4C54E00A116A0 /* landmarkList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landmarkList.png; sourceTree = "<group>"; };
+		3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "landmarkList@2x.png"; sourceTree = "<group>"; };
+		3807E7B516B4C54E00A116A0 /* vaults-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "vaults-Info.plist"; sourceTree = "<group>"; };
+		3807E7B616B4C54E00A116A0 /* vaults-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vaults-Prefix.pch"; sourceTree = "<group>"; };
+		3807E7C216B4C56400A116A0 /* KMTreasureAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTreasureAnnotationView.h; sourceTree = "<group>"; };
+		3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMTreasureAnnotationView.m; sourceTree = "<group>"; };
+		3807E7C416B4C56400A116A0 /* KMTreasureHunterAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTreasureHunterAnnotationView.h; sourceTree = "<group>"; };
+		3807E7C516B4C56400A116A0 /* KMTreasureHunterAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMTreasureHunterAnnotationView.m; sourceTree = "<group>"; };
+		3807E7C916B4C5CC00A116A0 /* KMQuizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMQuizeViewController.h; sourceTree = "<group>"; };
+		3807E7CA16B4C5CC00A116A0 /* KMQuizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMQuizeViewController.m; sourceTree = "<group>"; };
+		3807E7CD16B4C5DA00A116A0 /* KMLever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLever.h; sourceTree = "<group>"; };
+		3807E7CE16B4C5DA00A116A0 /* KMLever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLever.m; sourceTree = "<group>"; };
+		3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3807E7D216B4C5EF00A116A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3807E7D416B4C5F400A116A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +110,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */,
+				3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */,
+				3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */,
 				3807E6EF16B4BA5400A116A0 /* UIKit.framework in Frameworks */,
 				3807E6F116B4BA5400A116A0 /* Foundation.framework in Frameworks */,
 				3807E6F316B4BA5400A116A0 /* CoreGraphics.framework in Frameworks */,
@@ -68,6 +142,9 @@
 		3807E6ED16B4BA5400A116A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3807E7D416B4C5F400A116A0 /* CoreLocation.framework */,
+				3807E7D216B4C5EF00A116A0 /* MapKit.framework */,
+				3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */,
 				3807E6EE16B4BA5400A116A0 /* UIKit.framework */,
 				3807E6F016B4BA5400A116A0 /* Foundation.framework */,
 				3807E6F216B4BA5400A116A0 /* CoreGraphics.framework */,
@@ -78,7 +155,12 @@
 		3807E6F416B4BA5400A116A0 /* kyotika */ = {
 			isa = PBXGroup;
 			children = (
+				3807E79316B4C54300A116A0 /* images */,
 				3807E77B16B4C0C400A116A0 /* models */,
+				3807E7C116B4C56400A116A0 /* views */,
+				3807E7A616B4C54E00A116A0 /* landmark-keywords */,
+				3807E7C816B4C5CC00A116A0 /* quiz */,
+				3807E7CC16B4C5DA00A116A0 /* virtual */,
 				3807E6FD16B4BA5400A116A0 /* KMAppDelegate.h */,
 				3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */,
 				3807E6F516B4BA5400A116A0 /* Supporting Files */,
@@ -103,8 +185,82 @@
 		3807E77B16B4C0C400A116A0 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				3807E78916B4C49300A116A0 /* KMTreasureAnnotation.h */,
+				3807E78A16B4C49300A116A0 /* KMTreasureAnnotation.m */,
+				3807E78B16B4C49300A116A0 /* KMTreasureHunterAnnotation.h */,
+				3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */,
+				3807E78D16B4C49300A116A0 /* KMVaults.h */,
+				3807E78E16B4C49300A116A0 /* KMVaults.m */,
 			);
 			name = models;
+			sourceTree = "<group>";
+		};
+		3807E79316B4C54300A116A0 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				3807E79416B4C54300A116A0 /* 120815c.png */,
+				3807E79516B4C54300A116A0 /* icon.psd */,
+				3807E79616B4C54300A116A0 /* Shine1.png */,
+				3807E79716B4C54300A116A0 /* Shine2.png */,
+				3807E79816B4C54300A116A0 /* Shine3.png */,
+				3807E79916B4C54300A116A0 /* Shine4.png */,
+				3807E79A16B4C54300A116A0 /* Shine5.png */,
+				3807E79B16B4C54300A116A0 /* Shine6.png */,
+				3807E79C16B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		3807E7A616B4C54E00A116A0 /* landmark-keywords */ = {
+			isa = PBXGroup;
+			children = (
+				3807E7A716B4C54E00A116A0 /* keywordList.png */,
+				3807E7A816B4C54E00A116A0 /* keywordList@2x.png */,
+				3807E7A916B4C54E00A116A0 /* KMKeywordListController.h */,
+				3807E7AA16B4C54E00A116A0 /* KMKeywordListController.m */,
+				3807E7AB16B4C54E00A116A0 /* KMLandmarkInfoViewController.h */,
+				3807E7AC16B4C54E00A116A0 /* KMLandmarkInfoViewController.m */,
+				3807E7AD16B4C54E00A116A0 /* KMLandmarkListController.h */,
+				3807E7AE16B4C54E00A116A0 /* KMLandmarkListController.m */,
+				3807E7AF16B4C54E00A116A0 /* KMLandmarkViewController.h */,
+				3807E7B016B4C54E00A116A0 /* KMLandmarkViewController.m */,
+				3807E7B116B4C54E00A116A0 /* KMVaultViewController.h */,
+				3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */,
+				3807E7B316B4C54E00A116A0 /* landmarkList.png */,
+				3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */,
+				3807E7B516B4C54E00A116A0 /* vaults-Info.plist */,
+				3807E7B616B4C54E00A116A0 /* vaults-Prefix.pch */,
+			);
+			path = "landmark-keywords";
+			sourceTree = "<group>";
+		};
+		3807E7C116B4C56400A116A0 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				3807E7C216B4C56400A116A0 /* KMTreasureAnnotationView.h */,
+				3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */,
+				3807E7C416B4C56400A116A0 /* KMTreasureHunterAnnotationView.h */,
+				3807E7C516B4C56400A116A0 /* KMTreasureHunterAnnotationView.m */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		3807E7C816B4C5CC00A116A0 /* quiz */ = {
+			isa = PBXGroup;
+			children = (
+				3807E7C916B4C5CC00A116A0 /* KMQuizeViewController.h */,
+				3807E7CA16B4C5CC00A116A0 /* KMQuizeViewController.m */,
+			);
+			path = quiz;
+			sourceTree = "<group>";
+		};
+		3807E7CC16B4C5DA00A116A0 /* virtual */ = {
+			isa = PBXGroup;
+			children = (
+				3807E7CD16B4C5DA00A116A0 /* KMLever.h */,
+				3807E7CE16B4C5DA00A116A0 /* KMLever.m */,
+			);
+			path = virtual;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +319,20 @@
 				3807E70116B4BA5500A116A0 /* Default.png in Resources */,
 				3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */,
 				3807E70516B4BA5500A116A0 /* Default-568h@2x.png in Resources */,
+				3807E79D16B4C54300A116A0 /* 120815c.png in Resources */,
+				3807E79E16B4C54300A116A0 /* icon.psd in Resources */,
+				3807E79F16B4C54300A116A0 /* Shine1.png in Resources */,
+				3807E7A016B4C54300A116A0 /* Shine2.png in Resources */,
+				3807E7A116B4C54300A116A0 /* Shine3.png in Resources */,
+				3807E7A216B4C54300A116A0 /* Shine4.png in Resources */,
+				3807E7A316B4C54300A116A0 /* Shine5.png in Resources */,
+				3807E7A416B4C54300A116A0 /* Shine6.png in Resources */,
+				3807E7A516B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png in Resources */,
+				3807E7B716B4C54E00A116A0 /* keywordList.png in Resources */,
+				3807E7B816B4C54E00A116A0 /* keywordList@2x.png in Resources */,
+				3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */,
+				3807E7BF16B4C54E00A116A0 /* landmarkList@2x.png in Resources */,
+				3807E7C016B4C54E00A116A0 /* vaults-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +345,18 @@
 			files = (
 				3807E6FB16B4BA5400A116A0 /* main.m in Sources */,
 				3807E6FF16B4BA5500A116A0 /* KMAppDelegate.m in Sources */,
+				3807E78F16B4C49300A116A0 /* KMTreasureAnnotation.m in Sources */,
+				3807E79016B4C49300A116A0 /* KMTreasureHunterAnnotation.m in Sources */,
+				3807E79116B4C49300A116A0 /* KMVaults.m in Sources */,
+				3807E7B916B4C54E00A116A0 /* KMKeywordListController.m in Sources */,
+				3807E7BA16B4C54E00A116A0 /* KMLandmarkInfoViewController.m in Sources */,
+				3807E7BB16B4C54E00A116A0 /* KMLandmarkListController.m in Sources */,
+				3807E7BC16B4C54E00A116A0 /* KMLandmarkViewController.m in Sources */,
+				3807E7BD16B4C54E00A116A0 /* KMVaultViewController.m in Sources */,
+				3807E7C616B4C56400A116A0 /* KMTreasureAnnotationView.m in Sources */,
+				3807E7C716B4C56400A116A0 /* KMTreasureHunterAnnotationView.m in Sources */,
+				3807E7CB16B4C5CC00A116A0 /* KMQuizeViewController.m in Sources */,
+				3807E7CF16B4C5DA00A116A0 /* KMLever.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +430,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kyotika/kyotika-Prefix.pch";
 				INFOPLIST_FILE = "kyotika/kyotika-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -259,6 +442,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kyotika/kyotika-Prefix.pch";
 				INFOPLIST_FILE = "kyotika/kyotika-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
