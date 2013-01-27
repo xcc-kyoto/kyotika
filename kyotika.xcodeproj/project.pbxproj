@@ -37,7 +37,6 @@
 		3807E7BD16B4C54E00A116A0 /* KMVaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */; };
 		3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B316B4C54E00A116A0 /* landmarkList.png */; };
 		3807E7BF16B4C54E00A116A0 /* landmarkList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */; };
-		3807E7C016B4C54E00A116A0 /* vaults-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3807E7B516B4C54E00A116A0 /* vaults-Info.plist */; };
 		3807E7C616B4C56400A116A0 /* KMTreasureAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */; };
 		3807E7C716B4C56400A116A0 /* KMTreasureHunterAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7C516B4C56400A116A0 /* KMTreasureHunterAnnotationView.m */; };
 		3807E7CB16B4C5CC00A116A0 /* KMQuizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E7CA16B4C5CC00A116A0 /* KMQuizeViewController.m */; };
@@ -91,8 +90,6 @@
 		3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMVaultViewController.m; sourceTree = "<group>"; };
 		3807E7B316B4C54E00A116A0 /* landmarkList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landmarkList.png; sourceTree = "<group>"; };
 		3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "landmarkList@2x.png"; sourceTree = "<group>"; };
-		3807E7B516B4C54E00A116A0 /* vaults-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "vaults-Info.plist"; sourceTree = "<group>"; };
-		3807E7B616B4C54E00A116A0 /* vaults-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "vaults-Prefix.pch"; sourceTree = "<group>"; };
 		3807E7C216B4C56400A116A0 /* KMTreasureAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTreasureAnnotationView.h; sourceTree = "<group>"; };
 		3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMTreasureAnnotationView.m; sourceTree = "<group>"; };
 		3807E7C416B4C56400A116A0 /* KMTreasureHunterAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMTreasureHunterAnnotationView.h; sourceTree = "<group>"; };
@@ -233,8 +230,6 @@
 				3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */,
 				3807E7B316B4C54E00A116A0 /* landmarkList.png */,
 				3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */,
-				3807E7B516B4C54E00A116A0 /* vaults-Info.plist */,
-				3807E7B616B4C54E00A116A0 /* vaults-Prefix.pch */,
 			);
 			path = "landmark-keywords";
 			sourceTree = "<group>";
@@ -337,7 +332,6 @@
 				3807E7B816B4C54E00A116A0 /* keywordList@2x.png in Resources */,
 				3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */,
 				3807E7BF16B4C54E00A116A0 /* landmarkList@2x.png in Resources */,
-				3807E7C016B4C54E00A116A0 /* vaults-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

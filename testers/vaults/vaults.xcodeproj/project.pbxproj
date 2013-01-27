@@ -1,0 +1,338 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3892A4D616B4C9AA00EA614B /* keywordList.png in Resources */ = {isa = PBXBuildFile; fileRef = 3892A4C616B4C9AA00EA614B /* keywordList.png */; };
+		3892A4D716B4C9AA00EA614B /* keywordList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3892A4C716B4C9AA00EA614B /* keywordList@2x.png */; };
+		3892A4D816B4C9AA00EA614B /* KMKeywordListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4C916B4C9AA00EA614B /* KMKeywordListController.m */; };
+		3892A4D916B4C9AA00EA614B /* KMLandmarkInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4CB16B4C9AA00EA614B /* KMLandmarkInfoViewController.m */; };
+		3892A4DA16B4C9AA00EA614B /* KMLandmarkListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4CD16B4C9AA00EA614B /* KMLandmarkListController.m */; };
+		3892A4DB16B4C9AA00EA614B /* KMLandmarkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4CF16B4C9AA00EA614B /* KMLandmarkViewController.m */; };
+		3892A4DC16B4C9AA00EA614B /* KMVaultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4D116B4C9AA00EA614B /* KMVaultViewController.m */; };
+		3892A4DD16B4C9AA00EA614B /* landmarkList.png in Resources */ = {isa = PBXBuildFile; fileRef = 3892A4D216B4C9AA00EA614B /* landmarkList.png */; };
+		3892A4DE16B4C9AA00EA614B /* landmarkList@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3892A4D316B4C9AA00EA614B /* landmarkList@2x.png */; };
+		38F2771E16AE74EF00FFE10E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F2771D16AE74EF00FFE10E /* UIKit.framework */; };
+		38F2772016AE74EF00FFE10E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F2771F16AE74EF00FFE10E /* Foundation.framework */; };
+		38F2772216AE74EF00FFE10E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F2772116AE74EF00FFE10E /* CoreGraphics.framework */; };
+		38F2772816AE74EF00FFE10E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38F2772616AE74EF00FFE10E /* InfoPlist.strings */; };
+		38F2772A16AE74EF00FFE10E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2772916AE74EF00FFE10E /* main.m */; };
+		38F2772E16AE74EF00FFE10E /* KMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38F2772D16AE74EF00FFE10E /* KMAppDelegate.m */; };
+		38F2773016AE74EF00FFE10E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F2772F16AE74EF00FFE10E /* Default.png */; };
+		38F2773216AE74EF00FFE10E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F2773116AE74EF00FFE10E /* Default@2x.png */; };
+		38F2773416AE74EF00FFE10E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38F2773316AE74EF00FFE10E /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3892A4C616B4C9AA00EA614B /* keywordList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keywordList.png; sourceTree = "<group>"; };
+		3892A4C716B4C9AA00EA614B /* keywordList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keywordList@2x.png"; sourceTree = "<group>"; };
+		3892A4C816B4C9AA00EA614B /* KMKeywordListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMKeywordListController.h; sourceTree = "<group>"; };
+		3892A4C916B4C9AA00EA614B /* KMKeywordListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMKeywordListController.m; sourceTree = "<group>"; };
+		3892A4CA16B4C9AA00EA614B /* KMLandmarkInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkInfoViewController.h; sourceTree = "<group>"; };
+		3892A4CB16B4C9AA00EA614B /* KMLandmarkInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkInfoViewController.m; sourceTree = "<group>"; };
+		3892A4CC16B4C9AA00EA614B /* KMLandmarkListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkListController.h; sourceTree = "<group>"; };
+		3892A4CD16B4C9AA00EA614B /* KMLandmarkListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkListController.m; sourceTree = "<group>"; };
+		3892A4CE16B4C9AA00EA614B /* KMLandmarkViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMLandmarkViewController.h; sourceTree = "<group>"; };
+		3892A4CF16B4C9AA00EA614B /* KMLandmarkViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMLandmarkViewController.m; sourceTree = "<group>"; };
+		3892A4D016B4C9AA00EA614B /* KMVaultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMVaultViewController.h; sourceTree = "<group>"; };
+		3892A4D116B4C9AA00EA614B /* KMVaultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMVaultViewController.m; sourceTree = "<group>"; };
+		3892A4D216B4C9AA00EA614B /* landmarkList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = landmarkList.png; sourceTree = "<group>"; };
+		3892A4D316B4C9AA00EA614B /* landmarkList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "landmarkList@2x.png"; sourceTree = "<group>"; };
+		38F2771916AE74EF00FFE10E /* vaults.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vaults.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38F2771D16AE74EF00FFE10E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		38F2771F16AE74EF00FFE10E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		38F2772116AE74EF00FFE10E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		38F2772516AE74EF00FFE10E /* vaults-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "vaults-Info.plist"; sourceTree = "<group>"; };
+		38F2772716AE74EF00FFE10E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		38F2772916AE74EF00FFE10E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		38F2772B16AE74EF00FFE10E /* vaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "vaults-Prefix.pch"; sourceTree = "<group>"; };
+		38F2772C16AE74EF00FFE10E /* KMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMAppDelegate.h; sourceTree = "<group>"; };
+		38F2772D16AE74EF00FFE10E /* KMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMAppDelegate.m; sourceTree = "<group>"; };
+		38F2772F16AE74EF00FFE10E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		38F2773116AE74EF00FFE10E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		38F2773316AE74EF00FFE10E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38F2771616AE74EF00FFE10E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38F2771E16AE74EF00FFE10E /* UIKit.framework in Frameworks */,
+				38F2772016AE74EF00FFE10E /* Foundation.framework in Frameworks */,
+				38F2772216AE74EF00FFE10E /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3892A4C516B4C9AA00EA614B /* landmark-keywords */ = {
+			isa = PBXGroup;
+			children = (
+				3892A4C616B4C9AA00EA614B /* keywordList.png */,
+				3892A4C716B4C9AA00EA614B /* keywordList@2x.png */,
+				3892A4C816B4C9AA00EA614B /* KMKeywordListController.h */,
+				3892A4C916B4C9AA00EA614B /* KMKeywordListController.m */,
+				3892A4CA16B4C9AA00EA614B /* KMLandmarkInfoViewController.h */,
+				3892A4CB16B4C9AA00EA614B /* KMLandmarkInfoViewController.m */,
+				3892A4CC16B4C9AA00EA614B /* KMLandmarkListController.h */,
+				3892A4CD16B4C9AA00EA614B /* KMLandmarkListController.m */,
+				3892A4CE16B4C9AA00EA614B /* KMLandmarkViewController.h */,
+				3892A4CF16B4C9AA00EA614B /* KMLandmarkViewController.m */,
+				3892A4D016B4C9AA00EA614B /* KMVaultViewController.h */,
+				3892A4D116B4C9AA00EA614B /* KMVaultViewController.m */,
+				3892A4D216B4C9AA00EA614B /* landmarkList.png */,
+				3892A4D316B4C9AA00EA614B /* landmarkList@2x.png */,
+			);
+			name = "landmark-keywords";
+			path = "../../../kyotika/landmark-keywords";
+			sourceTree = "<group>";
+		};
+		38F2770E16AE74EF00FFE10E = {
+			isa = PBXGroup;
+			children = (
+				38F2772316AE74EF00FFE10E /* vaults */,
+				38F2771C16AE74EF00FFE10E /* Frameworks */,
+				38F2771A16AE74EF00FFE10E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		38F2771A16AE74EF00FFE10E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38F2771916AE74EF00FFE10E /* vaults.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38F2771C16AE74EF00FFE10E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38F2771D16AE74EF00FFE10E /* UIKit.framework */,
+				38F2771F16AE74EF00FFE10E /* Foundation.framework */,
+				38F2772116AE74EF00FFE10E /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		38F2772316AE74EF00FFE10E /* vaults */ = {
+			isa = PBXGroup;
+			children = (
+				38F2772C16AE74EF00FFE10E /* KMAppDelegate.h */,
+				38F2772D16AE74EF00FFE10E /* KMAppDelegate.m */,
+				3892A4C516B4C9AA00EA614B /* landmark-keywords */,
+				38F2772416AE74EF00FFE10E /* Supporting Files */,
+			);
+			path = vaults;
+			sourceTree = "<group>";
+		};
+		38F2772416AE74EF00FFE10E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38F2772516AE74EF00FFE10E /* vaults-Info.plist */,
+				38F2772616AE74EF00FFE10E /* InfoPlist.strings */,
+				38F2772916AE74EF00FFE10E /* main.m */,
+				38F2772B16AE74EF00FFE10E /* vaults-Prefix.pch */,
+				38F2772F16AE74EF00FFE10E /* Default.png */,
+				38F2773116AE74EF00FFE10E /* Default@2x.png */,
+				38F2773316AE74EF00FFE10E /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38F2771816AE74EF00FFE10E /* vaults */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38F2774B16AE74EF00FFE10E /* Build configuration list for PBXNativeTarget "vaults" */;
+			buildPhases = (
+				38F2771516AE74EF00FFE10E /* Sources */,
+				38F2771616AE74EF00FFE10E /* Frameworks */,
+				38F2771716AE74EF00FFE10E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vaults;
+			productName = vaults;
+			productReference = 38F2771916AE74EF00FFE10E /* vaults.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		38F2771016AE74EF00FFE10E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KM;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "國居貴浩";
+			};
+			buildConfigurationList = 38F2771316AE74EF00FFE10E /* Build configuration list for PBXProject "vaults" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 38F2770E16AE74EF00FFE10E;
+			productRefGroup = 38F2771A16AE74EF00FFE10E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				38F2771816AE74EF00FFE10E /* vaults */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38F2771716AE74EF00FFE10E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38F2772816AE74EF00FFE10E /* InfoPlist.strings in Resources */,
+				38F2773016AE74EF00FFE10E /* Default.png in Resources */,
+				38F2773216AE74EF00FFE10E /* Default@2x.png in Resources */,
+				38F2773416AE74EF00FFE10E /* Default-568h@2x.png in Resources */,
+				3892A4D616B4C9AA00EA614B /* keywordList.png in Resources */,
+				3892A4D716B4C9AA00EA614B /* keywordList@2x.png in Resources */,
+				3892A4DD16B4C9AA00EA614B /* landmarkList.png in Resources */,
+				3892A4DE16B4C9AA00EA614B /* landmarkList@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38F2771516AE74EF00FFE10E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38F2772A16AE74EF00FFE10E /* main.m in Sources */,
+				38F2772E16AE74EF00FFE10E /* KMAppDelegate.m in Sources */,
+				3892A4D816B4C9AA00EA614B /* KMKeywordListController.m in Sources */,
+				3892A4D916B4C9AA00EA614B /* KMLandmarkInfoViewController.m in Sources */,
+				3892A4DA16B4C9AA00EA614B /* KMLandmarkListController.m in Sources */,
+				3892A4DB16B4C9AA00EA614B /* KMLandmarkViewController.m in Sources */,
+				3892A4DC16B4C9AA00EA614B /* KMVaultViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		38F2772616AE74EF00FFE10E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38F2772716AE74EF00FFE10E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		38F2774916AE74EF00FFE10E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		38F2774A16AE74EF00FFE10E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		38F2774C16AE74EF00FFE10E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vaults/vaults-Prefix.pch";
+				INFOPLIST_FILE = "vaults/vaults-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		38F2774D16AE74EF00FFE10E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "vaults/vaults-Prefix.pch";
+				INFOPLIST_FILE = "vaults/vaults-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38F2771316AE74EF00FFE10E /* Build configuration list for PBXProject "vaults" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38F2774916AE74EF00FFE10E /* Debug */,
+				38F2774A16AE74EF00FFE10E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38F2774B16AE74EF00FFE10E /* Build configuration list for PBXNativeTarget "vaults" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38F2774C16AE74EF00FFE10E /* Debug */,
+				38F2774D16AE74EF00FFE10E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 38F2771016AE74EF00FFE10E /* Project object */;
+}
