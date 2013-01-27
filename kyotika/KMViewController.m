@@ -10,7 +10,9 @@
 #import <MapKit/MapKit.h>
 #import "KMViewController.h"
 #import "KMLever.h"
+#import "KMTreasureHunterAnnotation.h"
 #import "KMTreasureHunterAnnotationView.h"
+#import "KMTreasureAnnotation.h"
 #import "KMTreasureAnnotationView.h"
 #import "KMVaults.h"
 #import "KMQuizeViewController.h"

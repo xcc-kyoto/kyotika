@@ -45,6 +45,7 @@
 		3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */; };
 		3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D216B4C5EF00A116A0 /* MapKit.framework */; };
 		3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D416B4C5F400A116A0 /* CoreLocation.framework */; };
+		3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4BD16B4C78800EA614B /* KMViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,8 @@
 		3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3807E7D216B4C5EF00A116A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3807E7D416B4C5F400A116A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3892A4BC16B4C78800EA614B /* KMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMViewController.h; sourceTree = "<group>"; };
+		3892A4BD16B4C78800EA614B /* KMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +166,8 @@
 				3807E7CC16B4C5DA00A116A0 /* virtual */,
 				3807E6FD16B4BA5400A116A0 /* KMAppDelegate.h */,
 				3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */,
+				3892A4BC16B4C78800EA614B /* KMViewController.h */,
+				3892A4BD16B4C78800EA614B /* KMViewController.m */,
 				3807E6F516B4BA5400A116A0 /* Supporting Files */,
 			);
 			path = kyotika;
@@ -357,6 +362,7 @@
 				3807E7C716B4C56400A116A0 /* KMTreasureHunterAnnotationView.m in Sources */,
 				3807E7CB16B4C5CC00A116A0 /* KMQuizeViewController.m in Sources */,
 				3807E7CF16B4C5DA00A116A0 /* KMLever.m in Sources */,
+				3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
