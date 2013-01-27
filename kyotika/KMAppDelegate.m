@@ -7,6 +7,7 @@
 //
 
 #import "KMAppDelegate.h"
+#import "KMViewController.h"
 
 @implementation KMAppDelegate
 
@@ -14,8 +15,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+
+    KMViewController* controller = [[KMViewController alloc] init];
+    self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
     return YES;
 }

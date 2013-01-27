@@ -7,6 +7,7 @@
 //
 
 #import "KMVaults.h"
+#import "KMTreasureAnnotation.h"
 #import "KMTreasureAnnotationView.h"
 
 @implementation KMVaults {
