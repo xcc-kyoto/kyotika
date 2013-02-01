@@ -8,10 +8,12 @@
 
 #import "KMVaultViewController.h"
 #import "KMLandmarkListController.h"
+#import "KMPrologController.h"
 
 @interface KMVaultViewController () {
     KMLandmarkListController *viewController1;
     KMKeywordListController *viewController2;
+    KMPrologController *viewController3;
 }
 
 @end
@@ -36,9 +38,13 @@
     viewController2 = [[KMKeywordListController alloc] initWithStyle:UITableViewStylePlain];
     viewController2.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     
+    viewController3 = [[KMPrologController alloc] init];
+    viewController3.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
+
     UINavigationController* nav1 = [[UINavigationController alloc] initWithRootViewController:viewController1];
     UINavigationController* nav2 = [[UINavigationController alloc] initWithRootViewController:viewController2];
-    self.viewControllers = @[nav1, nav2];
+    UINavigationController* nav3 = [[UINavigationController alloc] initWithRootViewController:viewController3];
+    self.viewControllers = @[nav1, nav2, nav3];    
 }
 
 - (void)viewDidAppear:(BOOL)animated

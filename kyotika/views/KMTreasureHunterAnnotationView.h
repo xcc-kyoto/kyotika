@@ -13,7 +13,9 @@
 @interface KMTreasureHunterAnnotationView : MKAnnotationView
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)direction:(CGPoint)vector;
+- (void)setCourse:(CLLocationDirection)course;
+- (void)setRegion:(MKCoordinateRegion)region;
+
 @property (assign) KMTreasureHunterAnnotation* hunterAnnotation;
 @end
 

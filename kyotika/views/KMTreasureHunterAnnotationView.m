@@ -13,6 +13,7 @@
 
 @interface KMTreasureHunterAnnotationView() {
     CALayer* _walker;
+    CALayer*     _searcher;
     int _direction;
 }
 @end
@@ -92,16 +93,13 @@
     return self;
 }
 
-- (void)direction:(CGPoint)vector
+- (void)setCourse:(CLLocationDirection)course
 {
-    int direction = 0;
-    if (abs(vector.x) > abs(vector.y)) {     //  横移動
-        direction = (vector.x > 0.0) ? 2 : 1;
-    } else if ((vector.x == 0) && (vector.y == 0)) {
-        direction = -1;
-    } else {
-        direction = (vector.y > 0.0) ? 0 : 3;
-    }
+    if (course < 0)     //  使用不可
+        return;
+    int index = ((int)course % 360) / 45;        //  0 - 359     0, [1, 2], 3, 4, [5, 6], 7
+    int directions[] = {0,2,2,3,3,1,1,0};
+    int direction = directions[index];
     if (_direction == direction)
         return;
     _direction = direction;
@@ -119,15 +117,6 @@
 {
     CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
     walkAnimation.values = self.contentsRectArrayStand;
-/*
-    NSArray* keyTimes = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],
-                         [NSNumber numberWithFloat:0.5],
-                         [NSNumber numberWithFloat:0.6],
-                         [NSNumber numberWithFloat:0.9],
-                         [NSNumber numberWithFloat:1.0],
-                         nil];
-    walkAnimation.keyTimes = keyTimes;
-*/
     walkAnimation.calculationMode = kCAAnimationDiscrete;    //  kCAAnimationLinear
     
     walkAnimation.duration= 1;
@@ -138,6 +127,34 @@
 - (void)stopAnimation
 {
     [_walker removeAnimationForKey:@"walk"];
+}
+
+- (void)setRegion:(MKCoordinateRegion)region
+{
+    if (region.span.latitudeDelta > 0.0050) {
+        [_searcher removeFromSuperlayer];
+        return;
+    }
+    if (_searcher.superlayer) {
+        return;
+    }
+    if (_searcher == nil) {
+        _searcher = [CALayer layer];
+        _searcher.frame = CGRectInset(self.bounds, -20, -20);
+        _searcher.contents = (id)[UIImage imageNamed:@"searcher"].CGImage;
+    }
+    [self.layer insertSublayer:_searcher below:_walker];
+
+    CAKeyframeAnimation * searchAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14, 0, 0, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2, 0, 0, 1)]
+                               ];
+    searchAnimation.values = keyAttributes;
+    searchAnimation.duration= 3;
+    searchAnimation.repeatCount = HUGE_VALF;
+    [_searcher addAnimation:searchAnimation forKey:@"searcher"];
 }
 @end
 

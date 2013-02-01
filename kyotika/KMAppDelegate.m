@@ -8,6 +8,7 @@
 
 #import "KMAppDelegate.h"
 #import "KMViewController.h"
+#import "KMVaultViewController.h"
 
 @implementation KMAppDelegate
 
@@ -19,6 +20,7 @@
     KMViewController* controller = [[KMViewController alloc] init];
     self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
+    [controller showProlog];
     return YES;
 }
 

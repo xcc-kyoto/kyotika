@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface KMViewController : UIViewController
-
+- (void)showProlog;
 @end

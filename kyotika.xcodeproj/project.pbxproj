@@ -20,7 +20,6 @@
 		3807E79016B4C49300A116A0 /* KMTreasureHunterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */; };
 		3807E79116B4C49300A116A0 /* KMVaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78E16B4C49300A116A0 /* KMVaults.m */; };
 		3807E79D16B4C54300A116A0 /* 120815c.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79416B4C54300A116A0 /* 120815c.png */; };
-		3807E79E16B4C54300A116A0 /* icon.psd in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79516B4C54300A116A0 /* icon.psd */; };
 		3807E79F16B4C54300A116A0 /* Shine1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79616B4C54300A116A0 /* Shine1.png */; };
 		3807E7A016B4C54300A116A0 /* Shine2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79716B4C54300A116A0 /* Shine2.png */; };
 		3807E7A116B4C54300A116A0 /* Shine3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E79816B4C54300A116A0 /* Shine3.png */; };
@@ -44,6 +43,11 @@
 		3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */; };
 		3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D216B4C5EF00A116A0 /* MapKit.framework */; };
 		3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D416B4C5F400A116A0 /* CoreLocation.framework */; };
+		3871A07F16BBB052004F8B84 /* searcher.png in Resources */ = {isa = PBXBuildFile; fileRef = 3871A07C16BBB052004F8B84 /* searcher.png */; };
+		3871A08116BBB052004F8B84 /* searcher@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3871A07E16BBB052004F8B84 /* searcher@2x.png */; };
+		3871A08416BBB538004F8B84 /* KMLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3871A08316BBB538004F8B84 /* KMLocationManager.m */; };
+		3871A08D16BC20EC004F8B84 /* KMPrologController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3871A08B16BC20EC004F8B84 /* KMPrologController.m */; };
+		3871A08E16BC20EC004F8B84 /* KMPrologController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3871A08C16BC20EC004F8B84 /* KMPrologController.xib */; };
 		3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4BD16B4C78800EA614B /* KMViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -101,6 +105,14 @@
 		3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3807E7D216B4C5EF00A116A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3807E7D416B4C5F400A116A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3871A07C16BBB052004F8B84 /* searcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searcher.png; sourceTree = "<group>"; };
+		3871A07D16BBB052004F8B84 /* searcher.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = searcher.psd; sourceTree = "<group>"; };
+		3871A07E16BBB052004F8B84 /* searcher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searcher@2x.png"; sourceTree = "<group>"; };
+		3871A08216BBB538004F8B84 /* KMLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMLocationManager.h; path = models/KMLocationManager.h; sourceTree = "<group>"; };
+		3871A08316BBB538004F8B84 /* KMLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMLocationManager.m; path = models/KMLocationManager.m; sourceTree = "<group>"; };
+		3871A08A16BC20EC004F8B84 /* KMPrologController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMPrologController.h; sourceTree = "<group>"; };
+		3871A08B16BC20EC004F8B84 /* KMPrologController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMPrologController.m; sourceTree = "<group>"; };
+		3871A08C16BC20EC004F8B84 /* KMPrologController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMPrologController.xib; sourceTree = "<group>"; };
 		3892A4BC16B4C78800EA614B /* KMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMViewController.h; sourceTree = "<group>"; };
 		3892A4BD16B4C78800EA614B /* KMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -193,6 +205,8 @@
 				3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */,
 				3807E78D16B4C49300A116A0 /* KMVaults.h */,
 				3807E78E16B4C49300A116A0 /* KMVaults.m */,
+				3871A08216BBB538004F8B84 /* KMLocationManager.h */,
+				3871A08316BBB538004F8B84 /* KMLocationManager.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -209,6 +223,9 @@
 				3807E79A16B4C54300A116A0 /* Shine5.png */,
 				3807E79B16B4C54300A116A0 /* Shine6.png */,
 				3807E79C16B4C54300A116A0 /* vx_chara07_b_cvt_0_1.png */,
+				3871A07C16BBB052004F8B84 /* searcher.png */,
+				3871A07D16BBB052004F8B84 /* searcher.psd */,
+				3871A07E16BBB052004F8B84 /* searcher@2x.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -216,6 +233,9 @@
 		3807E7A616B4C54E00A116A0 /* landmark-keywords */ = {
 			isa = PBXGroup;
 			children = (
+				3871A08A16BC20EC004F8B84 /* KMPrologController.h */,
+				3871A08B16BC20EC004F8B84 /* KMPrologController.m */,
+				3871A08C16BC20EC004F8B84 /* KMPrologController.xib */,
 				3807E7A716B4C54E00A116A0 /* keywordList.png */,
 				3807E7A816B4C54E00A116A0 /* keywordList@2x.png */,
 				3807E7A916B4C54E00A116A0 /* KMKeywordListController.h */,
@@ -320,7 +340,6 @@
 				3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */,
 				3807E70516B4BA5500A116A0 /* Default-568h@2x.png in Resources */,
 				3807E79D16B4C54300A116A0 /* 120815c.png in Resources */,
-				3807E79E16B4C54300A116A0 /* icon.psd in Resources */,
 				3807E79F16B4C54300A116A0 /* Shine1.png in Resources */,
 				3807E7A016B4C54300A116A0 /* Shine2.png in Resources */,
 				3807E7A116B4C54300A116A0 /* Shine3.png in Resources */,
@@ -332,6 +351,9 @@
 				3807E7B816B4C54E00A116A0 /* keywordList@2x.png in Resources */,
 				3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */,
 				3807E7BF16B4C54E00A116A0 /* landmarkList@2x.png in Resources */,
+				3871A07F16BBB052004F8B84 /* searcher.png in Resources */,
+				3871A08116BBB052004F8B84 /* searcher@2x.png in Resources */,
+				3871A08E16BC20EC004F8B84 /* KMPrologController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +379,8 @@
 				3807E7CB16B4C5CC00A116A0 /* KMQuizeViewController.m in Sources */,
 				3807E7CF16B4C5DA00A116A0 /* KMLever.m in Sources */,
 				3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */,
+				3871A08416BBB538004F8B84 /* KMLocationManager.m in Sources */,
+				3871A08D16BC20EC004F8B84 /* KMPrologController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

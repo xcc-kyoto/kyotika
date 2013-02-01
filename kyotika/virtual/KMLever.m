@@ -41,13 +41,13 @@ const static float LeverImageSize = 44.0;
         //  レバー
         _leverImage = [CAGradientLayer layer];
         
-        UIColor* normalTop = [UIColor colorWithHue:0.0
+        UIColor* normalTop = [UIColor colorWithHue:0.6
                                         saturation:0.0
-                                        brightness:0.5
+                                        brightness:1.0
                                              alpha:1];
-        UIColor* normalBottom = [UIColor colorWithHue:0.0
+        UIColor* normalBottom = [UIColor colorWithHue:0.6
                                            saturation:0.0
-                                           brightness:0.2
+                                           brightness:0.5
                                                 alpha:1];
         NSArray *colors = [NSArray arrayWithObjects:
                            (__bridge id)normalTop.CGColor,
