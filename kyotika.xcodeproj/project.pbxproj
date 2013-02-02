@@ -56,6 +56,8 @@
 		3871A08D16BC20EC004F8B84 /* KMPrologController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3871A08B16BC20EC004F8B84 /* KMPrologController.m */; };
 		3871A08E16BC20EC004F8B84 /* KMPrologController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3871A08C16BC20EC004F8B84 /* KMPrologController.xib */; };
 		3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4BD16B4C78800EA614B /* KMViewController.m */; };
+		38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */; };
+		38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -132,6 +134,10 @@
 		3871A08C16BC20EC004F8B84 /* KMPrologController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMPrologController.xib; sourceTree = "<group>"; };
 		3892A4BC16B4C78800EA614B /* KMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMViewController.h; sourceTree = "<group>"; };
 		3892A4BD16B4C78800EA614B /* KMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMViewController.m; sourceTree = "<group>"; };
+		38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMAreaAnnotationView.h; sourceTree = "<group>"; };
+		38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAreaAnnotationView.m; sourceTree = "<group>"; };
+		38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMAreaAnnotation.h; path = models/KMAreaAnnotation.h; sourceTree = "<group>"; };
+		38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMAreaAnnotation.m; path = models/KMAreaAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +230,8 @@
 				3807E78E16B4C49300A116A0 /* KMVaults.m */,
 				3871A08216BBB538004F8B84 /* KMLocationManager.h */,
 				3871A08316BBB538004F8B84 /* KMLocationManager.m */,
+				38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */,
+				38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -288,6 +296,8 @@
 				383B468316BCAAAC0067E1A5 /* Landmark.psd */,
 				383B468416BCAAAC0067E1A5 /* shine.psd */,
 				383B468516BCAAAC0067E1A5 /* shines.psd */,
+				38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */,
+				38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -415,6 +425,8 @@
 				3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */,
 				3871A08416BBB538004F8B84 /* KMLocationManager.m in Sources */,
 				3871A08D16BC20EC004F8B84 /* KMPrologController.m in Sources */,
+				38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */,
+				38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
