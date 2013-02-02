@@ -14,6 +14,8 @@
 #import "KMTreasureHunterAnnotationView.h"
 #import "KMTreasureAnnotation.h"
 #import "KMTreasureAnnotationView.h"
+#import "KMAreaAnnotation.h"
+#import "KMAreaAnnotationView.h"
 #import "KMVaults.h"
 #import "KMQuizeViewController.h"
 #import "KMLandmarkViewController.h"
@@ -372,6 +374,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
         return nil;
     }
     if ([annotation isKindOfClass:[KMTreasureHunterAnnotation class]]) {
+        //  ハンタービュー
         KMTreasureHunterAnnotationView* pinView = (KMTreasureHunterAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Hunter"];
         if (pinView == nil) {
             pinView = [[KMTreasureHunterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Hunter"];
@@ -383,6 +386,17 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
         _hunterAnnotationView = pinView;
         return pinView;
     }
+    if ([annotation isKindOfClass:[KMAreaAnnotation class]]) {
+        //  エリアビュー
+        KMTreasureHunterAnnotationView* pinView = (KMTreasureHunterAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Area"];
+        if (pinView == nil) {
+            pinView = [[KMTreasureHunterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Area"];
+            pinView.canShowCallout = NO;
+        }
+        pinView.annotation = annotation;
+        return pinView;
+    }
+    //  ランドマークビュー
     KMTreasureAnnotationView* pinView = (KMTreasureAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
     if (pinView == nil) {
         pinView = [[KMTreasureAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
@@ -410,15 +424,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     [treasureAnnotations minusSet:[NSSet setWithArray:array]];
     if ([treasureAnnotations count] > 0)
         [_mapView addAnnotations:treasureAnnotations.allObjects];
-/*
-    for (KMTreasureAnnotation* a  in _mapView.annotations) {
-        if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
-            KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
-            [v setNeedsDisplay];
-            [v startAnimation];
-        }
-    }
-*/
     int64_t delayInSeconds = 0.01;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

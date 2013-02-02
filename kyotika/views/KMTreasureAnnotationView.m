@@ -46,13 +46,6 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.annotation, @"annotation", nil]];
 }
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    KMTreasureAnnotation* a = self.annotation;
-    if (a.find == NO)
-        return;
-    [self enterNotification];
-}
 
 - (BOOL)enter:(CLLocationCoordinate2D)location
 {
@@ -103,10 +96,19 @@
         self.frame = myFrame;
         // 不透過プロパティをNOに設定することで、地図コンテンツが、レンダリング対象外のビューの領域を透かして見えるようになる。
         self.opaque = NO;        
+        UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
 }
 
+- (void)tap
+{
+    KMTreasureAnnotation* a = self.annotation;
+    if (a.find == NO)
+        return;
+    [self enterNotification];
+}
 
 - (void)startAnimation
 {

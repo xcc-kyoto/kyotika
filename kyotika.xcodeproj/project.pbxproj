@@ -58,6 +58,8 @@
 		3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4BD16B4C78800EA614B /* KMViewController.m */; };
 		38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */; };
 		38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */; };
+		38A5D76816BD3E8500D04BFE /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76616BD3E8500D04BFE /* ggg.png */; };
+		38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76716BD3E8500D04BFE /* ggg@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -138,6 +140,9 @@
 		38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAreaAnnotationView.m; sourceTree = "<group>"; };
 		38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMAreaAnnotation.h; path = models/KMAreaAnnotation.h; sourceTree = "<group>"; };
 		38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMAreaAnnotation.m; path = models/KMAreaAnnotation.m; sourceTree = "<group>"; };
+		38A5D76116BD3E4800D04BFE /* shines.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = shines.psd; sourceTree = "<group>"; };
+		38A5D76616BD3E8500D04BFE /* ggg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ggg.png; sourceTree = "<group>"; };
+		38A5D76716BD3E8500D04BFE /* ggg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggg@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +289,10 @@
 		3807E7C116B4C56400A116A0 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */,
+				38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */,
+				38A5D76616BD3E8500D04BFE /* ggg.png */,
+				38A5D76716BD3E8500D04BFE /* ggg@2x.png */,
 				3807E7C216B4C56400A116A0 /* KMTreasureAnnotationView.h */,
 				3807E7C316B4C56400A116A0 /* KMTreasureAnnotationView.m */,
 				3807E7C416B4C56400A116A0 /* KMTreasureHunterAnnotationView.h */,
@@ -296,8 +305,7 @@
 				383B468316BCAAAC0067E1A5 /* Landmark.psd */,
 				383B468416BCAAAC0067E1A5 /* shine.psd */,
 				383B468516BCAAAC0067E1A5 /* shines.psd */,
-				38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */,
-				38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */,
+				38A5D76116BD3E4800D04BFE /* shines.psd */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -398,6 +406,8 @@
 				383B468216BCAA9F0067E1A5 /* shines.png in Resources */,
 				383B468816BCAB250067E1A5 /* Landmark.png in Resources */,
 				383B468916BCAB250067E1A5 /* Landmark@2x.png in Resources */,
+				38A5D76816BD3E8500D04BFE /* ggg.png in Resources */,
+				38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

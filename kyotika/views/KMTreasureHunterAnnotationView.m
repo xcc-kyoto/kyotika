@@ -57,16 +57,7 @@
     }
     return array[direction];
 }
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    [self stopAnimation];
-}
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureHunterAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_hunterAnnotation, @"annotation", nil]];
-}
 
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString*)reuseIdentifier
 {
@@ -88,9 +79,16 @@
         
         self.layer.cornerRadius = myFrame.size.width / 2;
         [self.layer addSublayer:_walker];
-
+        
+        UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+        [self addGestureRecognizer:tapGestureRecognizer];
     }
     return self;
+}
+
+- (void)tap
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureHunterAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_hunterAnnotation, @"annotation", nil]];
 }
 
 - (void)setCourse:(CLLocationDirection)course
