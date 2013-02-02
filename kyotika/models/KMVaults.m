@@ -146,6 +146,7 @@
     }
     return landmarks;
 }
+
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation
 {
     annotation.passed = YES;
@@ -160,6 +161,8 @@
             }
         }
     }
+    if (_complite < 1.0)
+        _complite += 0.5;
 }
 
 @end

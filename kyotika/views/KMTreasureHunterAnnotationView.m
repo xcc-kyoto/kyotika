@@ -15,6 +15,7 @@
     CALayer* _walker;
     CALayer*     _searcher;
     int _direction;
+    BOOL    _standbyNero;
 }
 @end
 
@@ -22,10 +23,11 @@
 @implementation KMTreasureHunterAnnotationView
 - (UIImage*)image
 {
-    static UIImage* walkerImage;
-    if (walkerImage == nil)
-        walkerImage = [UIImage imageNamed:@"vx_chara07_b_cvt_0_1"];
-    return walkerImage;
+    int index = _standbyNero?1:0;
+    static UIImage* walkerImage[2];
+    if (walkerImage[index] == nil)
+        walkerImage[index] = [UIImage imageNamed:index ? @"vx_chara07_b_cvt_0_1" : @"vx_chara07_b_cvt_0_1"];
+    return walkerImage[index];
 }
 
 - (NSArray*)contentsRectArrayStand
@@ -153,6 +155,12 @@
     searchAnimation.duration= 3;
     searchAnimation.repeatCount = HUGE_VALF;
     [_searcher addAnimation:searchAnimation forKey:@"searcher"];
+}
+
+- (void)setStandbyNero:(BOOL)standbyNero
+{
+    _standbyNero = standbyNero;
+    _walker.contents = (id)self.image.CGImage;
 }
 @end
 

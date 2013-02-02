@@ -22,6 +22,7 @@
 #import "KMVaultViewController.h"
 #import "KMLandmarkListController.h"
 #import "KMLocationManager.h"
+#import "KMEventViewController.h"
 
 @interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate> {
     MKMapView* _mapView;
@@ -37,7 +38,7 @@
     UISwitch*   _virtualSwitch;
     BOOL _first;
     NSArray* _targets;
-    UIButton*   _stopTargetModeButton;
+    UILabel*   _stopTargetModeButton;
 }
 @end
 
@@ -81,7 +82,7 @@
         _locationManager.delegate = self;
     }
     //  地図
-    _mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+    _mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _mapView.delegate = self;
     [self.view addSubview:_mapView];
@@ -98,6 +99,7 @@
     _hunterAnnotation = [[KMTreasureHunterAnnotation alloc] init];
     _hunterAnnotation.coordinate = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
     [_mapView addAnnotation:_hunterAnnotation];
+
 }
 
 /*
@@ -445,10 +447,17 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 - (void)setTargetMode:(BOOL)targetMode
 {
     if (targetMode) {
-        _stopTargetModeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [_stopTargetModeButton setTitle:@"解除" forState:UIControlStateNormal];
-        [_stopTargetModeButton addTarget:self action:@selector(stopTargetMode) forControlEvents:UIControlEventTouchUpInside];
-        _stopTargetModeButton.frame = CGRectMake(10, 10, 40, 30);
+        CGRect frame = self.view.bounds;
+        frame.size.height = 44;
+        _stopTargetModeButton = [[UILabel alloc] initWithFrame:frame];
+        _stopTargetModeButton.backgroundColor = [UIColor colorWithHue:0.6 saturation:1 brightness:0.2 alpha:0.8];
+        _stopTargetModeButton.userInteractionEnabled = YES;
+        _stopTargetModeButton.text = @"指定のスポットを☆で表示しています";
+        _stopTargetModeButton.textAlignment = NSTextAlignmentCenter;
+        _stopTargetModeButton.font = [UIFont systemFontOfSize:14];
+        _stopTargetModeButton.textColor = [UIColor whiteColor];
+        UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopTargetMode)];
+        [_stopTargetModeButton addGestureRecognizer:tapGestureRecognizer];
         [self.view addSubview:_stopTargetModeButton];
     } else {
         for (KMTreasureAnnotation* a in _targets) {
@@ -468,15 +477,21 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 -(void)vaultViewControllerDone:(KMVaultViewController*)viewController
 {
     [self dismissModalViewControllerAnimated:YES];
-    [self setTargetMode:NO];
 }
 
 -(void)landmarkViewControllerDone:(KMLandmarkViewController*)viewController
 {
     [self dismissModalViewControllerAnimated:YES];
-    [self setTargetMode:NO];
 }
 
+- (void)showTargets
+{
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [_mapView setRegion:_kyotoregion animated:YES];
+    });
+}
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
     [self setTargetMode:NO];
@@ -489,6 +504,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     _targets = [NSArray arrayWithArray:landmarks];
     [self setTargetMode:YES];
     [self dismissModalViewControllerAnimated:YES];
+    [self showTargets];
 }
 
 - (NSString*)keywordListControllerKeyword:(KMKeywordListController*)ViewController fromObject:(id)object
@@ -511,6 +527,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
     [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
+    [self showTargets];
 }
 
 - (NSString*)landmarkListControllerLandmark:(KMLandmarkListController*)controller fromObject:(id)object
@@ -523,9 +540,12 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 
 - (void)quizeViewControllerAnswer:(KMQuizeViewController*)controller
 {
+    float complite = _vaults.complite;
+    float newComplite = complite;
     KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
     if (controller.selectedIndex == annotation.correctAnswerIndex) {
         [_vaults setPassedAnnotation:annotation];
+        newComplite = _vaults.complite;
         KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
         [v startAnimation];
         for (id<MKAnnotation> a  in _mapView.annotations) {
@@ -536,8 +556,18 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
         }
     }
     [self mapView:_mapView regionDidChangeAnimated:NO];
-    
     [self dismissModalViewControllerAnimated:YES];
+    if (newComplite != complite) {
+        [_hunterAnnotationView startAnimation];
+        double delayInSeconds = 1.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            KMEventViewController* c = [[KMEventViewController alloc] init];
+            c.complite = newComplite;
+            c.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentModalViewController:c animated:YES];
+        });
+    }
 }
 @end
 

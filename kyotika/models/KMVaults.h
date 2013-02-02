@@ -17,5 +17,5 @@
 - (NSArray*)keywords;
 - (NSArray*)landmarks;
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation;
-
+@property (assign) float complite;
 @end

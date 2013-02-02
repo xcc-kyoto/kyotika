@@ -15,7 +15,7 @@
 - (void)stopAnimation;
 - (void)setCourse:(CLLocationDirection)course;
 - (void)setRegion:(MKCoordinateRegion)region;
-
+- (void)setStandbyNero:(BOOL)standbyNero;
 @property (assign) KMTreasureHunterAnnotation* hunterAnnotation;
 @end
 

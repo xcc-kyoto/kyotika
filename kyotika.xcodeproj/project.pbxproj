@@ -60,6 +60,8 @@
 		38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */; };
 		38A5D76816BD3E8500D04BFE /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76616BD3E8500D04BFE /* ggg.png */; };
 		38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76716BD3E8500D04BFE /* ggg@2x.png */; };
+		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
+		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +145,9 @@
 		38A5D76116BD3E4800D04BFE /* shines.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = shines.psd; sourceTree = "<group>"; };
 		38A5D76616BD3E8500D04BFE /* ggg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ggg.png; sourceTree = "<group>"; };
 		38A5D76716BD3E8500D04BFE /* ggg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggg@2x.png"; sourceTree = "<group>"; };
+		38E8140216BD7785002FF900 /* KMEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMEventViewController.h; sourceTree = "<group>"; };
+		38E8140316BD7785002FF900 /* KMEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMEventViewController.m; sourceTree = "<group>"; };
+		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +287,9 @@
 				3807E7B216B4C54E00A116A0 /* KMVaultViewController.m */,
 				3807E7B316B4C54E00A116A0 /* landmarkList.png */,
 				3807E7B416B4C54E00A116A0 /* landmarkList@2x.png */,
+				38E8140216BD7785002FF900 /* KMEventViewController.h */,
+				38E8140316BD7785002FF900 /* KMEventViewController.m */,
+				38E8140416BD7785002FF900 /* KMEventViewController.xib */,
 			);
 			path = "landmark-keywords";
 			sourceTree = "<group>";
@@ -408,6 +416,7 @@
 				383B468916BCAB250067E1A5 /* Landmark@2x.png in Resources */,
 				38A5D76816BD3E8500D04BFE /* ggg.png in Resources */,
 				38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */,
+				38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +446,7 @@
 				3871A08D16BC20EC004F8B84 /* KMPrologController.m in Sources */,
 				38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */,
 				38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */,
+				38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
