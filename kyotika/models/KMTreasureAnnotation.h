@@ -11,6 +11,7 @@
 @interface KMTreasureAnnotation : MKPointAnnotation
 @property BOOL passed;
 @property BOOL find;
+@property BOOL target;
 @property (copy) NSArray* keywords;
 @property (retain) NSDate* lastAtackDate;
 

@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+@class KMTreasureAnnotation;
+
 @interface KMVaults : NSObject
 - (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region;
 - (NSArray*)landmarksForKey:(id)key;
 - (NSArray*)keywords;
 - (NSArray*)landmarks;
+- (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation;
+
 @end

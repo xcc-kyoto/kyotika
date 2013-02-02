@@ -53,9 +53,9 @@
                                                   135.7555968 + longitude * 0.05);
         pin.title = [NSString stringWithFormat:@"title %d", i];
         pin.keywords = [NSArray arrayWithObjects:
-                        [NSNumber numberWithInt:rand() % 10],
-                        [NSNumber numberWithInt:rand() % 10],
-                        [NSNumber numberWithInt:rand() % 10],
+                        [NSNumber numberWithInt:rand() % 100],
+                        [NSNumber numberWithInt:rand() % 100],
+                        [NSNumber numberWithInt:rand() % 100],
                         nil];
         [_annotations addObject:pin];
     }
@@ -146,6 +146,22 @@
     }
     return landmarks;
 }
+- (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation
+{
+    annotation.passed = YES;
+    for (NSNumber* keyword in annotation.keywords) {
+        int num = [keyword intValue];
+        for (KMTreasureAnnotation* a in _annotations) {
+            for (NSNumber* xkeyword in a.keywords) {
+                if (num == [xkeyword intValue]) {
+                    a.find = YES;
+                    break;
+                }
+            }
+        }
+    }
+}
+
 @end
 
 //  MKMetersBetweenMapPoints

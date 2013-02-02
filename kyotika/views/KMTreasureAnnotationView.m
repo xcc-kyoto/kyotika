@@ -22,7 +22,7 @@
 {
     static UIImage* imageShine;
     if (imageShine == nil)
-        imageShine = [UIImage imageNamed:@"Shine1"];
+        imageShine = [UIImage imageNamed:@"shines"];
     return imageShine;
 }
 
@@ -30,17 +30,23 @@
 {
     static UIImage* imageBox;
     if (imageBox == nil)
-        imageBox = [UIImage imageNamed:@"120815c"];
+        imageBox = [UIImage imageNamed:@"Landmark"];
     return imageBox;
 }
 
+- (UIImage*)imageTargetBox
+{
+    static UIImage* imageBox;
+    if (imageBox == nil)
+        imageBox = [UIImage imageNamed:@"Landmark-target"];
+    return imageBox;
+}
 
 - (void)enterNotification
 {
-    _blinker.contents = (id)self.imageBox.CGImage;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.annotation, @"annotation", nil]];
 }
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     KMTreasureAnnotation* a = self.annotation;
     if (a.find == NO)
@@ -71,6 +77,21 @@
     return YES;
 }
 
+- (NSArray*)contentsRectArray
+{
+    static NSArray* array = nil;
+    if (array == nil) {
+        NSMutableArray* tmparray = [NSMutableArray arrayWithCapacity:4];
+        CGRect r = {0,0,0.20,1.0};
+        for (int i = 0; i < 5; i++) {
+            [tmparray addObject:[NSValue valueWithCGRect:r]];
+            r.origin.x += r.size.width;
+        }
+        array = tmparray;
+    }
+    return array;
+}
+
 - (id)initWithAnnotation:(id <MKAnnotation>)annotation reuseIdentifier:(NSString*)reuseIdentifier
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
@@ -81,20 +102,7 @@
         myFrame.size.height = 40;
         self.frame = myFrame;
         // 不透過プロパティをNOに設定することで、地図コンテンツが、レンダリング対象外のビューの領域を透かして見えるようになる。
-        self.opaque = NO;
-        
-        _blinker = [CALayer layer];
-        _blinker.shadowOpacity = 1.0;
-        _blinker.frame = CGRectMake(0, 0, 64, 64);
-        UIImage* image = nil;
-        KMTreasureAnnotation* a = self.annotation;
-        if (a.passed)
-            image = self.imageBox;
-        else
-            image = self.imageShine;
-        _blinker.contents = (id)image.CGImage;
-        [self.layer addSublayer:_blinker];
-        
+        self.opaque = NO;        
     }
     return self;
 }
@@ -102,26 +110,46 @@
 
 - (void)startAnimation
 {
-    [_blinker removeAnimationForKey:@"transform"];
-    
     KMTreasureAnnotation* a = self.annotation;
-    if (a.passed)
+    if (a.passed && !a.target) {
+        [_blinker removeFromSuperlayer];
+        _blinker = nil;
+        self.image = a.target ? self.imageTargetBox : self.imageBox;
         return;
-    if (a.find == NO)
-        return;
-    _blinker.contents = (id)self.imageShine.CGImage;
-    
-    [self.layer removeAnimationForKey:@"transform"];
-    CABasicAnimation* animation = [CABasicAnimation animation];
-    animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.5, 0.5, 1.0)];
-    animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)];
-    animation.duration = 1;
-    animation.removedOnCompletion = YES;
-    animation.autoreverses = YES;
-    animation.repeatCount = HUGE_VALF;
-    //    animation.fillMode = kCAFillModeBoth;
-    [_blinker removeAnimationForKey:@"transform"];
-    [_blinker addAnimation:animation forKey:@"transform"];
+    }
+    if (_blinker == nil) {
+        _blinker = [CALayer layer];
+        [self.layer addSublayer:_blinker];
+    }
+    self.image = nil;
+    if (a.target) {
+        _blinker.frame = self.bounds;
+        _blinker.contents = (id)self.imageTargetBox.CGImage;
+        _blinker.contentsRect = CGRectMake(0,0,1,1);
+        _blinker.contentsGravity = kCAGravityCenter;
+        
+        CABasicAnimation* animation = [CABasicAnimation animation];
+        animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1.0)];
+        animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(2.0, 2.0, 1.0)];
+        animation.duration = 1;
+        animation.removedOnCompletion = YES;
+        animation.autoreverses = YES;
+        animation.repeatCount = HUGE_VALF;
+        [_blinker addAnimation:animation forKey:@"transform"];
+    } else {
+        _blinker.frame = CGRectMake(-16, -16, 48, 48);
+        _blinker.contents = (id)self.imageShine.CGImage;
+        _blinker.contentsRect = [(NSValue*)[self.contentsRectArray objectAtIndex:0] CGRectValue];
+        _blinker.contentsGravity = kCAGravityResizeAspect;
+        
+        CAKeyframeAnimation * animation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
+        animation.values = self.contentsRectArray;
+        animation.calculationMode = kCAAnimationDiscrete;
+        animation.duration= 1;
+        animation.removedOnCompletion = YES;
+        animation.repeatCount = HUGE_VALF;
+        [_blinker addAnimation:animation forKey:@"shine"];
+    }
 }
 - (void)stopAnimation
 {

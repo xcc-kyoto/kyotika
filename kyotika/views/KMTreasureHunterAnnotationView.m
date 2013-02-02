@@ -63,7 +63,7 @@
     [self stopAnimation];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureHunterAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_hunterAnnotation, @"annotation", nil]];
 }
@@ -98,7 +98,7 @@
     if (course < 0)     //  使用不可
         return;
     int index = ((int)course % 360) / 45;        //  0 - 359     0, [1, 2], 3, 4, [5, 6], 7
-    int directions[] = {0,2,2,3,3,1,1,0};
+    int directions[] = {0,3,3,2,2,1,1,0};
     int direction = directions[index];
     if (_direction == direction)
         return;

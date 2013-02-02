@@ -34,7 +34,8 @@
     UILabel*    _virtualModeLabel;
     UISwitch*   _virtualSwitch;
     BOOL _first;
-
+    NSArray* _targets;
+    UIButton*   _stopTargetModeButton;
 }
 @end
 
@@ -54,6 +55,7 @@
                                                    object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tapTreasure:) name:@"KMTreasureAnnotationViewTapNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tapHunter) name:@"KMTreasureHunterAnnotationViewTapNotification" object:nil];
+
     }
     return self;
 }
@@ -144,8 +146,8 @@
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(_mapView.region.center,
-                                                                        1000.0,  //  1km
-                                                                        1000.0);
+                                                                        200.0,  //  1km
+                                                                        200.0);
             
             [_mapView setRegion:rgn animated:YES];
         });
@@ -283,7 +285,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
  */
 - (void)showVirtualLeaver
 {
-    float radius = 100;
+    float radius = 150;
     CGRect frame = CGRectMake(self.view.bounds.size.width - radius - 30,
                        self.view.bounds.size.height - radius - 30, radius, radius);
     _virtualLeaver = [[KMLever alloc] initWithFrame:frame];
@@ -365,25 +367,16 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
  */
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation
 {
-    // これがユーザの位置の場合は、単にnilを返す
     if ([annotation isKindOfClass:[MKUserLocation class]]) {
-        if (_virtualLeaver.hidden == NO)
-            return nil;
-        KMTreasureHunterAnnotationView* pinView = (KMTreasureHunterAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Hunter"];
-        if (pinView == nil) {
-            pinView = [[KMTreasureHunterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Hunter"];
-        }
-        pinView.hunterAnnotation = _hunterAnnotation;
-        pinView.canShowCallout = NO;
-        [pinView startAnimation];
-        _hunterAnnotationView = pinView;
-        return pinView;
+        // ユーザの位置の場合は、単にnilを返す。ただし、今回はユーザの位置は使わない
+        return nil;
     }
     if ([annotation isKindOfClass:[KMTreasureHunterAnnotation class]]) {
         KMTreasureHunterAnnotationView* pinView = (KMTreasureHunterAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Hunter"];
         if (pinView == nil) {
             pinView = [[KMTreasureHunterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Hunter"];
         }
+        pinView.annotation = annotation;
         pinView.hunterAnnotation = _hunterAnnotation;
         pinView.canShowCallout = NO;
         [pinView startAnimation];
@@ -393,8 +386,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     KMTreasureAnnotationView* pinView = (KMTreasureAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
     if (pinView == nil) {
         pinView = [[KMTreasureAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+        pinView.canShowCallout = NO;
     }
-    pinView.canShowCallout = YES;
+    pinView.annotation = annotation;
     [pinView startAnimation];
     return pinView;
 }
@@ -416,7 +410,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     [treasureAnnotations minusSet:[NSSet setWithArray:array]];
     if ([treasureAnnotations count] > 0)
         [_mapView addAnnotations:treasureAnnotations.allObjects];
-    
+/*
     for (KMTreasureAnnotation* a  in _mapView.annotations) {
         if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
             KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
@@ -424,7 +418,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
             [v startAnimation];
         }
     }
-
+*/
     int64_t delayInSeconds = 0.01;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -443,22 +437,52 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 
 #pragma mark - KMVaultViewController delegate
 
+- (void)setTargetMode:(BOOL)targetMode
+{
+    if (targetMode) {
+        _stopTargetModeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [_stopTargetModeButton setTitle:@"解除" forState:UIControlStateNormal];
+        [_stopTargetModeButton addTarget:self action:@selector(stopTargetMode) forControlEvents:UIControlEventTouchUpInside];
+        _stopTargetModeButton.frame = CGRectMake(10, 10, 40, 30);
+        [self.view addSubview:_stopTargetModeButton];
+    } else {
+        for (KMTreasureAnnotation* a in _targets) {
+            a.target = NO;
+            KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
+            [v startAnimation];
+        }
+        [_stopTargetModeButton removeFromSuperview];
+        _stopTargetModeButton = nil;
+    }
+}
+
+- (void)stopTargetMode
+{
+    [self setTargetMode:NO];    
+}
 -(void)vaultViewControllerDone:(KMVaultViewController*)viewController
 {
     [self dismissModalViewControllerAnimated:YES];
+    [self setTargetMode:NO];
 }
 
 -(void)landmarkViewControllerDone:(KMLandmarkViewController*)viewController
 {
     [self dismissModalViewControllerAnimated:YES];
+    [self setTargetMode:NO];
 }
 
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
+    [self setTargetMode:NO];
     NSArray* landmarks = [_vaults landmarksForKey:object];
     for (KMTreasureAnnotation* a in landmarks) {
-        printf("show landmark %s\n", [a.title UTF8String]) ;
+        a.target = YES;
+        KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
+        [v startAnimation];
     }
+    _targets = [NSArray arrayWithArray:landmarks];
+    [self setTargetMode:YES];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -474,8 +498,13 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 
 - (void)landmarkListControllerShowLocation:(KMLandmarkListController*)controller object:(id)object
 {
+    [self setTargetMode:NO];
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
-    printf("show landmark %s\n", [a.title UTF8String]) ;
+    a.target = YES;
+    _targets = [NSArray arrayWithObject:a];
+    [self setTargetMode:YES];
+   KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
+    [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
 }
 
@@ -491,10 +520,18 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 {
     KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
     if (controller.selectedIndex == annotation.correctAnswerIndex) {
-        annotation.passed = YES;
+        [_vaults setPassedAnnotation:annotation];
         KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
-        [v setNeedsDisplay];
+        [v startAnimation];
+        for (id<MKAnnotation> a  in _mapView.annotations) {
+            if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
+                KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
+                [v startAnimation];
+            }
+        }
     }
+    [self mapView:_mapView regionDidChangeAnimated:NO];
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 @end
