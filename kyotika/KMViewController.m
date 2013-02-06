@@ -23,6 +23,8 @@
 #import "KMLandmarkListController.h"
 #import "KMLocationManager.h"
 #import "KMEventViewController.h"
+#import "Landmark.h"
+#import "Tag.h"
 
 @interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate> {
     MKMapView* _mapView;
@@ -517,7 +519,8 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 
 - (NSString*)keywordListControllerKeyword:(KMKeywordListController*)ViewController fromObject:(id)object
 {
-    return  [NSString stringWithFormat:@"Key %d", [object intValue]];
+    Tag *t = object;
+    return t.name;
 }
 
 - (NSArray*)keywordListControllerLandmarks:(KMKeywordListController*)ViewController fromObject:(id)object

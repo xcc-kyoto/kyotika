@@ -8,24 +8,15 @@
 
 #import "KMVaults.h"
 #import "KMTreasureAnnotation.h"
-//#import "KMTreasureAnnotationView.h"
 #import "Landmark.h"
 
 @implementation KMVaults
 
-// 変更点
-// - 引数に NSManagedObjectContext を追加
-// 使い方
-//    MKCoordinateRegion region;
-//    region.center.latitude = 34.9875;
-//    region.center.longitude = 135.759;
-//    region.span.latitudeDelta = 0;
-//    region.span.longitudeDelta = 0;
-- (NSSet*)treasureAnnotationsInRegion:(NSManagedObjectContext *)moc
-                                     :(MKCoordinateRegion)region
+- (NSSet *)landmarks:(NSManagedObjectContext *)moc
+                    :(NSArray *)array
 {
     NSMutableSet* set = [NSMutableSet set];
-    for (Landmark *l in [Landmark locations:moc inRegion:region]) {
+    for (Landmark *l in array) {
         l.found = [NSNumber numberWithBool:YES];
         KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
         a.landmark = l;
@@ -40,9 +31,23 @@
     return set;
 }
 
+// 変更点
+// - 引数に NSManagedObjectContext を追加
+// 使い方
+//    MKCoordinateRegion region;
+//    region.center.latitude = 34.9875;
+//    region.center.longitude = 135.759;
+//    region.span.latitudeDelta = 0;
+//    region.span.longitudeDelta = 0;
+- (NSSet*)treasureAnnotationsInRegion:(NSManagedObjectContext *)moc
+                                     :(MKCoordinateRegion)region
+{
+    return [self landmarks:moc :[Landmark locations:moc inRegion:region]];
+}
+
 - (NSArray*)landmarksForKey:(NSManagedObjectContext *)moc :(Tag *)tag
 {
-    return [tag.landmarks allObjects];
+    return [[self landmarks:moc :[tag.landmarks allObjects]] allObjects];
 }
 
 - (NSArray*)keywords:(NSManagedObjectContext *)moc
@@ -52,7 +57,7 @@
 
 - (NSArray*)landmarks:(NSManagedObjectContext *)moc
 {
-    return [Landmark allFound:moc];
+    return [[self landmarks:moc :[Landmark allFound:moc]] allObjects];
 }
 
 - (void)setPassedAnnotation:(NSManagedObjectContext *)moc
