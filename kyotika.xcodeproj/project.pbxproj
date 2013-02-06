@@ -43,6 +43,9 @@
 		3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */; };
 		3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D216B4C5EF00A116A0 /* MapKit.framework */; };
 		3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D416B4C5F400A116A0 /* CoreLocation.framework */; };
+		3832956716C0F673007591CB /* rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832956616C0F673007591CB /* rainbow.png */; };
+		3832957416C1EBEB007591CB /* meet-again-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832957216C1EBEB007591CB /* meet-again-1.png */; };
+		3832957516C1EBEB007591CB /* meet-again-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832957316C1EBEB007591CB /* meet-again-2.png */; };
 		383B467B16BCAA5E0067E1A5 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B467916BCAA5E0067E1A5 /* About.png */; };
 		383B467C16BCAA5E0067E1A5 /* About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B467A16BCAA5E0067E1A5 /* About@2x.png */; };
 		383B468016BCAA9F0067E1A5 /* Landmark-target.png in Resources */ = {isa = PBXBuildFile; fileRef = 383B467D16BCAA9F0067E1A5 /* Landmark-target.png */; };
@@ -118,6 +121,11 @@
 		3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3807E7D216B4C5EF00A116A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3807E7D416B4C5F400A116A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3832956616C0F673007591CB /* rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbow.png; sourceTree = "<group>"; };
+		3832956816C0F67C007591CB /* rainbow.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = rainbow.psd; sourceTree = "<group>"; };
+		3832957216C1EBEB007591CB /* meet-again-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meet-again-1.png"; sourceTree = "<group>"; };
+		3832957316C1EBEB007591CB /* meet-again-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meet-again-2.png"; sourceTree = "<group>"; };
+		3832957616C1EBF1007591CB /* meet-again.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "meet-again.psd"; sourceTree = "<group>"; };
 		383B467916BCAA5E0067E1A5 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
 		383B467A16BCAA5E0067E1A5 /* About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About@2x.png"; sourceTree = "<group>"; };
 		383B467D16BCAA9F0067E1A5 /* Landmark-target.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Landmark-target.png"; sourceTree = "<group>"; };
@@ -290,6 +298,11 @@
 				38E8140216BD7785002FF900 /* KMEventViewController.h */,
 				38E8140316BD7785002FF900 /* KMEventViewController.m */,
 				38E8140416BD7785002FF900 /* KMEventViewController.xib */,
+				3832957216C1EBEB007591CB /* meet-again-1.png */,
+				3832957316C1EBEB007591CB /* meet-again-2.png */,
+				3832957616C1EBF1007591CB /* meet-again.psd */,
+				3832956616C0F673007591CB /* rainbow.png */,
+				3832956816C0F67C007591CB /* rainbow.psd */,
 			);
 			path = "landmark-keywords";
 			sourceTree = "<group>";
@@ -417,6 +430,9 @@
 				38A5D76816BD3E8500D04BFE /* ggg.png in Resources */,
 				38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */,
 				38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */,
+				3832956716C0F673007591CB /* rainbow.png in Resources */,
+				3832957416C1EBEB007591CB /* meet-again-1.png in Resources */,
+				3832957516C1EBEB007591CB /* meet-again-2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
