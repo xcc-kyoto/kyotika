@@ -65,6 +65,14 @@
 		38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76716BD3E8500D04BFE /* ggg@2x.png */; };
 		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
+		973DCB5C16C2360700B7C4FB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
+		973DCB6116C2387B00B7C4FB /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */; };
+		973DCB6816C23AA900B7C4FB /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB6716C23AA900B7C4FB /* Tag.m */; };
+		973DCB6E16C23C7400B7C4FB /* landmarks.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6B16C23C7400B7C4FB /* landmarks.tab */; };
+		973DCB6F16C23C7400B7C4FB /* taggings.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6C16C23C7400B7C4FB /* taggings.tab */; };
+		973DCB7016C23C7400B7C4FB /* tags.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
+		973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
+		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -156,6 +164,17 @@
 		38E8140216BD7785002FF900 /* KMEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMEventViewController.h; sourceTree = "<group>"; };
 		38E8140316BD7785002FF900 /* KMEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMEventViewController.m; sourceTree = "<group>"; };
 		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
+		973DCB5B16C2360700B7C4FB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		973DCB6016C2387B00B7C4FB /* Vaults.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaults.xcdatamodel; sourceTree = "<group>"; };
+		973DCB6616C23AA900B7C4FB /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		973DCB6716C23AA900B7C4FB /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		973DCB6B16C23C7400B7C4FB /* landmarks.tab */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = landmarks.tab; sourceTree = "<group>"; };
+		973DCB6C16C23C7400B7C4FB /* taggings.tab */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = taggings.tab; sourceTree = "<group>"; };
+		973DCB6D16C23C7400B7C4FB /* tags.tab */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tags.tab; sourceTree = "<group>"; };
+		973DCB8916C23D9400B7C4FB /* Converter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Converter.h; sourceTree = "<group>"; };
+		973DCB8A16C23D9400B7C4FB /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
+		973DCB8C16C23E9A00B7C4FB /* Landmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Landmark.h; sourceTree = "<group>"; };
+		973DCB8D16C23E9A00B7C4FB /* Landmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Landmark.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +188,7 @@
 				3807E6EF16B4BA5400A116A0 /* UIKit.framework in Frameworks */,
 				3807E6F116B4BA5400A116A0 /* Foundation.framework in Frameworks */,
 				3807E6F316B4BA5400A116A0 /* CoreGraphics.framework in Frameworks */,
+				973DCB5C16C2360700B7C4FB /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				3807E7D416B4C5F400A116A0 /* CoreLocation.framework */,
+				973DCB5B16C2360700B7C4FB /* CoreData.framework */,
 				3807E7D216B4C5EF00A116A0 /* MapKit.framework */,
 				3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */,
 				3807E6EE16B4BA5400A116A0 /* UIKit.framework */,
@@ -214,6 +235,7 @@
 				3807E7A616B4C54E00A116A0 /* landmark-keywords */,
 				3807E7C816B4C5CC00A116A0 /* quiz */,
 				3807E7CC16B4C5DA00A116A0 /* virtual */,
+				973DCB5E16C2385B00B7C4FB /* db */,
 				3807E6FD16B4BA5400A116A0 /* KMAppDelegate.h */,
 				3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */,
 				3892A4BC16B4C78800EA614B /* KMViewController.h */,
@@ -349,6 +371,47 @@
 			path = virtual;
 			sourceTree = "<group>";
 		};
+		973DCB5E16C2385B00B7C4FB /* db */ = {
+			isa = PBXGroup;
+			children = (
+				973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */,
+				973DCB6A16C23AE400B7C4FB /* seeds */,
+				973DCB6916C23ADD00B7C4FB /* migrate */,
+				973DCB6216C23A1800B7C4FB /* models */,
+				973DCB8916C23D9400B7C4FB /* Converter.h */,
+				973DCB8A16C23D9400B7C4FB /* Converter.m */,
+			);
+			path = db;
+			sourceTree = "<group>";
+		};
+		973DCB6216C23A1800B7C4FB /* models */ = {
+			isa = PBXGroup;
+			children = (
+				973DCB8C16C23E9A00B7C4FB /* Landmark.h */,
+				973DCB8D16C23E9A00B7C4FB /* Landmark.m */,
+				973DCB6616C23AA900B7C4FB /* Tag.h */,
+				973DCB6716C23AA900B7C4FB /* Tag.m */,
+			);
+			path = models;
+			sourceTree = "<group>";
+		};
+		973DCB6916C23ADD00B7C4FB /* migrate */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = migrate;
+			sourceTree = "<group>";
+		};
+		973DCB6A16C23AE400B7C4FB /* seeds */ = {
+			isa = PBXGroup;
+			children = (
+				973DCB6B16C23C7400B7C4FB /* landmarks.tab */,
+				973DCB6C16C23C7400B7C4FB /* taggings.tab */,
+				973DCB6D16C23C7400B7C4FB /* tags.tab */,
+			);
+			path = seeds;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -433,6 +496,9 @@
 				3832956716C0F673007591CB /* rainbow.png in Resources */,
 				3832957416C1EBEB007591CB /* meet-again-1.png in Resources */,
 				3832957516C1EBEB007591CB /* meet-again-2.png in Resources */,
+				973DCB6E16C23C7400B7C4FB /* landmarks.tab in Resources */,
+				973DCB6F16C23C7400B7C4FB /* taggings.tab in Resources */,
+				973DCB7016C23C7400B7C4FB /* tags.tab in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +529,10 @@
 				38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */,
 				38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */,
 				38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */,
+				973DCB6116C2387B00B7C4FB /* Vaults.xcdatamodeld in Sources */,
+				973DCB6816C23AA900B7C4FB /* Tag.m in Sources */,
+				973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */,
+				973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -576,6 +646,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				973DCB6016C2387B00B7C4FB /* Vaults.xcdatamodel */,
+			);
+			currentVersion = 973DCB6016C2387B00B7C4FB /* Vaults.xcdatamodel */;
+			path = Vaults.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3807E6E116B4BA5400A116A0 /* Project object */;
 }
