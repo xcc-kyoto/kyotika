@@ -8,14 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
+#import "Tag.h"
 
 @class KMTreasureAnnotation;
 
 @interface KMVaults : NSObject
-- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region;
-- (NSArray*)landmarksForKey:(id)key;
-- (NSArray*)keywords;
-- (NSArray*)landmarks;
-- (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation;
+- (NSSet*)treasureAnnotationsInRegion:(NSManagedObjectContext *)moc :(MKCoordinateRegion)region;
+- (NSArray*)landmarksForKey:(NSManagedObjectContext *)moc :(Tag *)tag;
+- (NSArray*)keywords:(NSManagedObjectContext *)moc;
+- (NSArray*)landmarks:(NSManagedObjectContext *)moc;
+- (void)setPassedAnnotation:(NSManagedObjectContext *)moc
+                           :(KMTreasureAnnotation*)annotation;
 @property (assign) float complite;
 @end

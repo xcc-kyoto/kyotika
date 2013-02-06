@@ -8,14 +8,17 @@
 
 #import <MapKit/MapKit.h>
 
+@class Landmark;
+
 @interface KMTreasureAnnotation : MKPointAnnotation
+@property (strong, nonatomic) Landmark *landmark;
 @property BOOL passed;
 @property BOOL find;
-@property BOOL target;
-@property (copy) NSArray* keywords;
-@property (retain) NSDate* lastAtackDate;
+@property (readonly) NSArray* keywords;
+@property (readonly) NSString* question;
+@property (readonly) NSArray* answers;
+@property (readonly) int correctAnswerIndex;
 
-- (NSString*)question;
-- (NSArray*)answers;
-- (int)correctAnswerIndex;
+@property BOOL target;
+@property (retain) NSDate* lastAtackDate;
 @end

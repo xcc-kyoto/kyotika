@@ -24,6 +24,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     KMViewController* controller = [[KMViewController alloc] init];
+    controller.moc = self.managedObjectContext;
     self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
     [controller showProlog];

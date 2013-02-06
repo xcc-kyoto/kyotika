@@ -7,20 +7,52 @@
 //
 
 #import "KMTreasureAnnotation.h"
+#import "Landmark.h"
 
 @implementation KMTreasureAnnotation
+
+@synthesize landmark = _landmark;
+
+- (void)setPassed:(BOOL)passed
+{
+    _landmark.passed = [NSNumber numberWithBool:passed];
+}
+- (BOOL)passed
+{
+    return [_landmark.passed boolValue];
+}
+
+- (void)setFind:(BOOL)find
+{
+    _landmark.found = [NSNumber numberWithBool:find];
+}
+- (BOOL)find
+{
+    return [_landmark.found boolValue];
+}
+
+- (void)setkeywords:(NSArray *)keywords
+{
+    //_landmark.found = [NSNumber numberWithBool:find];
+}
+- (NSArray *)keywords
+{
+    return [_landmark.tags allObjects];
+}
+
 - (NSString*)question
 {
-    return @"質問";
+    return _landmark.question;
 }
+
 - (NSArray*)answers
 {
-    return [NSArray arrayWithObjects:@"A1", @"A2", @"A3", nil];
+    return @[_landmark.answer1, _landmark.answer2, _landmark.answer3];
 }
 
 - (int)correctAnswerIndex
 {
-    return 1;
+    return [_landmark.correct intValue];
 }
 
 @end
