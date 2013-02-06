@@ -31,10 +31,6 @@
     return [_landmark.found boolValue];
 }
 
-- (void)setkeywords:(NSArray *)keywords
-{
-    //_landmark.found = [NSNumber numberWithBool:find];
-}
 - (NSArray *)keywords
 {
     return [_landmark.tags allObjects];
@@ -52,7 +48,7 @@
 
 - (int)correctAnswerIndex
 {
-    return [_landmark.correct intValue];
+    return [_landmark.correct intValue] - 1;
 }
 
 @end

@@ -30,6 +30,8 @@
         KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
         a.landmark = l;
         a.title = l.name;
+        a.coordinate = CLLocationCoordinate2DMake([l.latitude doubleValue],
+                                                  [l.longitude doubleValue]);
         [set addObject:a];
     }
     if (![moc save:nil]) {
