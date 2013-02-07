@@ -28,6 +28,8 @@ const static float LeverImageSize = 44.0;
         _radius /= 2.0;
         self.bounds = CGRectMake(-_radius, -_radius, _radius * 2.0, _radius * 2.0);
         
+        _radius -= LeverImageSize / 2.0;
+        
         //  可動範囲
         CALayer* ereaLayer = [CALayer layer];
         ereaLayer.backgroundColor = [UIColor grayColor].CGColor;

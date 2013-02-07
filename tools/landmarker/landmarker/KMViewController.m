@@ -141,6 +141,7 @@
     MKPointAnnotation* pin = [[MKPointAnnotation alloc] init];
     pin.title = [NSString stringWithFormat:@"%d", [_mapView.annotations count]];
     pin.coordinate = coordinate;
+    printf("%s %f %f\n", [pin.title UTF8String], pin.coordinate.latitude, pin.coordinate.longitude);
     [_mapView addAnnotation:pin];
     [self store];
 }
@@ -170,8 +171,11 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
-    if (newState == MKAnnotationViewDragStateEnding)
+    if (newState == MKAnnotationViewDragStateEnding) {
+        MKPointAnnotation* a = view.annotation;
+        printf("%s %f %f\n", [a.title UTF8String], a.coordinate.latitude, a.coordinate.longitude);
         [self store];
+    }
 }
 
 - (void)didReceiveMemoryWarning

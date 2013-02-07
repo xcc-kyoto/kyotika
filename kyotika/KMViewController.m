@@ -98,12 +98,12 @@
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
                                                       10000.0,  //  10km
                                                       10000.0);
-    _mapView.region = _kyotoregion;  //  アニメーション抜き
     //  ハンター追加
     _hunterAnnotation = [[KMTreasureHunterAnnotation alloc] init];
     _hunterAnnotation.coordinate = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
     [_mapView addAnnotation:_hunterAnnotation];
 
+    _mapView.region = _kyotoregion;  //  アニメーション抜き
 }
 
 - (UIButton*)addButton:(CGRect)frame backgroundImage:(UIImage*)backgroundImage image:(UIImage*)image action:(SEL)action
@@ -123,17 +123,17 @@
 - (void)addVirtualSwitch
 {
     UIImage* roundrect = [[UIImage imageNamed:@"roundrect"] stretchableImageWithLeftCapWidth:6 topCapHeight:14];
-    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 40, 30, 30);
+    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 60, 30, 30);
     _currentLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"arrow"] action:@selector(startTracking)];
     
-    frame = CGRectOffset(frame, frame.size.width + 40, 0);
+    frame = CGRectOffset(frame, frame.size.width + 10, 0);
     _returnLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"hunter"] action:@selector(returnLocation)];
     _returnLocationButton.alpha = 0;
 
     //  レバー
     float radius = 150;
-    frame = CGRectMake(self.view.bounds.size.width - radius - 30,
-                              self.view.bounds.size.height - radius - 30, radius, radius);
+    frame = CGRectMake(self.view.bounds.size.width - radius - 10,
+                              self.view.bounds.size.height - radius - 10, radius, radius);
     _virtualLeaver = [[KMLever alloc] initWithFrame:frame];
     _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
@@ -282,19 +282,17 @@
 }
 
 
-static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordinateRegion region)
+static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion region)
 {
-    float minlatitude = region.center.latitude - region.span.latitudeDelta / 2;
-    float maxlatitude = region.center.latitude + region.span.latitudeDelta / 2;
-    float minlongitude = region.center.longitude - region.span.longitudeDelta / 2;
-    float maxlongitude = region.center.longitude + region.span.longitudeDelta / 2;
-    if ((centerCoordinate.longitude > minlongitude) && (centerCoordinate.longitude < maxlongitude)
-        && (centerCoordinate.latitude > minlatitude) && (centerCoordinate.latitude < maxlatitude)) {
-        //  画面範囲内移動
-        return YES;
-    }
-    return NO;
+    CLLocationDegrees delta = region.span.latitudeDelta / 2.0;
+    if (a.latitude < (region.center.latitude - delta)) return NO;
+    if (a.latitude >= (region.center.latitude + delta)) return NO;
+    delta = region.span.longitudeDelta / 2.0;
+    if (a.longitude < (region.center.longitude - delta)) return NO;
+    if (a.longitude >= (region.center.longitude + delta)) return NO;
+    return YES;
 }
+
 /*
  ハンターを移動させる
  画面外への移動の場合、一度領域を10km四方にしてから移動させ、その後元の大きさにズームインする
@@ -356,16 +354,40 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 
 #pragma mark - KMLocationManager delegate
 
+- (void)showOutOfBoundsAlert
+{
+    CGRect frame = self.view.bounds;
+    frame.size.height /= 5;
+    frame.origin.y += frame.size.height;
+    UILabel* alert = [[UILabel alloc] initWithFrame:CGRectInset(frame, 20, 0)];
+    alert.text = @"現在、京都チカチカの範囲外です。\nバーチャルモードで遊びましょう。";
+    alert.numberOfLines = 2;
+    alert.textAlignment = NSTextAlignmentCenter;
+    alert.textColor = [UIColor whiteColor];
+    alert.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.5 brightness:0.3 alpha:0.5];
+    alert.layer.cornerRadius = 8;
+    [self.view addSubview:alert];
+    [UIView animateWithDuration:1 delay:2 options:0 animations:^{
+        alert.alpha = 0;
+    } completion:^(BOOL finished) {
+        [alert removeFromSuperview];
+    }];
+}
 /*
  位置が更新された
  */
 - (void)locationManagerUpdate:(KMLocationManager*)locationManager
 {
+    CLLocationCoordinate2D newLocation = locationManager.curtLocation.coordinate;   //  stopしても値が残っているのが保証されているかわからないので
     [_locationManager stop];
     [UIView animateWithDuration:0.3 animations:^{
         _currentLocationButton.alpha = 1;
     }];
     [self showVirtualLeaver];
+    if (coordinateInRegion(newLocation, _kyotoregion) == NO) {
+        [self showOutOfBoundsAlert];
+        return;
+    }
     [self moveHunter:locationManager.curtLocation.coordinate course:locationManager.curtLocation.course];
 }
 
@@ -413,14 +435,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     return pinView;
 }
 
-static BOOL locationISSame(CLLocationCoordinate2D a, CLLocationCoordinate2D b, CLLocationDegrees margin)
-{
-    if (a.latitude < (b.latitude - margin)) return NO;
-    if (a.latitude >= (b.latitude + margin)) return NO;
-    if (a.longitude < (b.longitude - margin)) return NO;
-    if (a.longitude >= (b.longitude + margin)) return NO;
-    return YES;
-}
 /*
  表示領域が変更された
  */
@@ -431,7 +445,10 @@ static BOOL locationISSame(CLLocationCoordinate2D a, CLLocationCoordinate2D b, C
     if (_returnLocationButton.alpha == 0) {
         printf("%f %f\n", _hunterAnnotation.coordinate.latitude, mapView.region.center.latitude);
         printf("%f %f\n", _hunterAnnotation.coordinate.longitude, mapView.region.center.longitude);
-        if (locationISSame(_hunterAnnotation.coordinate, mapView.region.center, 0.0001) == NO) {
+        MKCoordinateRegion region = mapView.region;
+        region.span.latitudeDelta *= 0.1;
+        region.span.longitudeDelta *= 0.1;
+        if (coordinateInRegion(_hunterAnnotation.coordinate, region) == NO) {
             [UIView animateWithDuration:0.3 animations:^{
                 _returnLocationButton.alpha = 1;
             }];
