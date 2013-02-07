@@ -36,11 +36,11 @@
     KMVaults*    _vaults;
     BOOL        _virtualMode;
     KMLocationManager*  _locationManager;
-    UILabel*    _virtualModeLabel;
-    UISwitch*   _virtualSwitch;
     BOOL _first;
     NSArray* _targets;
     UILabel*   _stopTargetModeButton;
+    UIButton*   _currentLocationButton;         /// 現在地を探す
+    UIButton*   _returnLocationButton;          /// パトラッシュの位置に戻る
 }
 @end
 
@@ -106,25 +106,66 @@
 
 }
 
+- (UIButton*)addButton:(CGRect)frame backgroundImage:(UIImage*)backgroundImage image:(UIImage*)image action:(SEL)action
+{
+    UIButton* bt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setImage:image forState:UIControlStateNormal];
+    [bt setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+    [bt addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    bt.frame = frame;
+    [self.view addSubview:bt];
+    return bt;
+}
+
 /*
  バーチャルモード切り替えスイッチの追加
  */
 - (void)addVirtualSwitch
 {
-    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 60, 100, 20);
-    UILabel* label = [[UILabel alloc]initWithFrame:frame];
-    label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowColor = [UIColor whiteColor];
-    label.font = [UIFont systemFontOfSize:10];
-    label.text = @"バーチャルモード";
-    [self.view addSubview:label];
-    frame.origin.y += frame.size.height;
-    frame.size.width = 150;
-    UISwitch* virtualSwitch = [[UISwitch alloc] initWithFrame:frame];
-    virtualSwitch.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    [virtualSwitch addTarget:self action:@selector(virtualSwitch:) forControlEvents:UIControlEventValueChanged];
-    [self.view addSubview:virtualSwitch];
+    UIImage* roundrect = [[UIImage imageNamed:@"roundrect"] stretchableImageWithLeftCapWidth:6 topCapHeight:14];
+    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 40, 30, 30);
+    _currentLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"arrow"] action:@selector(startTracking)];
+    
+    frame = CGRectOffset(frame, frame.size.width + 40, 0);
+    _returnLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"hunter"] action:@selector(returnLocation)];
+    _returnLocationButton.alpha = 0;
+
+    //  レバー
+    float radius = 150;
+    frame = CGRectMake(self.view.bounds.size.width - radius - 30,
+                              self.view.bounds.size.height - radius - 30, radius, radius);
+    _virtualLeaver = [[KMLever alloc] initWithFrame:frame];
+    _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
+    [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
+    [self.view addSubview:_virtualLeaver];
+}
+
+/*
+ トラッキングスタート
+ */
+- (void)startTracking
+{
+    if ([CLLocationManager locationServicesEnabled]) {
+        [UIView animateWithDuration:0.3 animations:^{
+            _currentLocationButton.alpha = 0;
+            _virtualLeaver.alpha = 0;
+        }];
+        [_locationManager start];
+    } else {
+        _currentLocationButton.hidden = YES;
+        [self showVirtualLeaver];
+    }
+}
+
+/*
+    地図をパトラッシュの位置に戻す
+ */
+- (void)returnLocation
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        _returnLocationButton.alpha = 0;
+    }];
+    [_mapView setCenterCoordinate:_hunterAnnotation.coordinate animated:YES];
 }
 
 /*
@@ -147,7 +188,6 @@
         }
     }
  */
-    [self startTracking];
     if (_first) {
         _first = NO;
         double delayInSeconds = 2.0;
@@ -179,18 +219,6 @@
         [_locationManager stop];
 }
 
-/*
- トラッキングスタート
- */
-- (void)startTracking
-{
-    BOOL locationServicesEnabled = [CLLocationManager locationServicesEnabled];
-    _virtualModeLabel.text = locationServicesEnabled?@"バーチャルモード" : @"バーチャルモードしか使えません";
-    _virtualSwitch.hidden = !locationServicesEnabled;
-    if ((_virtualSwitch.hidden == NO) && (_virtualMode == NO)) {
-        [_locationManager start];
-    }
-}
 
 /*
  ハンターが持つ情報をみせる（ランドマーク、キーワード、アバウト）
@@ -253,13 +281,6 @@
     [self presentModalViewController:c animated:YES];
 }
 
-/*
- バーチャルモードスイッチが切り替わった
- */
-- (void)virtualSwitch:(UISwitch*)virtualSwitch
-{
-    [self setVirtualMode:virtualSwitch.on];
-}
 
 static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordinateRegion region)
 {
@@ -293,13 +314,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
  */
 - (void)showVirtualLeaver
 {
-    float radius = 150;
-    CGRect frame = CGRectMake(self.view.bounds.size.width - radius - 30,
-                       self.view.bounds.size.height - radius - 30, radius, radius);
-    _virtualLeaver = [[KMLever alloc] initWithFrame:frame];
-    _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
-    [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
-
+    _virtualLeaver.alpha = 1;
     CAKeyframeAnimation * popupAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
 
     NSArray* keyAttributes = @[
@@ -313,7 +328,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     NSArray* keyTimes = @[@0.0,@0.5,@0.75,@1.0];
     popupAnimation.keyTimes = keyTimes;
     popupAnimation.duration= 0.5;
-    [self.view addSubview:_virtualLeaver];
     [_virtualLeaver.layer addAnimation:popupAnimation forKey:@"popup"];
 }
 
@@ -323,7 +337,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
 - (void)virtualMove
 {
     CGPoint vector = _virtualLeaver.vector;
-    CGPoint pt = [_mapView convertCoordinate:_hunterAnnotation.coordinate toPointToView:_mapView];
+    CGPoint pt = [_mapView convertCoordinate:_mapView.region.center toPointToView:_mapView];
     
     float dx = 15 * vector.x;
     float dy = 15 * vector.y;
@@ -332,30 +346,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     CLLocationDirection course = _virtualLeaver.rotation * 360.0 / (2.0 * 3.1415) - 90;
     if (course < 0) course += 270;
     [self moveHunter:[_mapView convertPoint:point toCoordinateFromView:_mapView] course:course];
-}
-
-/*
- バーチャルモードの設定
-    バーチャルモード：レバー表示、位置トラッキング停止
-    リアルモード：レバー非表示、位置トラッキング開始
- */
-- (void)setVirtualMode:(BOOL)virtualMode
-{
-    if (_virtualMode == virtualMode) {
-        return;
-    }
-    _virtualMode = virtualMode;
-    if (_virtualMode) {
-        [self showVirtualLeaver];
-        [_locationManager stop];
-        if (coordinateInRegion(_hunterAnnotation.coordinate, _kyotoregion)) {
-            return;
-        }
-        [self moveHunter:_kyotoregion.center course:0];
-    } else {
-        [_virtualLeaver removeFromSuperview];
-        _virtualLeaver = nil;
-        [self startTracking];
+    
+    if (_returnLocationButton.alpha != 0) {
+        [UIView animateWithDuration:0.3 animations:^{
+            _returnLocationButton.alpha = 0;
+        }];
     }
 }
 
@@ -366,6 +361,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
  */
 - (void)locationManagerUpdate:(KMLocationManager*)locationManager
 {
+    [_locationManager stop];
+    [UIView animateWithDuration:0.3 animations:^{
+        _currentLocationButton.alpha = 1;
+    }];
+    [self showVirtualLeaver];
     [self moveHunter:locationManager.curtLocation.coordinate course:locationManager.curtLocation.course];
 }
 
@@ -413,12 +413,32 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D centerCoordinate, MKCoordi
     return pinView;
 }
 
+static BOOL locationISSame(CLLocationCoordinate2D a, CLLocationCoordinate2D b, CLLocationDegrees margin)
+{
+    if (a.latitude < (b.latitude - margin)) return NO;
+    if (a.latitude >= (b.latitude + margin)) return NO;
+    if (a.longitude < (b.longitude - margin)) return NO;
+    if (a.longitude >= (b.longitude + margin)) return NO;
+    return YES;
+}
 /*
  表示領域が変更された
  */
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     [_hunterAnnotationView setRegion:_mapView.region];
+    
+    if (_returnLocationButton.alpha == 0) {
+        printf("%f %f\n", _hunterAnnotation.coordinate.latitude, mapView.region.center.latitude);
+        printf("%f %f\n", _hunterAnnotation.coordinate.longitude, mapView.region.center.longitude);
+        if (locationISSame(_hunterAnnotation.coordinate, mapView.region.center, 0.0001) == NO) {
+            [UIView animateWithDuration:0.3 animations:^{
+                _returnLocationButton.alpha = 1;
+            }];
+        }
+    }
+    
+    
     NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_moc :_mapView.region] mutableCopy];
     NSArray* array = [_mapView annotations];
     NSMutableSet* set = [NSMutableSet setWithArray:array];
