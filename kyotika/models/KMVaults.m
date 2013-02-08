@@ -89,7 +89,7 @@ static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接
 - (int)gropuIndexForRegion:(MKCoordinateRegion)region
 {
     int index = -1;
-    for (int thresholdSpan = 10000; index <= 2; thresholdSpan *= 2) {
+    for (int thresholdSpan = 10000; index < 2; thresholdSpan *= 2) {
         MKCoordinateRegion threshold = MKCoordinateRegionMakeWithDistance(region.center, thresholdSpan, thresholdSpan);
         if (region.span.longitudeDelta < threshold.span.longitudeDelta) {
             break;

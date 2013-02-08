@@ -111,6 +111,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(store) name:UIApplicationDidEnterBackgroundNotification object:nil];
     [super viewDidLoad];
     _mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
+    _mapView.mapType = MKMapTypeSatellite;
     _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     _mapView.delegate = self;
     [self restore];
