@@ -133,7 +133,9 @@
     _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
     [self.view addSubview:_virtualLeaver];
+    
     _virtualLeaver.hidden = YES;
+    _returnLocationButton.hidden = YES;
 }
 
 /*
