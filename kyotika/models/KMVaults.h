@@ -19,5 +19,6 @@
 - (NSArray*)landmarks:(NSManagedObjectContext *)moc;
 - (void)setPassedAnnotation:(NSManagedObjectContext *)moc
                            :(KMTreasureAnnotation*)annotation;
+- (void)save:(NSManagedObjectContext *)moc;
 @property (assign) float complite;
 @end
