@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class KMVaults;
 
 @interface KMViewController : UIViewController
-@property (strong, nonatomic) NSManagedObjectContext *moc;
+@property (retain, nonatomic) KMVaults* vaults;
 - (void)showProlog;
 @end

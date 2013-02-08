@@ -10,6 +10,7 @@
 #import "KMViewController.h"
 #import "KMVaultViewController.h"
 #import "Converter.h"
+#import "KMVaults.h"
 
 @implementation KMAppDelegate
 
@@ -20,11 +21,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Converter createSeeds:self.managedObjectContext];
+    //  お宝
+    KMVaults* vaults = [[KMVaults alloc] initWithContext:self.managedObjectContext];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-
     KMViewController* controller = [[KMViewController alloc] init];
-    controller.moc = self.managedObjectContext;
+    controller.vaults = vaults;
     self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
     [controller showProlog];

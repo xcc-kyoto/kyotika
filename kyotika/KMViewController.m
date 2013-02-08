@@ -33,7 +33,6 @@
     KMTreasureHunterAnnotation* _hunterAnnotation;
     KMTreasureHunterAnnotationView* _hunterAnnotationView;
     NSTimer*    _timer;
-    KMVaults*    _vaults;
     BOOL        _virtualMode;
     KMLocationManager*  _locationManager;
     BOOL _first;
@@ -45,8 +44,6 @@
 @end
 
 @implementation KMViewController
-
-@synthesize moc = _moc;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,8 +75,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //  お宝
-    _vaults = [[KMVaults alloc]init];
+    //  京都府庁をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
+    _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
+                                                      10000.0,  //  10km
+                                                      10000.0);
+    [_vaults makeArea:_kyotoregion];
     //  位置情報　（地図側は最大縮尺だとぶれまくるので使わない）
     if (_locationManager == nil) {
         _locationManager = [[KMLocationManager alloc] init];
@@ -93,11 +94,6 @@
     //  バーチャルモード切り替えスイッチ
     [self addVirtualSwitch];
     
-    //  京都府庁をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
-    _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
-                                                      10000.0,  //  10km
-                                                      10000.0);
     //  ハンター追加
     _hunterAnnotation = [[KMTreasureHunterAnnotation alloc] init];
     _hunterAnnotation.coordinate = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
@@ -217,6 +213,7 @@
 {
     if (_virtualMode == NO)
         [_locationManager stop];
+    [_vaults save];
 }
 
 
@@ -227,8 +224,8 @@
 {
     KMVaultViewController* c = [[KMVaultViewController alloc] init];
     c.selectedIndex = tabIndex;
-    c.keywords = [_vaults keywords:_moc];
-    c.landmarks= [_vaults landmarks:_moc];
+    c.keywords = [_vaults keywords];
+    c.landmarks= [_vaults landmarks];
     c.vaultsDelegate = self;
     c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:c animated:YES];
@@ -416,9 +413,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     }
     if ([annotation isKindOfClass:[KMAreaAnnotation class]]) {
         //  エリアビュー
-        KMTreasureHunterAnnotationView* pinView = (KMTreasureHunterAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Area"];
+        KMAreaAnnotationView* pinView = (KMAreaAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Area"];
         if (pinView == nil) {
-            pinView = [[KMTreasureHunterAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Area"];
+            pinView = [[KMAreaAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Area"];
             pinView.canShowCallout = NO;
         }
         pinView.annotation = annotation;
@@ -456,7 +453,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     }
     
     
-    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_moc :_mapView.region] mutableCopy];
+    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate power:0.0] mutableCopy];
     NSArray* array = [_mapView annotations];
     NSMutableSet* set = [NSMutableSet setWithArray:array];
     [set minusSet:treasureAnnotations];
@@ -542,7 +539,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
     [self setTargetMode:NO];
-    NSArray* landmarks = [_vaults landmarksForKey:_moc :object];
+    NSArray* landmarks = [_vaults landmarksForKey :object];
     for (KMTreasureAnnotation* a in landmarks) {
         a.target = YES;
         KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
@@ -562,7 +559,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (NSArray*)keywordListControllerLandmarks:(KMKeywordListController*)ViewController fromObject:(id)object
 {
-    return [_vaults landmarksForKey:_moc :object];
+    return [_vaults landmarksForKey :object];
 }
 
 - (void)landmarkListControllerShowLocation:(KMLandmarkListController*)controller object:(id)object
@@ -592,7 +589,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     float newComplite = complite;
     KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
     if (controller.selectedIndex == annotation.correctAnswerIndex) {
-        [_vaults setPassedAnnotation:_moc :annotation];
+        [_vaults setPassedAnnotation :annotation];
         newComplite = _vaults.complite;
         KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
         [v startAnimation];

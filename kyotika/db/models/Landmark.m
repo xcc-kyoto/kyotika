@@ -57,7 +57,8 @@
 {
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
     [req setEntity:[self entityDescription:moc]];
-    [req setPredicate:predicate];
+    if (predicate)
+        [req setPredicate:predicate];
     NSError *err = nil;
     NSArray *results = [moc executeFetchRequest:req error:&err];
     if (err == nil) {
@@ -84,7 +85,7 @@
 
 + (NSArray *)allFound:(NSManagedObjectContext *)moc
 {
-    return [self fetch:moc predicate:[self found]];
+    return [self fetch:moc predicate:nil];
 }
 
 + (NSPredicate *)passed
