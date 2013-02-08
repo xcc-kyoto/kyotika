@@ -35,16 +35,23 @@
     NSTimer*    _timer;
     BOOL        _virtualMode;
     KMLocationManager*  _locationManager;
-    BOOL _first;
     NSArray* _targets;
     UILabel*   _stopTargetModeButton;
     UIButton*   _currentLocationButton;         /// 現在地を探す
     UIButton*   _returnLocationButton;          /// パトラッシュの位置に戻る
+    BOOL        _prologue;                      /// 一度だけYESになる
 }
 @end
 
 @implementation KMViewController
 
+/*
+ ノーティフィケーションをここで登録する
+    アプリサスペンド
+        リジューム
+    KMTreasureAnnotationViewのタップ
+    KMTreasureHunterAnnotationViewのタップ
+ */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -64,6 +71,9 @@
     return self;
 }
 
+/*
+ ノーティフィケーション解除
+ */
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -102,17 +112,6 @@
     _mapView.region = _kyotoregion;  //  アニメーション抜き
 }
 
-- (UIButton*)addButton:(CGRect)frame backgroundImage:(UIImage*)backgroundImage image:(UIImage*)image action:(SEL)action
-{
-    UIButton* bt = [UIButton buttonWithType:UIButtonTypeCustom];
-    [bt setImage:image forState:UIControlStateNormal];
-    [bt setBackgroundImage:backgroundImage forState:UIControlStateNormal];
-    [bt addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    bt.frame = frame;
-    [self.view addSubview:bt];
-    return bt;
-}
-
 /*
  バーチャルモード切り替えスイッチの追加
  */
@@ -135,6 +134,21 @@
     [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
     [self.view addSubview:_virtualLeaver];
 }
+
+/*
+ 操作ボタンの追加
+ */
+- (UIButton*)addButton:(CGRect)frame backgroundImage:(UIImage*)backgroundImage image:(UIImage*)image action:(SEL)action
+{
+    UIButton* bt = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bt setImage:image forState:UIControlStateNormal];
+    [bt setBackgroundImage:backgroundImage forState:UIControlStateNormal];
+    [bt addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    bt.frame = frame;
+    [self.view addSubview:bt];
+    return bt;
+}
+
 
 /*
  トラッキングスタート
@@ -175,27 +189,6 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-
-/*
-    for (id < MKAnnotation > a  in _mapView.annotations) {
-        if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
-            KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
-            [v startAnimation];
-        }
-    }
- */
-    if (_first) {
-        _first = NO;
-        double delayInSeconds = 2.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(_mapView.region.center,
-                                                                        200.0,  //  1km
-                                                                        200.0);
-            
-            [_mapView setRegion:rgn animated:YES];
-        });
-    }
 }
 
 /*
@@ -220,12 +213,13 @@
 /*
  ハンターが持つ情報をみせる（ランドマーク、キーワード、アバウト）
  */
-- (void)showValuts:(int)tabIndex
+- (void)showValuts
 {
     KMVaultViewController* c = [[KMVaultViewController alloc] init];
-    c.selectedIndex = tabIndex;
     c.keywords = [_vaults keywords];
     c.landmarks= [_vaults landmarks];
+    c.selectedIndex = _prologue ? 2 : 0;
+    
     c.vaultsDelegate = self;
     c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:c animated:YES];
@@ -236,12 +230,8 @@
  */
 - (void)showProlog
 {
-    [self showValuts:2];
-    double delayInSeconds = 1.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        _first = YES;
-    });
+    _prologue = YES;
+    [self showValuts];
 }
 
 /*
@@ -249,7 +239,7 @@
  */
 - (void)tapHunter
 {
-    [self showValuts:0];
+    [self showValuts];
 }
 
 /*
@@ -262,7 +252,9 @@
     if (annotation.passed) {
         //  キーワードを見る
         KMLandmarkViewController* c = [[KMLandmarkViewController alloc] init];
+        c.title = annotation.title;
         c.keywords = annotation.keywords;
+        c.urlString = annotation.landmark.url;
         c.landmarkDelegate = self;
         c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
         [self presentModalViewController:c animated:YES];
@@ -350,7 +342,12 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 }
 
 #pragma mark - KMLocationManager delegate
+// WiFi、GPS位置情報デリゲート
 
+
+/*
+    領域外アラート　自動消滅
+ */
 - (void)showOutOfBoundsAlert
 {
     CGRect frame = self.view.bounds;
@@ -370,6 +367,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         [alert removeFromSuperview];
     }];
 }
+
 /*
  位置が更新された
  */
@@ -389,6 +387,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 }
 
 #pragma mark - MKMapView delegate
+/*
+    MKMapViewデリゲート
+ */
 /*
  注釈ビューを返す
  */
@@ -487,6 +488,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 }
 
 #pragma mark - KMVaultViewController delegate
+//  お宝表示デリゲート
 
 - (void)setTargetMode:(BOOL)targetMode
 {
@@ -518,17 +520,30 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 {
     [self setTargetMode:NO];    
 }
--(void)vaultViewControllerDone:(KMVaultViewController*)viewController
+
+/*
+ プロローグとして表示していたならズームインする。
+ */
+- (void)zoomInIfPrologue
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (_prologue == NO)
+        return;
+    _prologue = NO;
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(_mapView.region.center,
+                                                                    200.0,  //  1km
+                                                                    200.0);
+        
+        [_mapView setRegion:rgn animated:YES];
+    });
 }
 
--(void)landmarkViewControllerDone:(KMLandmarkViewController*)viewController
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void)showTargets
+/*
+ ターゲットを見せるため、ズームアウト
+ */
+- (void)zoomOut
 {
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -536,6 +551,28 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         [_mapView setRegion:_kyotoregion animated:YES];
     });
 }
+
+/*
+ キャンセルでの切り替わり。プロローグとして表示していたならズームインする。
+ */
+-(void)vaultViewControllerDone:(KMVaultViewController*)viewController
+{
+    [self zoomInIfPrologue];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+/*
+ キャンセルでの切り替わり。プロローグとして表示していたならズームインする。
+ */
+-(void)landmarkViewControllerDone:(KMLandmarkViewController*)viewController
+{
+    [self zoomInIfPrologue];
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+/*
+ 選択されたランドマークに☆を付けて表示
+ */
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
     [self setTargetMode:NO];
@@ -548,20 +585,29 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     _targets = [NSArray arrayWithArray:landmarks];
     [self setTargetMode:YES];
     [self dismissModalViewControllerAnimated:YES];
-    [self showTargets];
+    [self zoomOut];
 }
 
+/*
+ 指定されたキーワード名を返す
+ */
 - (NSString*)keywordListControllerKeyword:(KMKeywordListController*)ViewController fromObject:(id)object
 {
     Tag *t = object;
     return t.name;
 }
 
+/*
+ 指定されたキーワードに関連するKMTreasureAnnotation群を返す
+ */
 - (NSArray*)keywordListControllerLandmarks:(KMKeywordListController*)ViewController fromObject:(id)object
 {
     return [_vaults landmarksForKey :object];
 }
 
+/*
+ 選択されたランドマークに☆を付けて表示
+ */
 - (void)landmarkListControllerShowLocation:(KMLandmarkListController*)controller object:(id)object
 {
     [self setTargetMode:NO];
@@ -572,16 +618,22 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
     [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
-    [self showTargets];
+    [self zoomOut];
 }
 
+/*
+ 選択されたランドマークの名前を返す。
+ */
 - (NSString*)landmarkListControllerLandmark:(KMLandmarkListController*)controller fromObject:(id)object
 {
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
-    return a.title;
+    if (a.passed)
+        return a.title;
+    return @"？";
 }
 
 #pragma mark - KMQuizeViewController delegate
+//  クイズ用デリゲート
 
 - (void)quizeViewControllerAnswer:(KMQuizeViewController*)controller
 {

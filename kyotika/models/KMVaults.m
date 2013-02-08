@@ -145,6 +145,11 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
                 [set addObject:a];
             }
         }
+        for (KMTreasureAnnotation* a in _treasureAnnotations) {
+            if (a.target == NO)
+                continue;
+            [set addObject:a];
+        }
         return set;
     }
     
@@ -184,8 +189,8 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
     NSArray* array = [tag.landmarks allObjects];
     NSMutableArray* result = [NSMutableArray arrayWithCapacity:[array count]];
     for (Landmark* landmark in array) {
-        int index = [_treasureAnnotations indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            if (obj == landmark) {
+        int index = [_treasureAnnotations indexOfObjectPassingTest:^BOOL(KMTreasureAnnotation* obj, NSUInteger idx, BOOL *stop) {
+            if (obj.landmark == landmark) {
                 return YES;
             }
             return NO;

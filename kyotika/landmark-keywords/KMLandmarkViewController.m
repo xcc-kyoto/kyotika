@@ -40,13 +40,15 @@
     self.viewControllers = @[nav1, nav2];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    viewController1.tabBarItem.title = viewController1.navigationItem.title;
+    viewController1.navigationItem.title = self.title;
     viewController1.urlString = _urlString;
+    
     viewController2.keywordsDelegate = _landmarkDelegate;
     viewController2.keywords = _keywords;
-    [viewController1 reload];
 }
 
 - (void)didReceiveMemoryWarning

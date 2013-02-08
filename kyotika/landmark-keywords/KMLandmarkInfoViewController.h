@@ -10,5 +10,4 @@
 
 @interface KMLandmarkInfoViewController : UIViewController
 @property (copy) NSString* urlString;
-- (void)reload;
 @end

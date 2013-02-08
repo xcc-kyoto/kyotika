@@ -20,8 +20,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"LandscapeInfo", @"LandscapeInfo");
-        self.tabBarItem.image = [UIImage imageNamed:@"first"];
+        self.title = NSLocalizedString(@"LandmarkInfo", @"LandmarkInfo");
+        self.tabBarItem.image = [UIImage imageNamed:@"landmarkList"];
     }
     return self;
 }
@@ -32,15 +32,9 @@
     self.view = _webView;
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    if (_urlString)
-        [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
-}
-
-- (void)reload
-{
+    [super viewDidAppear:animated];
     if (_urlString)
         [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
 }
