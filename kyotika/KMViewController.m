@@ -133,6 +133,7 @@
     _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
     [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
     [self.view addSubview:_virtualLeaver];
+    _virtualLeaver.hidden = YES;
 }
 
 /*
@@ -326,8 +327,8 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     CGPoint vector = _virtualLeaver.vector;
     CGPoint pt = [_mapView convertCoordinate:_mapView.region.center toPointToView:_mapView];
     
-    float dx = 15 * vector.x;
-    float dy = 15 * vector.y;
+    float dx = 8 * vector.x;
+    float dy = 8 * vector.y;
     CGPoint point = CGPointMake(pt.x + dx, pt.y + dy);
     
     CLLocationDirection course = _virtualLeaver.rotation * 360.0 / (2.0 * 3.1415) - 90;
@@ -439,10 +440,8 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     [_hunterAnnotationView setRegion:_mapView.region];
-    
+
     if (_returnLocationButton.alpha == 0) {
-        printf("%f %f\n", _hunterAnnotation.coordinate.latitude, mapView.region.center.latitude);
-        printf("%f %f\n", _hunterAnnotation.coordinate.longitude, mapView.region.center.longitude);
         MKCoordinateRegion region = mapView.region;
         region.span.latitudeDelta *= 0.1;
         region.span.longitudeDelta *= 0.1;
@@ -453,6 +452,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         }
     }
     
+    _hunterAnnotation.coordinate = _mapView.region.center;
     
     NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate power:0.0] mutableCopy];
     NSArray* array = [_mapView annotations];

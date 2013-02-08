@@ -162,5 +162,15 @@
     _standbyNero = standbyNero;
     _walker.contents = (id)self.image.CGImage;
 }
+
+- (id < CAAction >)actionForLayer:(CALayer *)layer forKey:(NSString *)key
+{
+    if ([key isEqualToString:@"position"]) {
+        CABasicAnimation * animation =[CABasicAnimation animationWithKeyPath:@"position"];
+        animation.duration= 0.3;
+        return animation;
+    }
+    return [super actionForLayer:layer forKey:key];
+}
 @end
 
