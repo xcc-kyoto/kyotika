@@ -25,9 +25,6 @@
                                                   [l.longitude doubleValue]);
         [set addObject:a];
     }
-    if (![moc save:nil]) {
-        // FIXME
-    }
     return set;
 }
 
@@ -64,6 +61,10 @@
                            :(KMTreasureAnnotation*)annotation
 {
     annotation.passed = YES;
+}
+
+- (void)save:(NSManagedObjectContext *)moc
+{
     if (![moc save:nil]) {
         // FIXME
     }

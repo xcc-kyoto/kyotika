@@ -59,7 +59,7 @@
     [req setEntity:[self entityDescription:moc]];
     [req setPredicate:predicate];
     NSError *err = nil;
-    NSArray *results = [[moc executeFetchRequest:req error:&err] mutableCopy];
+    NSArray *results = [moc executeFetchRequest:req error:&err];
     if (err == nil) {
         // FIXME
     }
