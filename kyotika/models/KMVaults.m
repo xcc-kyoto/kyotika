@@ -167,7 +167,7 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
     for (KMTreasureAnnotation* a in _treasureAnnotations) {
         if (MKCoordinateInKMRegion(a.coordinate, r) == NO)
             continue;
-        if (a.find) {
+        if (a.find || a.target) {
             [set addObject:a];
             continue;
         }
