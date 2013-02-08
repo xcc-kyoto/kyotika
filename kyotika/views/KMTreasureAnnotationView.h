@@ -11,7 +11,4 @@
 @interface KMTreasureAnnotationView : MKAnnotationView
 - (void)startAnimation;
 - (void)stopAnimation;
-- (void)enterNotification;
-
-- (BOOL)enter:(CLLocationCoordinate2D)location;
 @end

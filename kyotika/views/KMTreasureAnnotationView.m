@@ -42,33 +42,6 @@
     return imageBox;
 }
 
-- (void)enterNotification
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:self.annotation, @"annotation", nil]];
-}
-
-- (BOOL)enter:(CLLocationCoordinate2D)location
-{
-    KMTreasureAnnotation* an = self.annotation;
-    if (an.passed)
-        return NO;
-    if (an.lastAtackDate && [[NSDate date] timeIntervalSinceDate:an.lastAtackDate] < 20)
-        return NO;
-    
-    CLLocationCoordinate2D a = self.annotation.coordinate;
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(a, 50.0, 50.0);
-    float peekminlatitude = region.center.latitude - region.span.latitudeDelta;
-    float peekmaxlatitude = region.center.latitude + region.span.latitudeDelta;
-    float peekminlongitude = region.center.longitude - region.span.longitudeDelta;
-    float peekmaxlongitude = region.center.longitude + region.span.longitudeDelta;
-    if (location.longitude < peekminlongitude) return NO;
-    if (location.longitude > peekmaxlongitude) return NO;
-    if (location.latitude < peekminlatitude) return NO;
-    if (location.latitude > peekmaxlatitude) return NO;
-    
-    an.lastAtackDate = [NSDate date];
-    return YES;
-}
 
 - (NSArray*)contentsRectArray
 {
@@ -107,7 +80,9 @@
     KMTreasureAnnotation* a = self.annotation;
     if (a.find == NO)
         return;
-    [self enterNotification];
+    if (a.lastAtackDate && [[NSDate date] timeIntervalSinceDate:a.lastAtackDate] < 20)  //  前回のトライから時間が経過していない
+        return;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationHitNotification" object:self userInfo:@{@"annotation" : a}];
 }
 
 - (void)startAnimation

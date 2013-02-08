@@ -26,6 +26,8 @@
 #import "Landmark.h"
 #import "Tag.h"
 
+static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅をデフォルト位置にする　latitude：34.985 longitude：135.758
+
 @interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate> {
     MKMapView* _mapView;
     KMLever* _virtualLeaver;
@@ -51,6 +53,10 @@
         リジューム
     KMTreasureAnnotationViewのタップ
     KMTreasureHunterAnnotationViewのタップ
+ アプリフォアグラウンド復帰   CLLocationManagerが使えるか調べ、使えない場合はバーチャルモードのみの運用にする
+ アプリバックグラウンド移動   CLLocationManagerを使って位置確認中なら停止する
+ KMTreasureAnnotationHitNotification ランドマークヒット（タップ）
+ KMTreasureHunterAnnotationViewTapNotification   探索者タップ
  */
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -64,7 +70,7 @@
                                                  selector:@selector(applicationDidEnterBackground)
                                                      name:UIApplicationDidEnterBackgroundNotification
                                                    object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tapTreasure:) name:@"KMTreasureAnnotationViewTapNotification" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hitTreasure:) name:@"KMTreasureAnnotationHitNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tapHunter) name:@"KMTreasureHunterAnnotationViewTapNotification" object:nil];
 
     }
@@ -85,8 +91,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //  京都府庁をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
+    //  京都駅をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
+    CLLocationCoordinate2D center = kyotoCenter;
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
                                                       10000.0,  //  10km
                                                       10000.0);
@@ -106,7 +112,7 @@
     
     //  ハンター追加
     _hunterAnnotation = [[KMTreasureHunterAnnotation alloc] init];
-    _hunterAnnotation.coordinate = CLLocationCoordinate2DMake(35.0212466, 135.7555968);
+    _hunterAnnotation.coordinate = kyotoCenter;
     [_mapView addAnnotation:_hunterAnnotation];
 
     _mapView.region = _kyotoregion;  //  アニメーション抜き
@@ -182,24 +188,11 @@
 }
 
 /*
- ビュー表示直後
-    ノーティフィケーションを見張る
-        アプリフォアグラウンド復帰   CLLocationManagerが使えるか調べ、使えない場合はバーチャルモードのみの運用にする
-        アプリバックグラウンド移動   CLLocationManagerを使って位置確認中なら停止する
-        KMTreasureAnnotationViewTapNotification ランドマークタップ
-        KMTreasureHunterAnnotationViewTapNotification   探索者タップ
- */
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-/*
  バックグラウンドから復帰した
  */
 - (void)applicationDidBecomeActive
 {
-    [self startTracking];
+//    [self startTracking];
 }
 
 /*
@@ -248,7 +241,7 @@
 /*
  ランドマークがタップされた
  */
-- (void)tapTreasure:(NSNotification*)notification
+- (void)hitTreasure:(NSNotification*)notification
 {
     KMTreasureAnnotation* annotation = [notification.userInfo objectForKey:@"annotation"];
 
@@ -357,7 +350,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     frame.size.height /= 5;
     frame.origin.y += frame.size.height;
     UILabel* alert = [[UILabel alloc] initWithFrame:CGRectInset(frame, 20, 0)];
-    alert.text = @"現在、京都チカチカの範囲外です。\nバーチャルモードで遊びましょう。";
+    alert.text = @"現在、京都チカチカの範囲外です。";
     alert.numberOfLines = 2;
     alert.textAlignment = NSTextAlignmentCenter;
     alert.textColor = [UIColor whiteColor];
@@ -371,6 +364,21 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     }];
 }
 
+- (void)searchAnimation
+{
+    UIImage* image = [UIImage imageNamed:@"searcher"];
+    UIImageView* v = [[UIImageView alloc] initWithImage:image];
+    v.frame = self.view.frame;
+    v.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view addSubview:v];
+    [UIView animateWithDuration:1
+                     animations:^{
+                         v.transform = CGAffineTransformMakeRotation(3.14);
+                     } completion:^(BOOL finished) {
+                         [v removeFromSuperview];
+                     }
+     ];
+}
 /*
  位置が更新された
  */
@@ -386,7 +394,19 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         [self showOutOfBoundsAlert];
         return;
     }
-    [self moveHunter:locationManager.curtLocation.coordinate course:locationManager.curtLocation.course];
+
+    [_vaults search:locationManager.curtLocation.coordinate radiusMeter:1000];
+    MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(locationManager.curtLocation.coordinate,
+                                                      1000.0,  //  1km
+                                                      1000.0);
+    [_mapView setRegion:rgn animated:YES];
+
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self searchAnimation];
+    });
+    
 }
 
 #pragma mark - MKMapView delegate
@@ -456,7 +476,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     
     _hunterAnnotation.coordinate = _mapView.region.center;
     
-    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate power:0.0] mutableCopy];
+    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate] mutableCopy];
     NSArray* array = [_mapView annotations];
     NSMutableSet* set = [NSMutableSet setWithArray:array];
     [set minusSet:treasureAnnotations];
@@ -465,28 +485,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     if ([set count] > 0)
         [_mapView removeAnnotations:set.allObjects];
     [treasureAnnotations minusSet:[NSSet setWithArray:array]];
-    // FIXME
-    NSLog(@"--- treasureAnnotations ---");
-    for (KMTreasureAnnotation *t in treasureAnnotations) {
-        NSLog(@"%@", t.title);
-    }
-    //
+
     if ([treasureAnnotations count] > 0)
         [_mapView addAnnotations:treasureAnnotations.allObjects];
-    int64_t delayInSeconds = 0.01;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        for (KMTreasureAnnotation* a  in _mapView.annotations) {
-            if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
-                KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
-                if ([v enter:_hunterAnnotation.coordinate]) {
-                    [v enterNotification];
-                    break;
-                }
-            }
-        }
-
-    });
 }
 
 #pragma mark - KMVaultViewController delegate
@@ -535,7 +536,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(_mapView.region.center,
-                                                                    200.0,  //  1km
+                                                                    200.0,  //  200m
                                                                     200.0);
         
         [_mapView setRegion:rgn animated:YES];
@@ -631,7 +632,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
     if (a.passed)
         return a.title;
-    return @"？";
+    return nil;
 }
 
 #pragma mark - KMQuizeViewController delegate
@@ -656,6 +657,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     }
     [self mapView:_mapView regionDidChangeAnimated:NO];
     [self dismissModalViewControllerAnimated:YES];
+    annotation.lastAtackDate = [NSDate date];
     if (newComplite != complite) {
         [_hunterAnnotationView startAnimation];
         double delayInSeconds = 1.0;

@@ -24,13 +24,19 @@
 /**
     指定された領域のKMTreasureAnnotationのセットを返す。
  
- in region  領域指定
- in hunter  パトラッシュの位置
- in power   ランドマークと近接した時に発見とみなすが、その近接しきい値（m）の倍率 0.0意外を指定するとデフォルトにpowerがかけられた値でチェックされる。
+ @in region  領域指定
+ @in hunter  パトラッシュの位置
  
- out
+ @return    指定された領域のKMTreasureAnnotationのセット
  */
-- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter power:(float)power;
+- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter;
+
+/**
+ 指定された中心から、指定された半径の円範囲のランドマークのfindをYESにする。
+ @in center  中心 緯度経度
+ @in radiusMeter 半径 m
+ */
+- (void)search:(CLLocationCoordinate2D)center radiusMeter:(CLLocationDistance)radiusMeter;
 
 - (NSArray*)landmarksForKey:(Tag *)tag;
 - (NSArray*)keywords;

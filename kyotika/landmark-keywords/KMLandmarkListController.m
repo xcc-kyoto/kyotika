@@ -46,8 +46,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     id obj = [_landmarks objectAtIndex:indexPath.row];
-    cell.textLabel.text = [_landmarksDelegate landmarkListControllerLandmark:self fromObject:obj];
-   
+    NSString* title = [_landmarksDelegate landmarkListControllerLandmark:self fromObject:obj];
+    if (title)
+        cell.textLabel.text = title;
+    else
+        cell.textLabel.text = @"？";
     return cell;
 }
 #pragma mark - Table view delegate

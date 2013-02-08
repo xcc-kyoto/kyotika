@@ -70,6 +70,11 @@
     return _question;
 }
 
+- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
+{
+    return @"慎重に…　間違えると\n2分間チャレンジできなくなるワン";
+}
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

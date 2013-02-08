@@ -12,8 +12,8 @@
 #import "Landmark.h"
 
 static const CLLocationDegrees groupThresholdDegree = 0.02;             ///  KMTreasureAnnotationではなく、KMAreaAnnotationを返すしきい値
-static const CLLocationDegrees findingModeThresholdDegree = 0.0050;     ///  検索モードのしきい値設定（角度）この角度以内の表示領域なら検索モードとなる
-static const CLLocationDistance nearThresholdMeter = 200.0;             ///  200m四方が基本の近接範囲
+static const CLLocationDistance nearThresholdMeter = 100.0;             ///  基本の近接範囲 m
+static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接触とみなす範囲 m
 
 @implementation KMVaults {
     __weak NSManagedObjectContext* _moc;
@@ -125,6 +125,17 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
     return YES;
 }
 
+static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegion hr)
+{
+    if (a.passed)
+        return nil;
+    if (a.lastAtackDate && [[NSDate date] timeIntervalSinceDate:a.lastAtackDate] < 20)  //  前回のトライから時間が経過していない
+        return nil;
+    if (MKCoordinateInKMRegion(a.coordinate, hr) == NO)
+        return nil;
+    return a;
+}
+
 /*
     Landmarkの数が多い場合は、与えられたregion範囲のLandmarkを検索し、
     結果を_treasureAnnotationsにキャッシュしたKMTreasureAnnotationインスタンスのLandmarkと比較し
@@ -132,7 +143,7 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
     そして、検索されなかったLandmarkを持つKMTreasureAnnotationは_treasureAnnotationsからとりはぶく
     といった作業が必要。
  */
-- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter power:(float)power
+- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter
 {
     NSMutableSet* set = [NSMutableSet set];
     KMRegion r = KMRegionFromMKCoordinateRegion(region);    //  regionで指定された範囲を決定
@@ -153,35 +164,55 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
         return set;
     }
     
-    //  検索モードのときは、nearThresholdMeter内の場合、無条件に発見（find）フラグをたてる。その範囲。
-    KMRegion pr;
+    //  nearThresholdMeter内の場合、無条件に発見（find）フラグをたてる。その範囲。
+    MKCoordinateRegion peekregion = MKCoordinateRegionMakeWithDistance(hunter, nearThresholdMeter, nearThresholdMeter);
+    KMRegion pr = KMRegionFromMKCoordinateRegion(peekregion);    //  peekregionで指定された範囲を決定
     
-    if ((power != 0.0) || (region.span.latitudeDelta <= findingModeThresholdDegree)) {  //  power != 0.0は無条件で検索モード
-        //  検索モードなので近接範囲を決定
-        CLLocationDistance meter = nearThresholdMeter;
-        if (power != 0.0) meter *= power;
-        MKCoordinateRegion peekregion = MKCoordinateRegionMakeWithDistance(hunter, meter, meter);
-        pr = KMRegionFromMKCoordinateRegion(peekregion);    //  peekregionで指定された範囲を決定
-    }
+    MKCoordinateRegion hitregion = MKCoordinateRegionMakeWithDistance(hunter, hitThresholdMeter, hitThresholdMeter);
+    KMRegion hr = KMRegionFromMKCoordinateRegion(hitregion);    //  hitregionで指定された範囲を決定
     
+    KMTreasureAnnotation* hitAnnotation = nil;
     for (KMTreasureAnnotation* a in _treasureAnnotations) {
         if (MKCoordinateInKMRegion(a.coordinate, r) == NO)
             continue;
         if (a.find || a.target) {
+            if (hitAnnotation == nil) {
+                hitAnnotation = hitAnnotationCheck(a, hr);
+            }
             [set addObject:a];
             continue;
         }
-        //  検索モードか？
-        if (region.span.latitudeDelta > findingModeThresholdDegree)
-            continue;
-        //  検索モード
         if (MKCoordinateInKMRegion(a.coordinate, pr) == NO)
             continue;
         //  nearThresholdMeter内なので無条件に発見（find）フラグをたてる。
         a.find = YES;
+        if (hitAnnotation == nil) {
+            hitAnnotation = hitAnnotationCheck(a, hr);
+        }
         [set addObject:a];
     }
+    if (hitAnnotation) {
+        double delayInSeconds = 0.1;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationHitNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:hitAnnotation, @"annotation", nil]];
+        });
+    }
+
     return set;
+}
+
+- (void)search:(CLLocationCoordinate2D)center radiusMeter:(CLLocationDistance)radiusMeter
+{
+    MKCoordinateRegion peekregion = MKCoordinateRegionMakeWithDistance(center, radiusMeter, radiusMeter);
+    KMRegion pr = KMRegionFromMKCoordinateRegion(peekregion);    //  peekregionで指定された範囲を決定
+    for (KMTreasureAnnotation* a in _treasureAnnotations) {
+        if (a.find)
+            continue;   //  すでに設定済み
+        if (MKCoordinateInKMRegion(a.coordinate, pr) == NO)
+            continue;   //  範囲外
+        a.find = YES;
+    }
 }
 
 - (NSArray*)landmarksForKey :(Tag *)tag
@@ -209,7 +240,13 @@ BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region)
 
 - (NSArray*)landmarks
 {
-    return _treasureAnnotations;
+    NSMutableArray* array = [NSMutableArray arrayWithCapacity:[_treasureAnnotations count]];
+    for (KMTreasureAnnotation* a in _treasureAnnotations) {
+        if (a.find) {
+            [array addObject:a];
+        }
+    }
+    return array;
 }
 
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation
