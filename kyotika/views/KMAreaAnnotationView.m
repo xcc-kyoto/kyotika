@@ -9,7 +9,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "KMAreaAnnotationView.h"
 
-@implementation KMAreaAnnotationView
+@implementation KMAreaAnnotationView {
+    CALayer* _blinker;
+}
 
 - (UIImage*)image
 {
@@ -44,7 +46,7 @@
         // 不透過プロパティをNOに設定することで、地図コンテンツが、レンダリング対象外のビューの領域を透かして見えるようになる。
         self.opaque = NO;
         
-        CALayer* _blinker = [CALayer layer];
+        _blinker = [CALayer layer];
         _blinker.opacity = 0.5;
         [self.layer addSublayer:_blinker];
         _blinker.frame = CGRectMake(0, 0, 24, 24);
@@ -56,11 +58,18 @@
         animation.values = self.contentsRectArray;
         animation.calculationMode = kCAAnimationDiscrete;
         animation.duration= 0.3;
-        animation.removedOnCompletion = YES;
+        animation.removedOnCompletion = NO;
         animation.repeatCount = HUGE_VALF;
         [_blinker addAnimation:animation forKey:@"ggg"];
         
     }
     return self;
 }
+
+- (void)restoreAnimation
+{
+    CAAnimation * animation = [_blinker animationForKey:@"ggg"];
+    [_blinker addAnimation:animation forKey:@"ggg"];
+}
+
 @end

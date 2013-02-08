@@ -154,6 +154,7 @@
     searchAnimation.values = keyAttributes;
     searchAnimation.duration= 3;
     searchAnimation.repeatCount = HUGE_VALF;
+    searchAnimation.removedOnCompletion = NO;
     [_searcher addAnimation:searchAnimation forKey:@"searcher"];
 }
 
@@ -172,5 +173,12 @@
     }
     return [super actionForLayer:layer forKey:key];
 }
+
+- (void)restoreAnimation
+{
+    CAAnimation * animation = [_searcher animationForKey:@"searcher"];
+    [_searcher addAnimation:animation forKey:@"searcher"];
+}
+
 @end
 

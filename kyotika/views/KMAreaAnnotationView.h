@@ -7,7 +7,8 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "KMAnnotationView.h"
 
-@interface KMAreaAnnotationView : MKAnnotationView
+@interface KMAreaAnnotationView : KMAnnotationView
 
 @end

@@ -192,7 +192,14 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
  */
 - (void)applicationDidBecomeActive
 {
-//    [self startTracking];
+    for (id a in _mapView.annotations) {
+        UIView* view = [_mapView viewForAnnotation:a];
+        if ([a isKindOfClass:[KMAnnotationView class]]) {
+            KMAnnotationView* annotationView = (KMAnnotationView*)view;
+            [annotationView restoreAnimation];
+        }
+    }
+    [self startTracking];
 }
 
 /*

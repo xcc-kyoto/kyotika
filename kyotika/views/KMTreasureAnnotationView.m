@@ -78,11 +78,7 @@
 - (void)tap
 {
     KMTreasureAnnotation* a = self.annotation;
-    if (a.find == NO)
-        return;
-    if (a.lastAtackDate && [[NSDate date] timeIntervalSinceDate:a.lastAtackDate] < 20)  //  前回のトライから時間が経過していない
-        return;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationHitNotification" object:self userInfo:@{@"annotation" : a}];
+    [a notificationHitIfNeed];
 }
 
 - (void)startAnimation
@@ -109,9 +105,10 @@
         animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1.0)];
         animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(2.0, 2.0, 1.0)];
         animation.duration = 1;
-        animation.removedOnCompletion = YES;
+        animation.removedOnCompletion = NO;
         animation.autoreverses = YES;
         animation.repeatCount = HUGE_VALF;
+        [_blinker removeAnimationForKey:@"shine"];
         [_blinker addAnimation:animation forKey:@"transform"];
     } else {
         _blinker.frame = CGRectMake(-16, -16, 48, 48);
@@ -123,8 +120,9 @@
         animation.values = self.contentsRectArray;
         animation.calculationMode = kCAAnimationDiscrete;
         animation.duration= 1;
-        animation.removedOnCompletion = YES;
+        animation.removedOnCompletion = NO;
         animation.repeatCount = HUGE_VALF;
+        [_blinker removeAnimationForKey:@"transform"];
         [_blinker addAnimation:animation forKey:@"shine"];
     }
 }
@@ -132,5 +130,17 @@
 {
     [_blinker removeAnimationForKey:@"transform"];
 }
+
+- (void)restoreAnimation
+{
+    CAAnimation * animation = [_blinker animationForKey:@"shine"];
+    if (animation == nil) {
+        animation = [_blinker animationForKey:@"transform"];
+        [_blinker addAnimation:animation forKey:@"transform"];
+    } else {
+        [_blinker addAnimation:animation forKey:@"shine"];
+    }
+}
+
 @end
 

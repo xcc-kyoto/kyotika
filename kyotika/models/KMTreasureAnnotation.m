@@ -51,4 +51,16 @@
     return [_landmark.correct intValue] - 1;
 }
 
+- (void)notificationHitIfNeed
+{
+    if (self.find == NO)
+        return;
+    if (self.passed == NO) {
+        if (self.lastAtackDate && [[NSDate date] timeIntervalSinceDate:self.lastAtackDate] < 120) {  //  前回のトライから時間が経過していない
+            return;
+        }
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationHitNotification" object:self userInfo:@{@"annotation" : self}];
+}
+
 @end

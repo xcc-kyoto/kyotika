@@ -7,12 +7,11 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "KMAnnotationView.h"
 
 @class KMTreasureHunterAnnotation;
 
-@interface KMTreasureHunterAnnotationView : MKAnnotationView
-- (void)startAnimation;
-- (void)stopAnimation;
+@interface KMTreasureHunterAnnotationView : KMAnnotationView
 - (void)setCourse:(CLLocationDirection)course;
 - (void)setRegion:(MKCoordinateRegion)region;
 - (void)setStandbyNero:(BOOL)standbyNero;

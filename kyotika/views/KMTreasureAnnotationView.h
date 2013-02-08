@@ -7,8 +7,7 @@
 //
 
 #import <MapKit/MapKit.h>
+#import "KMAnnotationView.h"
 
-@interface KMTreasureAnnotationView : MKAnnotationView
-- (void)startAnimation;
-- (void)stopAnimation;
+@interface KMTreasureAnnotationView : KMAnnotationView
 @end

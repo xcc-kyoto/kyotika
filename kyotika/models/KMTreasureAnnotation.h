@@ -11,6 +11,9 @@
 @class Landmark;
 
 @interface KMTreasureAnnotation : MKPointAnnotation
+/// ヒット通知が必要ならば通知する
+- (void)notificationHitIfNeed;
+
 @property (strong, nonatomic) Landmark *landmark;
 @property BOOL passed;
 @property BOOL find;
