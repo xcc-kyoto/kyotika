@@ -121,7 +121,9 @@
 }
 - (IBAction)tap
 {
-    if (_complite >= 1.0) {
+    if (_complite >= 2.0) {
+        ;
+    } else if (_complite >= 1.0) {
         if (_stage == 0) {
             _stage++;
             _textView.text = @"そんな、まさか、でも\n間違いない…\n懐かしいみすぼらしいチョッキの小僧。\n\n寝露、寝露、寝露ォオオオ";

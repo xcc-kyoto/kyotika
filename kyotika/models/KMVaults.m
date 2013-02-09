@@ -279,6 +279,7 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     if (_complite < 1.0)
         _complite += 0.2;
     else if ((_complite < 2.0) && (_complite >= 1.0)) {
+        _complite = 2.0;
         if (_totalPassedCount == [_treasureAnnotations count]) {
             _complite = 2.0;
         }
