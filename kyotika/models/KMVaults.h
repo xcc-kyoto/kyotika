@@ -38,10 +38,13 @@
  */
 - (void)search:(CLLocationCoordinate2D)center radiusMeter:(CLLocationDistance)radiusMeter;
 
+- (int)totalLandmarkCount;
+
 - (NSArray*)landmarksForKey:(Tag *)tag;
 - (NSArray*)keywords;
 - (NSArray*)landmarks;
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation;
 - (void)save;
 @property (assign) float complite;
+@property (readonly) int totalPassedCount;
 @end

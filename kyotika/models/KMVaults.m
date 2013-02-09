@@ -30,9 +30,12 @@ static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接
         //  今回は、いったん全部KMTreasureAnnotation化し_treasureAnnotationsに蓄える。千件以上ならキャッシュ機能をつけるべき。
         NSArray* array = [Landmark allFound:_moc];
         _treasureAnnotations = [NSMutableArray arrayWithCapacity:[array count]];
+        _totalPassedCount = 0;
         for (Landmark *l in array) {
             l.found = [NSNumber numberWithBool:NO];
             KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
+            if (l.passed)
+                _totalPassedCount++;
             a.landmark = l;
             a.title = l.name;
             a.coordinate = CLLocationCoordinate2DMake([l.latitude doubleValue],
@@ -89,7 +92,7 @@ static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接
 - (int)gropuIndexForRegion:(MKCoordinateRegion)region
 {
     int index = -1;
-    for (int thresholdSpan = 10000; index < 2; thresholdSpan *= 2) {
+    for (int thresholdSpan = 2000; index < 2; thresholdSpan *= 2) {
         MKCoordinateRegion threshold = MKCoordinateRegionMakeWithDistance(region.center, thresholdSpan, thresholdSpan);
         if (region.span.longitudeDelta < threshold.span.longitudeDelta) {
             break;
@@ -249,9 +252,17 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     return array;
 }
 
+- (int)totalLandmarkCount
+{
+    return [_treasureAnnotations count];
+}
+
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation
 {
-    annotation.passed = YES;
+    if (annotation.passed == NO) {
+        _totalPassedCount++;
+        annotation.passed = YES;
+    }
     for (Tag* keyword in annotation.keywords) {
         for (KMTreasureAnnotation* a in _treasureAnnotations) {
             int index = [a.keywords indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
@@ -267,6 +278,11 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     }
     if (_complite < 1.0)
         _complite += 0.2;
+    else if ((_complite < 2.0) && (_complite >= 1.0)) {
+        if (_totalPassedCount == [_treasureAnnotations count]) {
+            _complite = 2.0;
+        }
+    }
 }
 
 - (void)save

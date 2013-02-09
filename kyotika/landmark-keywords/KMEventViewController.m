@@ -53,6 +53,11 @@
     _imageView.layer.anchorPoint = CGPointMake(1.0,1.0);
     _imageView.layer.frame = frame;
 
+    if (_complite == 2.0) {
+        _textView.text = @"これで現在、登録されているスポットはすべて訪ね終わりました。京都チカチカツアーのご利用、誠にありがとうございました。\nでも、二人の旅は始まったばかりだ！";
+        return;
+    }
+    
     _imageView.image = [UIImage imageNamed:@"rainbow"];
     CAKeyframeAnimation * animation =[CAKeyframeAnimation
                                       animationWithKeyPath:@"transform"];

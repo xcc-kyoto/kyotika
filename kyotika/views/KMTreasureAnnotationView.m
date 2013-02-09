@@ -42,6 +42,13 @@
     return imageBox;
 }
 
+- (UIImage*)imageTargetPassedBox
+{
+    static UIImage* imageBox;
+    if (imageBox == nil)
+        imageBox = [UIImage imageNamed:@"Landmark-target-passed"];
+    return imageBox;
+}
 
 - (NSArray*)contentsRectArray
 {
@@ -97,13 +104,14 @@
     self.image = nil;
     if (a.target) {
         _blinker.frame = self.bounds;
-        _blinker.contents = (id)self.imageTargetBox.CGImage;
+        UIImage* image = a.passed ? self.imageTargetPassedBox : self.imageTargetBox;
+        _blinker.contents = (id)image.CGImage;
         _blinker.contentsRect = CGRectMake(0,0,1,1);
         _blinker.contentsGravity = kCAGravityCenter;
         
         CABasicAnimation* animation = [CABasicAnimation animation];
-        animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1.0)];
-        animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(2.0, 2.0, 1.0)];
+        animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)];
+        animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.6, 1.6, 1.0)];
         animation.duration = 1;
         animation.removedOnCompletion = NO;
         animation.autoreverses = YES;

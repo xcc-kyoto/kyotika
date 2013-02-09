@@ -19,4 +19,5 @@
 @property (copy) NSArray* keywords;
 @property (copy) NSArray* landmarks;
 @property (assign) id<KMVaultViewControllerDelegate> vaultsDelegate;
+@property (assign) int totalLandmarkCount;
 @end

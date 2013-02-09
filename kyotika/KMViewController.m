@@ -38,7 +38,7 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     BOOL        _virtualMode;
     KMLocationManager*  _locationManager;
     NSArray* _targets;
-    UILabel*   _stopTargetModeButton;
+    UIView*   _stopTargetModeButton;
     UIButton*   _currentLocationButton;         /// 現在地を探す
     UIButton*   _returnLocationButton;          /// パトラッシュの位置に戻る
     BOOL        _prologue;                      /// 一度だけYESになる
@@ -94,8 +94,8 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     //  京都駅をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
     CLLocationCoordinate2D center = kyotoCenter;
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
-                                                      10000.0,  //  10km
-                                                      10000.0);
+                                                      12000.0,  //  15km
+                                                      12000.0);
     [_vaults makeArea:_kyotoregion];
     //  位置情報　（地図側は最大縮尺だとぶれまくるので使わない）
     if (_locationManager == nil) {
@@ -221,8 +221,9 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     KMVaultViewController* c = [[KMVaultViewController alloc] init];
     c.keywords = [_vaults keywords];
     c.landmarks= [_vaults landmarks];
+    c.totalLandmarkCount = _vaults.totalLandmarkCount;
     c.selectedIndex = _prologue ? 2 : 0;
-    
+
     c.vaultsDelegate = self;
     c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:c animated:YES];
@@ -505,16 +506,33 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     if (targetMode) {
         CGRect frame = self.view.bounds;
         frame.size.height = 44;
-        _stopTargetModeButton = [[UILabel alloc] initWithFrame:frame];
+        _stopTargetModeButton = [[UIView alloc] initWithFrame:frame];
         _stopTargetModeButton.backgroundColor = [UIColor colorWithHue:0.6 saturation:1 brightness:0.2 alpha:0.8];
-        _stopTargetModeButton.userInteractionEnabled = YES;
-        _stopTargetModeButton.text = @"指定のスポットを☆で表示しています";
-        _stopTargetModeButton.textAlignment = NSTextAlignmentCenter;
-        _stopTargetModeButton.font = [UIFont systemFontOfSize:14];
-        _stopTargetModeButton.textColor = [UIColor whiteColor];
         UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopTargetMode)];
         [_stopTargetModeButton addGestureRecognizer:tapGestureRecognizer];
         [self.view addSubview:_stopTargetModeButton];
+
+        frame = _stopTargetModeButton.bounds;
+        frame.origin.y += 4;
+        frame.size.height = 20;
+        UILabel* titleLabel = [[UILabel alloc] initWithFrame:frame];
+        [_stopTargetModeButton addSubview:titleLabel];
+        titleLabel.backgroundColor = [UIColor clearColor];
+        titleLabel.text = @"スポットモード";
+        titleLabel.textAlignment = NSTextAlignmentCenter;
+        titleLabel.font = [UIFont systemFontOfSize:14];
+        titleLabel.textColor = [UIColor whiteColor];
+
+        frame.origin.y += frame.size.height;
+        frame.size.height = 16;
+        UILabel* subtitleLabel = [[UILabel alloc] initWithFrame:frame];
+        [_stopTargetModeButton addSubview:subtitleLabel];
+        subtitleLabel.backgroundColor = [UIColor clearColor];
+        subtitleLabel.text = @"ここをタップすると通常モードに戻ります";
+        subtitleLabel.textAlignment = NSTextAlignmentCenter;
+        subtitleLabel.font = [UIFont systemFontOfSize:12];
+        subtitleLabel.textColor = [UIColor whiteColor];
+    
     } else {
         for (KMTreasureAnnotation* a in _targets) {
             a.target = NO;
@@ -550,6 +568,27 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     });
 }
 
+- (BOOL)isKyotoRgn
+{
+    MKCoordinateRegion krgn = [_mapView regionThatFits:_kyotoregion];
+    MKCoordinateRegion mrgn = _mapView.region;
+    
+    printf("%f %f %f %f\n",
+           fabs(krgn.center.latitude - mrgn.center.latitude),
+           fabs(krgn.center.longitude - mrgn.center.longitude),
+           fabs(krgn.span.latitudeDelta - mrgn.span.latitudeDelta),
+           fabs(krgn.span.longitudeDelta - mrgn.span.longitudeDelta));
+    
+    if (fabs(krgn.center.latitude - mrgn.center.latitude) > 0.0001)
+        return NO;
+    if (fabs(krgn.center.longitude - mrgn.center.longitude) > 0.0001)
+        return NO;
+    if (fabs(krgn.span.latitudeDelta - mrgn.span.latitudeDelta) > 0.0001)
+        return NO;
+    if (fabs(krgn.span.longitudeDelta - mrgn.span.longitudeDelta) > 0.0001)
+        return NO;
+    return YES;
+}
 /*
  ターゲットを見せるため、ズームアウト
  */
@@ -558,6 +597,12 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        if ([self isKyotoRgn]) {
+            MKCoordinateRegion tmpRgn = _kyotoregion;
+            tmpRgn.span.longitudeDelta *= 0.75;
+            tmpRgn.span.latitudeDelta *= 0.75;
+            [_mapView setRegion:tmpRgn animated:NO];
+        }
         [_mapView setRegion:_kyotoregion animated:YES];
     });
 }

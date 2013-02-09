@@ -50,6 +50,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    viewController1.navigationItem.title = [NSString stringWithFormat:@"%@ %d/%d",
+                                        viewController1.title,
+                                        [_landmarks count],
+                                        _totalLandmarkCount];
 }
 - (void)viewDidAppear:(BOOL)animated
 {

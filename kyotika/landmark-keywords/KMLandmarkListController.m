@@ -18,7 +18,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = NSLocalizedString(@"landmark", @"landmark");
+        self.title = NSLocalizedString(@"landmarkList", @"landmark list");
         self.tabBarItem.image = [UIImage imageNamed:@"landmarkList"];
     }
     return self;
