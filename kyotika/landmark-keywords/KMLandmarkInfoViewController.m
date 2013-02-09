@@ -35,8 +35,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (_urlString)
-        [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_urlString]]];
+    if (_urlString) {
+        NSString* url = [_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    }
 }
 - (void)didReceiveMemoryWarning
 {

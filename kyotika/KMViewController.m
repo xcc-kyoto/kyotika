@@ -94,8 +94,8 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     //  京都駅をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
     CLLocationCoordinate2D center = kyotoCenter;
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
-                                                      12000.0,  //  15km
-                                                      12000.0);
+                                                      10500.0,  //  15km
+                                                      10500.0);
     [_vaults makeArea:_kyotoregion];
     //  位置情報　（地図側は最大縮尺だとぶれまくるので使わない）
     if (_locationManager == nil) {
