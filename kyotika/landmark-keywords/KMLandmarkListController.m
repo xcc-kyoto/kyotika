@@ -28,6 +28,19 @@
 {
     [super viewDidLoad];
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    CGRect frame = self.view.bounds;
+    frame.size.height = 20;
+    UIView* view = [[UIView alloc] initWithFrame:frame];
+    view.backgroundColor = [UIColor colorWithHue:0.6 saturation:0.1 brightness:0.95 alpha:1];
+    frame = view.bounds;
+    UILabel* label = [[UILabel alloc] initWithFrame:frame];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont systemFontOfSize:14];
+    label.numberOfLines = 2;
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"項目をタップすると地図で場所が表示されます";
+    [view addSubview:label];
+    self.tableView.tableHeaderView = view;
 }
 
 - (void)didReceiveMemoryWarning

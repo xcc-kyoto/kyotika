@@ -52,9 +52,10 @@
     
     id obj = [_keywords objectAtIndex:indexPath.row];
     cell.textLabel.text = [_keywordsDelegate keywordListControllerKeyword:self fromObject:obj];
-    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,7 +65,7 @@
     viewController1 = [[KMLandmarkListController alloc] initWithStyle:UITableViewStylePlain];
     viewController1.landmarks = [_keywordsDelegate keywordListControllerLandmarks:self fromObject:obj];
     viewController1.landmarksDelegate = _keywordsDelegate;
-    viewController1.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Show in map" style:
+    viewController1.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Show in map", @"Show in map") style:
                                                          UIBarButtonItemStyleBordered target:self action:@selector(showMap)];
     
     viewController1.title = [_keywordsDelegate keywordListControllerKeyword:self fromObject:obj];

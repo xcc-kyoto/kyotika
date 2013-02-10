@@ -9,7 +9,7 @@
 #import "KMPrologController.h"
 
 @interface KMPrologController ()
-@property (assign) IBOutlet UITextView* textView;
+@property (assign) IBOutlet UIScrollView* scrollView;
 @end
 
 @implementation KMPrologController
@@ -27,13 +27,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [_textView flashScrollIndicators];
+    [_scrollView flashScrollIndicators];
+    _scrollView.contentSize = CGSizeMake(320, 2000);
     
 }
 - (void)didReceiveMemoryWarning

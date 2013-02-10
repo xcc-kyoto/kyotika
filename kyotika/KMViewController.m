@@ -199,7 +199,15 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
             [annotationView restoreAnimation];
         }
     }
-    [self startTracking];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"started"];       //  デバッグ用
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"started"] == NO) {
+        //  最初の起動ではGPSチェックで移動させない。必ずJR京都駅に配置。
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"started"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    } else {
+        [self startTracking];
+    }
 }
 
 /*
