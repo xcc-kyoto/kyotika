@@ -143,12 +143,26 @@ const static float LeverImageSize = 44.0;
 }
 
 /*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+ バーチャルレバー表示
+ アニメーション付きでレバーを表示する
+ */
+- (void)showVirtualLeaver
 {
-    // Drawing code
+    self.alpha = 1;
+    CAKeyframeAnimation * popupAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    
+    NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity]
+                               ];
+    
+    popupAnimation.values = keyAttributes;
+    NSArray* keyTimes = @[@0.0,@0.5,@0.75,@1.0];
+    popupAnimation.keyTimes = keyTimes;
+    popupAnimation.duration= 0.5;
+    [self.layer addAnimation:popupAnimation forKey:@"popup"];
 }
-*/
 
 @end

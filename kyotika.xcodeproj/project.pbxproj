@@ -43,6 +43,8 @@
 		3807E7D116B4C5EB00A116A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */; };
 		3807E7D316B4C5EF00A116A0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D216B4C5EF00A116A0 /* MapKit.framework */; };
 		3807E7D516B4C5F400A116A0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E7D416B4C5F400A116A0 /* CoreLocation.framework */; };
+		38200E9716CB62240096C70C /* help2.png in Resources */ = {isa = PBXBuildFile; fileRef = 38200E9516CB62240096C70C /* help2.png */; };
+		38200ECB16CB63DA0096C70C /* KMPrologController~ipad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38200ECA16CB63DA0096C70C /* KMPrologController~ipad.xib */; };
 		38208FA016C5E1CF0065F7F8 /* Landmark-target-passed.png in Resources */ = {isa = PBXBuildFile; fileRef = 38208F9E16C5E1CF0065F7F8 /* Landmark-target-passed.png */; };
 		38208FA116C5E1CF0065F7F8 /* Landmark-target-passed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38208F9F16C5E1CF0065F7F8 /* Landmark-target-passed@2x.png */; };
 		38208FA516C5F33B0065F7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38208FA316C5F33B0065F7F8 /* Localizable.strings */; };
@@ -140,6 +142,8 @@
 		3807E7D016B4C5EB00A116A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3807E7D216B4C5EF00A116A0 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		3807E7D416B4C5F400A116A0 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		38200E9516CB62240096C70C /* help2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help2.png; sourceTree = "<group>"; };
+		38200ECA16CB63DA0096C70C /* KMPrologController~ipad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "KMPrologController~ipad.xib"; sourceTree = "<group>"; };
 		38208F9E16C5E1CF0065F7F8 /* Landmark-target-passed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Landmark-target-passed.png"; sourceTree = "<group>"; };
 		38208F9F16C5E1CF0065F7F8 /* Landmark-target-passed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Landmark-target-passed@2x.png"; sourceTree = "<group>"; };
 		38208FA216C5F2E20065F7F8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -328,11 +332,13 @@
 			isa = PBXGroup;
 			children = (
 				38372EDA16C7716B007D60AD /* help1.png */,
+				38200E9516CB62240096C70C /* help2.png */,
 				383B467916BCAA5E0067E1A5 /* About.png */,
 				383B467A16BCAA5E0067E1A5 /* About@2x.png */,
 				3871A08A16BC20EC004F8B84 /* KMPrologController.h */,
 				3871A08B16BC20EC004F8B84 /* KMPrologController.m */,
 				3871A08C16BC20EC004F8B84 /* KMPrologController.xib */,
+				38200ECA16CB63DA0096C70C /* KMPrologController~ipad.xib */,
 				3807E7A716B4C54E00A116A0 /* keywordList.png */,
 				3807E7A816B4C54E00A116A0 /* keywordList@2x.png */,
 				3807E7A916B4C54E00A116A0 /* KMKeywordListController.h */,
@@ -553,6 +559,8 @@
 				38208FA116C5E1CF0065F7F8 /* Landmark-target-passed@2x.png in Resources */,
 				38208FA516C5F33B0065F7F8 /* Localizable.strings in Resources */,
 				38372EDB16C7716B007D60AD /* help1.png in Resources */,
+				38200E9716CB62240096C70C /* help2.png in Resources */,
+				38200ECB16CB63DA0096C70C /* KMPrologController~ipad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,19 +29,15 @@
 static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅をデフォルト位置にする　latitude：34.985 longitude：135.758
 
 @interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate> {
-    MKMapView* _mapView;
-    KMLever* _virtualLeaver;
-    MKCoordinateRegion _kyotoregion;
-    KMTreasureHunterAnnotation* _hunterAnnotation;
+    MKMapView*                      _mapView;
+    MKCoordinateRegion              _kyotoregion;
+    KMTreasureHunterAnnotation*     _hunterAnnotation;
     KMTreasureHunterAnnotationView* _hunterAnnotationView;
-    NSTimer*    _timer;
-    BOOL        _virtualMode;
-    KMLocationManager*  _locationManager;
-    NSArray* _targets;
-    UIView*   _stopTargetModeButton;
-    UIButton*   _currentLocationButton;         /// 現在地を探す
-    UIButton*   _returnLocationButton;          /// パトラッシュの位置に戻る
-    BOOL        _prologue;                      /// 一度だけYESになる
+    KMLocationManager*              _locationManager;
+    NSArray*                        _targets;
+    UIView*                         _stopTargetModeButton;          /// 目的地表示
+    UIButton*                       _currentLocationButton;         /// 現在地を探す
+    BOOL                            _prologue;                      /// 一度だけYESになる
 }
 @end
 
@@ -126,22 +122,7 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     UIImage* roundrect = [[UIImage imageNamed:@"roundrect"] stretchableImageWithLeftCapWidth:6 topCapHeight:14];
     CGRect frame = CGRectMake(10, self.view.bounds.size.height - 60, 30, 30);
     _currentLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"arrow"] action:@selector(startTracking)];
-    
-    frame = CGRectOffset(frame, frame.size.width + 10, 0);
-    _returnLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"hunter"] action:@selector(returnLocation)];
-    _returnLocationButton.alpha = 0;
-
-    //  レバー
-    float radius = 150;
-    frame = CGRectMake(self.view.bounds.size.width - radius - 10,
-                              self.view.bounds.size.height - radius - 10, radius, radius);
-    _virtualLeaver = [[KMLever alloc] initWithFrame:frame];
-    _virtualLeaver.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin;
-    [_virtualLeaver addTarget:self action:@selector(virtualMove) forControlEvents:UIControlEventTouchDragInside];
-    [self.view addSubview:_virtualLeaver];
-    
-    _virtualLeaver.hidden = YES;
-    _returnLocationButton.hidden = YES;
+    _currentLocationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }
 
 /*
@@ -167,24 +148,11 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     if ([CLLocationManager locationServicesEnabled]) {
         [UIView animateWithDuration:0.3 animations:^{
             _currentLocationButton.alpha = 0;
-            _virtualLeaver.alpha = 0;
         }];
         [_locationManager start];
     } else {
         _currentLocationButton.hidden = YES;
-        [self showVirtualLeaver];
     }
-}
-
-/*
-    地図をパトラッシュの位置に戻す
- */
-- (void)returnLocation
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        _returnLocationButton.alpha = 0;
-    }];
-    [_mapView setCenterCoordinate:_hunterAnnotation.coordinate animated:YES];
 }
 
 /*
@@ -215,8 +183,7 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
  */
 - (void)applicationDidEnterBackground
 {
-    if (_virtualMode == NO)
-        [_locationManager stop];
+    [_locationManager stop];
     [_vaults save];
 }
 
@@ -307,52 +274,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 }
 
-/*
- バーチャルレバー表示
-    アニメーション付きでレバーを表示する
- */
-- (void)showVirtualLeaver
-{
-    _virtualLeaver.alpha = 1;
-    CAKeyframeAnimation * popupAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
-
-    NSArray* keyAttributes = @[
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1.0)],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)],
-                               [NSValue valueWithCATransform3D:CATransform3DIdentity]
-                           ];
-
-    popupAnimation.values = keyAttributes;
-    NSArray* keyTimes = @[@0.0,@0.5,@0.75,@1.0];
-    popupAnimation.keyTimes = keyTimes;
-    popupAnimation.duration= 0.5;
-    [_virtualLeaver.layer addAnimation:popupAnimation forKey:@"popup"];
-}
-
-/*
- レバー対応
- */
-- (void)virtualMove
-{
-    CGPoint vector = _virtualLeaver.vector;
-    CGPoint pt = [_mapView convertCoordinate:_mapView.region.center toPointToView:_mapView];
-    
-    float dx = 8 * vector.x;
-    float dy = 8 * vector.y;
-    CGPoint point = CGPointMake(pt.x + dx, pt.y + dy);
-    
-    CLLocationDirection course = _virtualLeaver.rotation * 360.0 / (2.0 * 3.1415) - 90;
-    if (course < 0) course += 270;
-    [self moveHunter:[_mapView convertPoint:point toCoordinateFromView:_mapView] course:course];
-    
-    if (_returnLocationButton.alpha != 0) {
-        [UIView animateWithDuration:0.3 animations:^{
-            _returnLocationButton.alpha = 0;
-        }];
-    }
-}
-
 #pragma mark - KMLocationManager delegate
 // WiFi、GPS位置情報デリゲート
 
@@ -405,7 +326,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     [UIView animateWithDuration:0.3 animations:^{
         _currentLocationButton.alpha = 1;
     }];
-    [self showVirtualLeaver];
     if (coordinateInRegion(newLocation, _kyotoregion) == NO) {
         [self showOutOfBoundsAlert];
         return;
@@ -478,18 +398,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
     [_hunterAnnotationView setRegion:_mapView.region];
-
-    if (_returnLocationButton.alpha == 0) {
-        MKCoordinateRegion region = mapView.region;
-        region.span.latitudeDelta *= 0.1;
-        region.span.longitudeDelta *= 0.1;
-        if (coordinateInRegion(_hunterAnnotation.coordinate, region) == NO) {
-            [UIView animateWithDuration:0.3 animations:^{
-                _returnLocationButton.alpha = 1;
-            }];
-        }
-    }
-    
     _hunterAnnotation.coordinate = _mapView.region.center;
     
     NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate] mutableCopy];

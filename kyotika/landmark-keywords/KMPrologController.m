@@ -10,6 +10,7 @@
 
 @interface KMPrologController ()
 @property (assign) IBOutlet UIScrollView* scrollView;
+@property (strong) IBOutlet UIView* contentsView;
 @end
 
 @implementation KMPrologController
@@ -33,8 +34,8 @@
 {
     [super viewDidAppear:animated];
     [_scrollView flashScrollIndicators];
-    _scrollView.contentSize = CGSizeMake(320, 2000);
-    
+    _scrollView.contentSize = _contentsView.bounds.size;
+    [_scrollView addSubview:_contentsView];
 }
 - (void)didReceiveMemoryWarning
 {
