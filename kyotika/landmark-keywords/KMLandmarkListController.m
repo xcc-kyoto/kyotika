@@ -41,6 +41,7 @@
     label.text = @"項目をタップすると地図で場所が表示されます";
     [view addSubview:label];
     self.tableView.tableHeaderView = view;
+    self.view.backgroundColor = [UIColor clearColor];
 }
 
 - (void)didReceiveMemoryWarning

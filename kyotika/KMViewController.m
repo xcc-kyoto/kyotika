@@ -227,13 +227,29 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
 - (void)showValuts
 {
     KMVaultViewController* c = [[KMVaultViewController alloc] init];
+    c.vaultsDelegate = self;
+    c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
     c.keywords = [_vaults keywords];
     c.landmarks= [_vaults landmarks];
     c.totalLandmarkCount = _vaults.totalLandmarkCount;
     c.selectedIndex = _prologue ? 2 : 0;
 
-    c.vaultsDelegate = self;
-    c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    // 背景にまゆまろ
+    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"mayumaro2" ofType:@"png"];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.backgroundColor = [UIColor whiteColor];
+    [imageView sizeToFit];
+    CGRect imageRect = imageView.frame;
+    CGRect frame = self.view.frame;
+    CGFloat newX = (frame.size.width - imageRect.size.width)/2.0;
+    CGFloat newY = (frame.size.height - imageRect.size.height)/2.0 + 40;
+    imageView.frame = CGRectMake(newX, newY,
+                                 imageRect.size.width, imageRect.size.height);
+    [c.view addSubview:imageView];
+    [c.view sendSubviewToBack:imageView];
+    
     [self presentModalViewController:c animated:YES];
 }
 
