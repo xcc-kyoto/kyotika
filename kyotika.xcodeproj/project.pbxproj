@@ -86,8 +86,8 @@
 		973DCB7016C23C7400B7C4FB /* tags.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
 		973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
 		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
-		EE506C3816CC61CB00159F98 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
-		EE506C3A16CCABDB00159F98 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
+		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
+		EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -520,6 +520,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */,
+				EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */,
 				3807E6F916B4BA5400A116A0 /* InfoPlist.strings in Resources */,
 				3807E70116B4BA5500A116A0 /* Default.png in Resources */,
 				3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */,
