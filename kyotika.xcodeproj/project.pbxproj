@@ -86,6 +86,8 @@
 		973DCB7016C23C7400B7C4FB /* tags.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
 		973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
 		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
+		EE506C3816CC61CB00159F98 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
+		EE506C3A16CCABDB00159F98 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -207,6 +209,8 @@
 		973DCB8A16C23D9400B7C4FB /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 		973DCB8C16C23E9A00B7C4FB /* Landmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Landmark.h; sourceTree = "<group>"; };
 		973DCB8D16C23E9A00B7C4FB /* Landmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Landmark.m; sourceTree = "<group>"; };
+		EE506C3716CC61CB00159F98 /* mayumaro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro.png; sourceTree = "<group>"; };
+		EE506C3916CCABDB00159F98 /* mayumaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +316,8 @@
 		3807E79316B4C54300A116A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				EE506C3916CCABDB00159F98 /* mayumaro2.png */,
+				EE506C3716CC61CB00159F98 /* mayumaro.png */,
 				3807E79416B4C54300A116A0 /* 120815c.png */,
 				3807E79516B4C54300A116A0 /* icon.psd */,
 				3807E79616B4C54300A116A0 /* Shine1.png */,
