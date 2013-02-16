@@ -206,7 +206,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"mayumaro2" ofType:@"png"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.backgroundColor = [UIColor whiteColor];
     [imageView sizeToFit];
     CGRect imageRect = imageView.frame;
     CGRect frame = self.view.frame;

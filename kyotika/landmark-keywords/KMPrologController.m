@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 國居貴浩. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "KMPrologController.h"
 
 @interface KMPrologController ()
@@ -30,12 +31,30 @@
     [super viewDidLoad];
 }
 
+- (void)popMayumaro
+{
+    UIImage *image = [UIImage imageNamed:@"mayumaro2"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    
+    CAKeyframeAnimation * popAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity]
+                               ];
+    popAnimation.values = keyAttributes;
+    popAnimation.duration= 1;
+    [imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
+    [self.view addSubview:imageView];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [_scrollView flashScrollIndicators];
     _scrollView.contentSize = _contentsView.bounds.size;
     [_scrollView addSubview:_contentsView];
+    [self popMayumaro];
 }
 - (void)didReceiveMemoryWarning
 {
