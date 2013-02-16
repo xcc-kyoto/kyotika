@@ -43,6 +43,8 @@ static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接
             [_treasureAnnotations addObject:a];
         }
         //  横20 x 縦20の区画でランドマークをまとめてグループ注釈として返す
+
+        _complite = [[NSUserDefaults standardUserDefaults] floatForKey:@"complite"];
     }
     return self;
 }
@@ -284,6 +286,8 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
             _complite = 2.0;
         }
     }
+    [[NSUserDefaults standardUserDefaults] setFloat:_complite forKey:@"complite"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)save
