@@ -307,6 +307,8 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (void)searchAnimation
 {
+    if (_searchAnimationView)
+        return;
     UIImage* image = [UIImage imageNamed:@"search"];
     UIImageView* v = [[UIImageView alloc] initWithImage:image];
     v.layer.anchorPoint = CGPointMake(0.0,1.0);
@@ -328,17 +330,19 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
                                ];
     searchAnimation.values = keyAttributes;
     searchAnimation.duration= 2;
-    searchAnimation.delegate = self;
+//    searchAnimation.delegate = self;
     _searchAnimationView = v;
 
+    
+    
     UIImage* oraimage = [UIImage imageNamed:@"ora"];
     UIImageView* orav = [[UIImageView alloc] initWithImage:oraimage];
-    orav.frame = CGRectOffset(CGRectInset(self.view.bounds, 10, self.view.bounds.size.height / 3), 0, self.view.bounds.size.height / 3);
+    orav.frame = CGRectMake(0, self.view.bounds.size.height - 80, self.view.bounds.size.width, 80);
     [self.view addSubview:orav];
     CAKeyframeAnimation * oraAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
     keyAttributes = @[
-                                [NSValue valueWithCATransform3D:CATransform3DIdentity],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 2, 1)]
+                                [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(orav.frame.size.width, 0, 1)],
+                                [NSValue valueWithCATransform3D:CATransform3DIdentity]
                                ];
     oraAnimation.values = keyAttributes;
     oraAnimation.duration= 2;
