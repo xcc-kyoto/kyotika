@@ -25,6 +25,7 @@
     KMVaults* vaults = [[KMVaults alloc] initWithContext:self.managedObjectContext];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
     KMViewController* controller = [[KMViewController alloc] init];
     controller.vaults = vaults;
     self.window.rootViewController = controller;
