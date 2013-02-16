@@ -54,6 +54,7 @@
                                         viewController1.title,
                                         [_landmarks count],
                                         _totalLandmarkCount];
+    viewController3.pop = (self.selectedIndex == 2);
 }
 - (void)viewDidAppear:(BOOL)animated
 {

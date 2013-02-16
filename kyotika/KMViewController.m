@@ -38,6 +38,8 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     UIView*                         _stopTargetModeButton;          /// 目的地表示
     UIButton*                       _currentLocationButton;         /// 現在地を探す
     BOOL                            _prologue;                      /// 一度だけYESになる
+    UIView*                         _searchAnimationView;
+    UIView*                         _searchAnimationView2;
 }
 @end
 
@@ -305,18 +307,54 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (void)searchAnimation
 {
-    UIImage* image = [UIImage imageNamed:@"searcher"];
+    UIImage* image = [UIImage imageNamed:@"search"];
     UIImageView* v = [[UIImageView alloc] initWithImage:image];
-    v.frame = self.view.frame;
-    v.contentMode = UIViewContentModeScaleAspectFill;
+    v.layer.anchorPoint = CGPointMake(0.0,1.0);
+    CGRect frame = v.frame;
+    float scale = (self.view.bounds.size.width / 2.0) / frame.size.width;
+    frame.size.width *= scale;
+    frame.size.height *= scale;
+    frame.origin.x = self.view.bounds.size.width / 2;
+    frame.origin.y = self.view.bounds.size.height / 2 - frame.size.height;
+    v.frame = frame;
     [self.view addSubview:v];
-    [UIView animateWithDuration:1
-                     animations:^{
-                         v.transform = CGAffineTransformMakeRotation(3.14);
-                     } completion:^(BOOL finished) {
-                         [v removeFromSuperview];
-                     }
-     ];
+    
+    
+    CAKeyframeAnimation * searchAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14, 0, 0, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2, 0, 0, 1)]
+                               ];
+    searchAnimation.values = keyAttributes;
+    searchAnimation.duration= 2;
+    searchAnimation.delegate = self;
+    _searchAnimationView = v;
+
+    UIImage* oraimage = [UIImage imageNamed:@"ora"];
+    UIImageView* orav = [[UIImageView alloc] initWithImage:oraimage];
+    orav.frame = CGRectOffset(CGRectInset(self.view.bounds, 10, self.view.bounds.size.height / 3), 0, self.view.bounds.size.height / 3);
+    [self.view addSubview:orav];
+    CAKeyframeAnimation * oraAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    keyAttributes = @[
+                                [NSValue valueWithCATransform3D:CATransform3DIdentity],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 2, 1)]
+                               ];
+    oraAnimation.values = keyAttributes;
+    oraAnimation.duration= 2;
+    oraAnimation.delegate = self;
+    _searchAnimationView2 = orav;
+
+    [v.layer addAnimation:searchAnimation forKey:@"searcher"];
+    [orav.layer addAnimation:oraAnimation forKey:@"ora"];
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    [_searchAnimationView removeFromSuperview];
+    _searchAnimationView = nil;
+    [_searchAnimationView2 removeFromSuperview];
+    _searchAnimationView2 = nil;
 }
 /*
  位置が更新された

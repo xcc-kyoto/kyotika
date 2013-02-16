@@ -48,6 +48,10 @@
 		38208FA016C5E1CF0065F7F8 /* Landmark-target-passed.png in Resources */ = {isa = PBXBuildFile; fileRef = 38208F9E16C5E1CF0065F7F8 /* Landmark-target-passed.png */; };
 		38208FA116C5E1CF0065F7F8 /* Landmark-target-passed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38208F9F16C5E1CF0065F7F8 /* Landmark-target-passed@2x.png */; };
 		38208FA516C5F33B0065F7F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 38208FA316C5F33B0065F7F8 /* Localizable.strings */; };
+		382C87B616CF634C00C120E2 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 382C87B416CF634C00C120E2 /* search.png */; };
+		382C87B716CF634C00C120E2 /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 382C87B516CF634C00C120E2 /* search@2x.png */; };
+		382C87BA16CF6BD700C120E2 /* ora.png in Resources */ = {isa = PBXBuildFile; fileRef = 382C87B816CF6BD700C120E2 /* ora.png */; };
+		382C87BB16CF6BD700C120E2 /* ora@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 382C87B916CF6BD700C120E2 /* ora@2x.png */; };
 		3832956716C0F673007591CB /* rainbow.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832956616C0F673007591CB /* rainbow.png */; };
 		3832957416C1EBEB007591CB /* meet-again-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832957216C1EBEB007591CB /* meet-again-1.png */; };
 		3832957516C1EBEB007591CB /* meet-again-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3832957316C1EBEB007591CB /* meet-again-2.png */; };
@@ -151,6 +155,12 @@
 		38208FA216C5F2E20065F7F8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		38208FA416C5F33B0065F7F8 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		38208FA616C5F3430065F7F8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		382C87B416CF634C00C120E2 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		382C87B516CF634C00C120E2 /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
+		382C87B816CF6BD700C120E2 /* ora.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ora.png; sourceTree = "<group>"; };
+		382C87B916CF6BD700C120E2 /* ora@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ora@2x.png"; sourceTree = "<group>"; };
+		382C87BC16CF794100C120E2 /* ora.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = ora.psd; sourceTree = "<group>"; };
+		382C87BD16CF794100C120E2 /* search.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = search.psd; sourceTree = "<group>"; };
 		3832956616C0F673007591CB /* rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbow.png; sourceTree = "<group>"; };
 		3832956816C0F67C007591CB /* rainbow.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = rainbow.psd; sourceTree = "<group>"; };
 		3832957216C1EBEB007591CB /* meet-again-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meet-again-1.png"; sourceTree = "<group>"; };
@@ -330,6 +340,12 @@
 				3871A07C16BBB052004F8B84 /* searcher.png */,
 				3871A07D16BBB052004F8B84 /* searcher.psd */,
 				3871A07E16BBB052004F8B84 /* searcher@2x.png */,
+				382C87B416CF634C00C120E2 /* search.png */,
+				382C87B516CF634C00C120E2 /* search@2x.png */,
+				382C87B816CF6BD700C120E2 /* ora.png */,
+				382C87B916CF6BD700C120E2 /* ora@2x.png */,
+				382C87BC16CF794100C120E2 /* ora.psd */,
+				382C87BD16CF794100C120E2 /* search.psd */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -569,6 +585,10 @@
 				38372EDB16C7716B007D60AD /* help1.png in Resources */,
 				38200E9716CB62240096C70C /* help2.png in Resources */,
 				38200ECB16CB63DA0096C70C /* KMPrologController~ipad.xib in Resources */,
+				382C87B616CF634C00C120E2 /* search.png in Resources */,
+				382C87B716CF634C00C120E2 /* search@2x.png in Resources */,
+				382C87BA16CF6BD700C120E2 /* ora.png in Resources */,
+				382C87BB16CF6BD700C120E2 /* ora@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

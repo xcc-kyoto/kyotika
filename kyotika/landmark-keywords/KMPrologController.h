@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface KMPrologController : UIViewController
-
+@property (assign) BOOL pop;
 @end

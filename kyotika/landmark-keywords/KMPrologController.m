@@ -9,7 +9,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "KMPrologController.h"
 
-@interface KMPrologController ()
+@interface KMPrologController () {
+    UIImageView *imageView;
+}
 @property (assign) IBOutlet UIScrollView* scrollView;
 @property (strong) IBOutlet UIView* contentsView;
 @end
@@ -33,20 +35,41 @@
 
 - (void)popMayumaro
 {
-    UIImage *image = [UIImage imageNamed:@"mayumaro2"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    imageView.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
-    
+    if (imageView == nil) {
+        UIImage *image = [UIImage imageNamed:@"mayumaro"];
+        imageView = [[UIImageView alloc] initWithImage:image];
+        [self.navigationController.view addSubview:imageView];
+    }
+    CGRect rect = CGRectZero;
+    rect.size = imageView.image.size;
+    imageView.frame = CGRectOffset(rect, self.view.bounds.size.width - rect.size.width, 30);
+    [imageView.layer removeAnimationForKey:@"opacity"];
+    imageView.layer.opacity = 1.0;
+
     CAKeyframeAnimation * popAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
     NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1) ],
                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1) ],
                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1) ],
-                               [NSValue valueWithCATransform3D:CATransform3DIdentity]
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1) ],
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity]                               
                                ];
     popAnimation.values = keyAttributes;
-    popAnimation.duration= 1;
+    popAnimation.duration= 2;
+    popAnimation.delegate = self;
     [imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
-    [self.view addSubview:imageView];
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{    
+    CABasicAnimation* fadeoutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeoutAnimation.toValue = @0.0;
+    fadeoutAnimation.duration= 2;
+    fadeoutAnimation.fillMode = kCAFillModeForwards;
+    fadeoutAnimation.removedOnCompletion = NO;
+    [imageView.layer addAnimation:fadeoutAnimation forKey:@"opacity"];
+    return;
 }
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -54,7 +77,9 @@
     [_scrollView flashScrollIndicators];
     _scrollView.contentSize = _contentsView.bounds.size;
     [_scrollView addSubview:_contentsView];
-    [self popMayumaro];
+    if (_pop)
+        [self popMayumaro];
+    _pop = NO;
 }
 - (void)didReceiveMemoryWarning
 {
