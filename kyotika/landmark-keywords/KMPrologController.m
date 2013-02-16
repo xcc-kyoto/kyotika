@@ -8,12 +8,17 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "KMPrologController.h"
+#import "KMTreasureHunterAnnotationView.h"
 
 @interface KMPrologController () {
-    UIImageView *imageView;
+    UIImageView *_imageView;
 }
 @property (assign) IBOutlet UIScrollView* scrollView;
 @property (strong) IBOutlet UIView* contentsView;
+@property (assign) IBOutlet KMTreasureHunterView* v0;
+@property (assign) IBOutlet KMTreasureHunterView* v1;
+@property (assign) IBOutlet KMTreasureHunterView* v2;
+@property (assign) IBOutlet KMTreasureHunterView* v3;
 @end
 
 @implementation KMPrologController
@@ -33,18 +38,19 @@
     [super viewDidLoad];
 }
 
+
 - (void)popMayumaro
 {
-    if (imageView == nil) {
+    if (_imageView == nil) {
         UIImage *image = [UIImage imageNamed:@"mayumaro"];
-        imageView = [[UIImageView alloc] initWithImage:image];
-        [self.navigationController.view addSubview:imageView];
+        _imageView = [[UIImageView alloc] initWithImage:image];
+        [self.navigationController.view addSubview:_imageView];
     }
     CGRect rect = CGRectZero;
-    rect.size = imageView.image.size;
-    imageView.frame = CGRectOffset(rect, self.view.bounds.size.width - rect.size.width, 30);
-    [imageView.layer removeAnimationForKey:@"opacity"];
-    imageView.layer.opacity = 1.0;
+    rect.size = _imageView.image.size;
+    _imageView.frame = CGRectOffset(rect, self.view.bounds.size.width - rect.size.width, 30);
+    [_imageView.layer removeAnimationForKey:@"opacity"];
+    _imageView.layer.opacity = 1.0;
 
     CAKeyframeAnimation * popAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
     NSArray* keyAttributes = @[
@@ -58,19 +64,26 @@
     popAnimation.values = keyAttributes;
     popAnimation.duration= 2;
     popAnimation.delegate = self;
-    [imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
+    [_imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
 }
 
 - (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{    
+{
+    if (theAnimation == [_imageView.layer animationForKey:@"opacity"]) {
+        _imageView.layer.opacity = 0.0;
+        [_imageView.layer removeAnimationForKey:@"opacity"];
+        return;
+    }
     CABasicAnimation* fadeoutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     fadeoutAnimation.toValue = @0.0;
     fadeoutAnimation.duration= 2;
     fadeoutAnimation.fillMode = kCAFillModeForwards;
     fadeoutAnimation.removedOnCompletion = NO;
-    [imageView.layer addAnimation:fadeoutAnimation forKey:@"opacity"];
+    fadeoutAnimation.delegate = self;
+    [_imageView.layer addAnimation:fadeoutAnimation forKey:@"opacity"];
     return;
 }
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

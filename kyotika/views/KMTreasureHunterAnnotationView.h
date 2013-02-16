@@ -12,8 +12,11 @@
 @class KMTreasureHunterAnnotation;
 
 @interface KMTreasureHunterAnnotationView : KMAnnotationView
-- (void)setRegion:(MKCoordinateRegion)region;
+- (void)setSearcherHidden:(BOOL)hidden;
 - (void)setStandbyNero:(BOOL)standbyNero;
 @property (assign) KMTreasureHunterAnnotation* hunterAnnotation;
 @end
 
+@interface KMTreasureHunterView : UIView
+- (void)startAnimation;
+@end

@@ -13,6 +13,7 @@
 @interface KMTreasureAnnotation : MKPointAnnotation
 /// ヒット通知が必要ならば通知する
 - (void)notificationHitIfNeed;
+- (BOOL)locking;
 
 @property (strong, nonatomic) Landmark *landmark;
 @property BOOL passed;
@@ -25,3 +26,5 @@
 @property BOOL target;
 @property (retain) NSDate* lastAtackDate;
 @end
+
+extern const NSTimeInterval KMTreasureAnnotationPenaltyDuration;

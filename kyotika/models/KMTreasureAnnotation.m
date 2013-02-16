@@ -9,6 +9,8 @@
 #import "KMTreasureAnnotation.h"
 #import "Landmark.h"
 
+const NSTimeInterval KMTreasureAnnotationPenaltyDuration = 120;
+
 @implementation KMTreasureAnnotation
 
 @synthesize landmark = _landmark;
@@ -51,14 +53,21 @@
     return [_landmark.correct intValue] - 1;
 }
 
+- (BOOL)locking
+{
+    if (self.passed == NO) {
+        if (self.lastAtackDate && [[NSDate date] timeIntervalSinceDate:self.lastAtackDate] < KMTreasureAnnotationPenaltyDuration) {  //  前回のトライから時間が経過していない
+            return YES;
+        }
+    }
+    return NO;
+}
 - (void)notificationHitIfNeed
 {
     if (self.find == NO)
         return;
-    if (self.passed == NO) {
-        if (self.lastAtackDate && [[NSDate date] timeIntervalSinceDate:self.lastAtackDate] < 120) {  //  前回のトライから時間が経過していない
-            return;
-        }
+    if (self.locking) {
+        return;
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureAnnotationHitNotification" object:self userInfo:@{@"annotation" : self}];
 }

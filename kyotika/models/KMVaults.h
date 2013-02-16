@@ -45,6 +45,9 @@
 - (NSArray*)landmarks;
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation;
 - (void)save;
++ (int)gropuIndexForRegion:(MKCoordinateRegion)region;
+
 @property (assign) float complite;
 @property (readonly) int totalPassedCount;
 @end
+

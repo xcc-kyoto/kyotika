@@ -14,6 +14,7 @@
 static const CLLocationDegrees groupThresholdDegree = 0.02;             ///  KMTreasureAnnotationではなく、KMAreaAnnotationを返すしきい値
 static const CLLocationDistance nearThresholdMeter = 100.0;             ///  基本の近接範囲 m
 static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接触とみなす範囲 m
+static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
 
 @implementation KMVaults {
     __weak NSManagedObjectContext* _moc;
@@ -91,10 +92,10 @@ static const CLLocationDistance hitThresholdMeter = 30.0;               ///  接
     return groupAnnotations;
 }
 
-- (int)gropuIndexForRegion:(MKCoordinateRegion)region
++ (int)gropuIndexForRegion:(MKCoordinateRegion)region
 {
     int index = -1;
-    for (int thresholdSpan = 2000; index < 2; thresholdSpan *= 2) {
+    for (int thresholdSpan = KMVaultsAreaThresholdSpan; index < 2; thresholdSpan *= 2) {
         MKCoordinateRegion threshold = MKCoordinateRegionMakeWithDistance(region.center, thresholdSpan, thresholdSpan);
         if (region.span.longitudeDelta < threshold.span.longitudeDelta) {
             break;
@@ -134,7 +135,7 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
 {
     if (a.passed)
         return nil;
-    if (a.lastAtackDate && [[NSDate date] timeIntervalSinceDate:a.lastAtackDate] < 20)  //  前回のトライから時間が経過していない
+    if (a.locking)
         return nil;
     if (MKCoordinateInKMRegion(a.coordinate, hr) == NO)
         return nil;
@@ -153,7 +154,7 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     NSMutableSet* set = [NSMutableSet set];
     KMRegion r = KMRegionFromMKCoordinateRegion(region);    //  regionで指定された範囲を決定
 
-    int index = [self gropuIndexForRegion:region];
+    int index = [[self class] gropuIndexForRegion:region];
     if (index >= 0) {
         NSArray* garray = [_groupAnnotations[index] allValues];
         for (MKPointAnnotation* a in garray) {
@@ -172,8 +173,11 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     //  nearThresholdMeter内の場合、無条件に発見（find）フラグをたてる。その範囲。
     MKCoordinateRegion peekregion = MKCoordinateRegionMakeWithDistance(hunter, nearThresholdMeter, nearThresholdMeter);
     KMRegion pr = KMRegionFromMKCoordinateRegion(peekregion);    //  peekregionで指定された範囲を決定
-    
     MKCoordinateRegion hitregion = MKCoordinateRegionMakeWithDistance(hunter, hitThresholdMeter, hitThresholdMeter);
+    CLLocationDegrees minlatitudeDelta = region.span.latitudeDelta / 15;
+    CLLocationDegrees minlongitudeDelta = region.span.longitudeDelta / 15;
+    if (hitregion.span.latitudeDelta < minlatitudeDelta) hitregion.span.latitudeDelta = minlatitudeDelta;
+    if (hitregion.span.longitudeDelta < minlongitudeDelta) hitregion.span.longitudeDelta = minlongitudeDelta;
     KMRegion hr = KMRegionFromMKCoordinateRegion(hitregion);    //  hitregionで指定された範囲を決定
     
     KMTreasureAnnotation* hitAnnotation = nil;

@@ -10,7 +10,6 @@
 #import "KMTreasureHunterAnnotationView.h"
 #import "KMTreasureHunterAnnotation.h"
 
-
 @interface KMTreasureHunterAnnotationView() {
     CALayer* _walker;
     CALayer*     _searcher;
@@ -21,16 +20,16 @@
 
 
 @implementation KMTreasureHunterAnnotationView
-- (UIImage*)image
++ (UIImage*)imageWithNero:(BOOL)standbyNero
 {
-    int index = _standbyNero?1:0;
+    int index = standbyNero?1:0;
     static UIImage* walkerImage[2];
     if (walkerImage[index] == nil)
         walkerImage[index] = [UIImage imageNamed:index ? @"vx_chara07_b_cvt_0_1" : @"vx_chara07_b_cvt_0_1"];
     return walkerImage[index];
 }
 
-- (NSArray*)contentsRectArrayStand
++ (NSArray*)contentsRectArrayStand
 {
     static NSMutableArray* array = nil;
     if (array == nil) {
@@ -44,7 +43,7 @@
     return array;
 }
 
-- (NSArray*)contentsRectArrayWalkWithDirection:(int)direction
++ (NSArray*)contentsRectArrayWalkWithDirection:(int)direction
 {
     static NSArray* array[] = {nil, nil, nil, nil};
     if (array[direction] == nil) {
@@ -75,8 +74,8 @@
         
         _walker = [CALayer layer];
         _walker.frame = CGRectMake(0, 0, 32, 48);
-        _walker.contents = (id)self.image.CGImage;
-        _walker.contentsRect = [(NSValue*)[self.contentsRectArrayStand objectAtIndex:0] CGRectValue];
+        _walker.contents = (id)[[self class] imageWithNero:_standbyNero].CGImage;
+        _walker.contentsRect = [(NSValue*)[[self class].contentsRectArrayStand objectAtIndex:0] CGRectValue];
         _direction = -1;
         
         self.layer.cornerRadius = myFrame.size.width / 2;
@@ -96,7 +95,7 @@
 - (void)startAnimation
 {
     CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
-    walkAnimation.values = self.contentsRectArrayStand;
+    walkAnimation.values = [self class].contentsRectArrayStand;
     walkAnimation.calculationMode = kCAAnimationDiscrete;    //  kCAAnimationLinear
     
     walkAnimation.duration= 1;
@@ -105,9 +104,9 @@
     [_walker addAnimation:walkAnimation forKey:@"walk"];
 }
 
-- (void)setRegion:(MKCoordinateRegion)region
+- (void)setSearcherHidden:(BOOL)hidden
 {
-    if (region.span.latitudeDelta > 0.0050) {
+    if (hidden) {
         [_searcher removeFromSuperlayer];
         return;
     }
@@ -160,3 +159,29 @@
 
 @end
 
+
+@implementation KMTreasureHunterView
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        self.layer.contents = (id)[KMTreasureHunterAnnotationView imageWithNero:NO].CGImage;
+        self.layer.contentsRect = [(NSValue*)[[KMTreasureHunterAnnotationView contentsRectArrayStand] objectAtIndex:0] CGRectValue];
+        [self startAnimation];
+    }
+    return self;
+}
+
+- (void)startAnimation
+{
+    CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
+    walkAnimation.values = [KMTreasureHunterAnnotationView contentsRectArrayWalkWithDirection:self.tag];
+    walkAnimation.calculationMode = kCAAnimationDiscrete;    //  kCAAnimationLinear
+    
+    walkAnimation.duration= 1;
+    walkAnimation.repeatCount = HUGE_VALF;
+    walkAnimation.removedOnCompletion = NO;
+    [self.layer addAnimation:walkAnimation forKey:@"walk"];
+}
+@end

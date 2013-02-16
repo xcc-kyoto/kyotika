@@ -13,10 +13,19 @@
 
 @interface KMTreasureAnnotationView() {
     CALayer* _blinker;
+    CALayer*    _locker;
 }
 @end
 
 @implementation KMTreasureAnnotationView
+
+- (UIImage*)imageLock
+{
+    static UIImage* image;
+    if (image == nil)
+        image = [UIImage imageNamed:@"lock"];
+    return image;
+}
 
 - (UIImage*)imageShine
 {
@@ -92,6 +101,8 @@
 {
     KMTreasureAnnotation* a = self.annotation;
     if (a.passed && !a.target) {
+        [_locker removeFromSuperlayer];
+        _locker = nil;
         [_blinker removeFromSuperlayer];
         _blinker = nil;
         self.image = a.target ? self.imageTargetBox : self.imageBox;
@@ -101,6 +112,7 @@
         _blinker = [CALayer layer];
         [self.layer addSublayer:_blinker];
     }
+
     self.image = nil;
     if (a.target) {
         _blinker.frame = self.bounds;
@@ -132,6 +144,18 @@
         animation.repeatCount = HUGE_VALF;
         [_blinker removeAnimationForKey:@"transform"];
         [_blinker addAnimation:animation forKey:@"shine"];
+    }
+    if (a.locking) {
+        if (_locker == nil) {
+            _locker = [CALayer layer];
+            _locker.frame = self.layer.bounds;
+            _locker.contents = (id)self.imageLock.CGImage;
+            _locker.contentsGravity = kCAGravityCenter;
+            [self.layer addSublayer:_locker];
+        }
+    } else {
+        [_locker removeFromSuperlayer];
+        _locker = nil;        
     }
 }
 

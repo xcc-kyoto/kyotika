@@ -443,7 +443,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
  */
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    [_hunterAnnotationView setRegion:_mapView.region];
+    [_hunterAnnotationView setSearcherHidden:[KMVaults gropuIndexForRegion:_mapView.region] >= 0];
     _hunterAnnotation.coordinate = _mapView.region.center;
     
     NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate] mutableCopy];
@@ -656,22 +656,23 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 {
     float complite = _vaults.complite;
     float newComplite = complite;
-    KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
+    __weak KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
+    annotation.lastAtackDate = [NSDate date];
+    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
     if (controller.selectedIndex == annotation.correctAnswerIndex) {
         [_vaults setPassedAnnotation :annotation];
         newComplite = _vaults.complite;
-        KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
-        [v startAnimation];
-        for (id<MKAnnotation> a  in _mapView.annotations) {
-            if ([a isKindOfClass:[KMTreasureAnnotation class]]) {
-                KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
-                [v startAnimation];
-            }
-        }
+    } else {
+        double delayInSeconds = KMTreasureAnnotationPenaltyDuration + 0.2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
+            [v startAnimation];
+        });
     }
+    [v startAnimation];
     [self mapView:_mapView regionDidChangeAnimated:NO];
     [self dismissModalViewControllerAnimated:YES];
-    annotation.lastAtackDate = [NSDate date];
     if (newComplite != complite) {
         [_hunterAnnotationView startAnimation];
         double delayInSeconds = 1.0;
