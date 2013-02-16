@@ -10,6 +10,5 @@
 
 @interface KMAnnotationView : MKAnnotationView
 - (void)startAnimation;
-- (void)stopAnimation;
 - (void)restoreAnimation;
 @end

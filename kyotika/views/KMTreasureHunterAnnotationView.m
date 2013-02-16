@@ -93,26 +93,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"KMTreasureHunterAnnotationViewTapNotification" object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:_hunterAnnotation, @"annotation", nil]];
 }
 
-- (void)setCourse:(CLLocationDirection)course
-{
-    if (course < 0)     //  使用不可
-        return;
-    int index = ((int)course % 360) / 45;        //  0 - 359     0, [1, 2], 3, 4, [5, 6], 7
-    int directions[] = {0,3,3,2,2,1,1,0};
-    int direction = directions[index];
-    if (_direction == direction)
-        return;
-    _direction = direction;
-    CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
-    walkAnimation.values = [self contentsRectArrayWalkWithDirection:_direction];
-    walkAnimation.calculationMode = kCAAnimationDiscrete;
-    
-    walkAnimation.duration= 1;
-    walkAnimation.repeatCount = HUGE_VALF;
-    [_walker removeAnimationForKey:@"walk"];
-    [_walker addAnimation:walkAnimation forKey:@"walk"];
-}
-
 - (void)startAnimation
 {
     CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
@@ -121,12 +101,8 @@
     
     walkAnimation.duration= 1;
     walkAnimation.repeatCount = HUGE_VALF;
+    walkAnimation.removedOnCompletion = NO;
     [_walker addAnimation:walkAnimation forKey:@"walk"];
-}
-
-- (void)stopAnimation
-{
-    [_walker removeAnimationForKey:@"walk"];
 }
 
 - (void)setRegion:(MKCoordinateRegion)region
@@ -178,6 +154,8 @@
 {
     CAAnimation * animation = [_searcher animationForKey:@"searcher"];
     [_searcher addAnimation:animation forKey:@"searcher"];
+    animation = [_searcher animationForKey:@"walk"];
+    [_searcher addAnimation:animation forKey:@"walk"];
 }
 
 @end

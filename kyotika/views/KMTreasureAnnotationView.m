@@ -134,10 +134,6 @@
         [_blinker addAnimation:animation forKey:@"shine"];
     }
 }
-- (void)stopAnimation
-{
-    [_blinker removeAnimationForKey:@"transform"];
-}
 
 - (void)restoreAnimation
 {

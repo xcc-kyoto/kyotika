@@ -12,7 +12,6 @@
 @class KMTreasureHunterAnnotation;
 
 @interface KMTreasureHunterAnnotationView : KMAnnotationView
-- (void)setCourse:(CLLocationDirection)course;
 - (void)setRegion:(MKCoordinateRegion)region;
 - (void)setStandbyNero:(BOOL)standbyNero;
 @property (assign) KMTreasureHunterAnnotation* hunterAnnotation;

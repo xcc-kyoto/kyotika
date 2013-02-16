@@ -276,19 +276,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     return YES;
 }
 
-/*
- ハンターを移動させる
- 画面外への移動の場合、一度領域を10km四方にしてから移動させ、その後元の大きさにズームインする
- 元の大きさが500m以上の場合、500m四方にズームインする
- */
-- (void)moveHunter:(CLLocationCoordinate2D)centerCoordinate course:(CLLocationDirection)course
-{
-    _hunterAnnotation.coordinate = centerCoordinate;
-    [_hunterAnnotationView setCourse:course];
-    [_mapView setCenterCoordinate:centerCoordinate animated:NO];
-
-}
-
 #pragma mark - KMLocationManager delegate
 // WiFi、GPS位置情報デリゲート
 
