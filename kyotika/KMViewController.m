@@ -313,7 +313,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     UIImageView* v = [[UIImageView alloc] initWithImage:image];
     v.layer.anchorPoint = CGPointMake(0.0,1.0);
     CGRect frame = v.frame;
-    float scale = (self.view.bounds.size.width / 2.0) / frame.size.width;
+    float length = self.view.bounds.size.width;
+    if (length < self.view.bounds.size.height)
+        length = self.view.bounds.size.height;
+    length /= 2;
+    float scale = (length * 1.0) / frame.size.width;
     frame.size.width *= scale;
     frame.size.height *= scale;
     frame.origin.x = self.view.bounds.size.width / 2;
@@ -321,16 +325,14 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     v.frame = frame;
     [self.view addSubview:v];
     
-    
     CAKeyframeAnimation * searchAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
     NSArray* keyAttributes = @[
                                [NSValue valueWithCATransform3D:CATransform3DIdentity],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14, 0, 0, 1) ],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2, 0, 0, 1)]
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 , 0, 0, 1)],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2 , 0, 0, 1)]
                                ];
     searchAnimation.values = keyAttributes;
     searchAnimation.duration= 2;
-//    searchAnimation.delegate = self;
     _searchAnimationView = v;
 
     
