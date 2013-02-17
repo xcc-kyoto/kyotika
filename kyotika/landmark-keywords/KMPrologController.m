@@ -57,11 +57,16 @@
                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.1, 0.1, 1) ],
                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1) ],
                                [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1) ],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1) ],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1) ],
-                               [NSValue valueWithCATransform3D:CATransform3DIdentity]                               
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity],
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity]
                                ];
     popAnimation.values = keyAttributes;
+    popAnimation.keyTimes = @[
+                                     @0.0,
+                                     @0.2,
+                                     @0.25,
+                                     @0.3,
+                                     @1.0];
     popAnimation.duration= 2;
     popAnimation.delegate = self;
     [_imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
@@ -72,6 +77,10 @@
     if (theAnimation == [_imageView.layer animationForKey:@"opacity"]) {
         _imageView.layer.opacity = 0.0;
         [_imageView.layer removeAnimationForKey:@"opacity"];
+        return;
+    }
+    if (flag == NO) {//  中断
+        _imageView.layer.opacity = 0.0;
         return;
     }
     CABasicAnimation* fadeoutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];

@@ -8,8 +8,10 @@
 
 #import "KMLandmarkInfoViewController.h"
 
-@interface KMLandmarkInfoViewController () {
+@interface KMLandmarkInfoViewController ()<UIWebViewDelegate> {
     UIWebView*  _webView;
+    UIActivityIndicatorView* _activitiIndicator;
+    UILabel*    _errorLabel;
 }
 
 @end
@@ -29,6 +31,11 @@
 - (void)loadView
 {
     _webView = [[UIWebView alloc] init];
+    _webView.delegate = self;
+    _activitiIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    _activitiIndicator.color = [UIColor darkGrayColor];
+    [_webView addSubview:_activitiIndicator];
+    
     self.view = _webView;
 }
 
@@ -36,6 +43,7 @@
 {
     [super viewDidAppear:animated];
     if (_urlString) {
+        _activitiIndicator.frame = _webView.bounds;
         NSString* url = [_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     }
@@ -45,5 +53,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [_errorLabel removeFromSuperview];
+    _errorLabel = nil;
+    [_activitiIndicator startAnimating];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [_activitiIndicator stopAnimating];
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [_activitiIndicator stopAnimating];
+    _errorLabel = [[UILabel alloc] init];
+    _errorLabel.frame = _webView.bounds;
+    [_webView addSubview:_errorLabel];
+    _errorLabel.text = NSLocalizedString(@"Loading failed", @"Loading failed");
+}
 @end
