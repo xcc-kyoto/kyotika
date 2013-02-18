@@ -415,6 +415,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         pinView.canShowCallout = NO;
         [pinView startAnimation];
         _hunterAnnotationView = pinView;
+        [_hunterAnnotationView setStandbyNero:_vaults.complite >= 1.0];
         return pinView;
     }
     if ([annotation isKindOfClass:[KMAreaAnnotation class]]) {
@@ -466,6 +467,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)setTargetMode:(BOOL)targetMode
 {
     if (targetMode) {
+        //  ターゲットモード解除用のビューを画面上部に貼付ける。
         CGRect frame = self.view.bounds;
         frame.size.height = 44;
         _stopTargetModeButton = [[UIView alloc] initWithFrame:frame];
@@ -530,9 +532,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     });
 }
 
-- (BOOL)isKyotoRgn
+- (BOOL)isSameRgn:(MKCoordinateRegion)region
 {
-    MKCoordinateRegion krgn = [_mapView regionThatFits:_kyotoregion];
+    MKCoordinateRegion krgn = [_mapView regionThatFits:region];
     MKCoordinateRegion mrgn = _mapView.region;
     
     printf("%f %f %f %f\n",
@@ -556,16 +558,40 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
  */
 - (void)zoomOut
 {
+    //  必要な領域を決める
+    CLLocationCoordinate2D coordinate = _hunterAnnotation.coordinate;
+    CLLocationDegrees minlatitude = coordinate.latitude;
+    CLLocationDegrees maxlatitude = minlatitude;
+    CLLocationDegrees minlongitude = coordinate.longitude;
+    CLLocationDegrees maxlongitude = minlongitude;
+    for (KMTreasureAnnotation* a in _targets) {
+        coordinate = a.coordinate;
+        if (minlatitude > coordinate.latitude)
+            minlatitude = coordinate.latitude;
+        else if (maxlatitude < coordinate.latitude)
+            maxlatitude = coordinate.latitude;
+        if (minlongitude > coordinate.longitude)
+            minlongitude = coordinate.longitude;
+        else if (maxlongitude < coordinate.longitude)
+            maxlongitude = coordinate.longitude;
+    }
+    static const CLLocationDegrees minDelta = 0.001;
+    MKCoordinateRegion tmpRgn;
+    tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * 1.5;
+    if (tmpRgn.span.longitudeDelta < minDelta) tmpRgn.span.longitudeDelta = minDelta;   //  minDelta以下にはしない
+    tmpRgn.span.latitudeDelta = (maxlatitude - minlatitude) * 1.5;
+    if (tmpRgn.span.latitudeDelta < minDelta) tmpRgn.span.latitudeDelta = minDelta;     //  minDelta以下にはしない
+    tmpRgn.center.longitude = minlongitude + (tmpRgn.span.longitudeDelta / 2);
+    tmpRgn.center.latitude = minlatitude + (tmpRgn.span.latitudeDelta / 2);
+    
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        if ([self isKyotoRgn]) {
-            MKCoordinateRegion tmpRgn = _kyotoregion;
-            tmpRgn.span.longitudeDelta *= 0.75;
-            tmpRgn.span.latitudeDelta *= 0.75;
-            [_mapView setRegion:tmpRgn animated:NO];
+        if ([self isSameRgn:tmpRgn]) {
+            [self mapView:_mapView regionDidChangeAnimated:NO];
+        } else {
+            [_mapView setRegion:tmpRgn animated:YES];
         }
-        [_mapView setRegion:_kyotoregion animated:YES];
     });
 }
 
@@ -674,6 +700,8 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     [self mapView:_mapView regionDidChangeAnimated:NO];
     [self dismissModalViewControllerAnimated:YES];
     if (newComplite != complite) {
+        if (newComplite == 1.0)
+            [_hunterAnnotationView setStandbyNero:YES];
         [_hunterAnnotationView startAnimation];
         double delayInSeconds = 1.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));

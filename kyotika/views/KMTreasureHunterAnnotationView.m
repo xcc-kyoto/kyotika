@@ -25,7 +25,7 @@
     int index = standbyNero?1:0;
     static UIImage* walkerImage[2];
     if (walkerImage[index] == nil)
-        walkerImage[index] = [UIImage imageNamed:index ? @"vx_chara07_b_cvt_0_1" : @"vx_chara07_b_cvt_0_1"];
+        walkerImage[index] = [UIImage imageNamed:(index == 0) ? @"patorash" : @"patorash_nero"];
     return walkerImage[index];
 }
 
@@ -96,7 +96,7 @@
 {
     CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
     walkAnimation.values = [self class].contentsRectArrayStand;
-    walkAnimation.calculationMode = kCAAnimationDiscrete;    //  kCAAnimationLinear
+    walkAnimation.calculationMode = kCAAnimationDiscrete;
     
     walkAnimation.duration= 1;
     walkAnimation.repeatCount = HUGE_VALF;
@@ -136,7 +136,7 @@
 - (void)setStandbyNero:(BOOL)standbyNero
 {
     _standbyNero = standbyNero;
-    _walker.contents = (id)self.image.CGImage;
+    _walker.contents = (id)[[self class] imageWithNero:_standbyNero].CGImage;
 }
 
 - (id < CAAction >)actionForLayer:(CALayer *)layer forKey:(NSString *)key
