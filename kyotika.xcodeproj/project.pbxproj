@@ -86,6 +86,7 @@
 		973DCB7016C23C7400B7C4FB /* tags.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
 		973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
 		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
+		97806DBB16D22AA3009A3970 /* Vaults.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 97806DBA16D22A89009A3970 /* Vaults.sqlite */; };
 		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
 		EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
 /* End PBXBuildFile section */
@@ -211,6 +212,7 @@
 		973DCB8A16C23D9400B7C4FB /* Converter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Converter.m; sourceTree = "<group>"; };
 		973DCB8C16C23E9A00B7C4FB /* Landmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Landmark.h; sourceTree = "<group>"; };
 		973DCB8D16C23E9A00B7C4FB /* Landmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Landmark.m; sourceTree = "<group>"; };
+		97806DBA16D22A89009A3970 /* Vaults.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vaults.sqlite; sourceTree = "<group>"; };
 		EE506C3716CC61CB00159F98 /* mayumaro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro.png; sourceTree = "<group>"; };
 		EE506C3916CCABDB00159F98 /* mayumaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */,
+				97806DBA16D22A89009A3970 /* Vaults.sqlite */,
 				973DCB6A16C23AE400B7C4FB /* seeds */,
 				973DCB6916C23ADD00B7C4FB /* migrate */,
 				973DCB6216C23A1800B7C4FB /* models */,
@@ -573,6 +576,7 @@
 				38816AD816CFC4E400F221AD /* lock@2x.png in Resources */,
 				38ADD8C516D21B4500FA9F18 /* patorash_nero.png in Resources */,
 				38ADD8C616D21B4500FA9F18 /* patorash.png in Resources */,
+				97806DBB16D22AA3009A3970 /* Vaults.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
