@@ -20,7 +20,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Converter createSeeds:self.managedObjectContext];
     //  お宝
     KMVaults* vaults = [[KMVaults alloc] initWithContext:self.managedObjectContext];
     
@@ -115,6 +114,20 @@
     }
     
     NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Vaults.sqlite"];
+    
+    // 初回だけSQLiteファイルをコピーする
+    // Set up the store.
+    // For the sake of illustration, provide a pre-populated default store.
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    // If the expected store doesn't exist, copy the default store.
+    if (![fileManager fileExistsAtPath:[storeURL path]]) {
+        NSURL *defaultStoreURL = [[NSBundle mainBundle] URLForResource:@"Vaults" withExtension:@"sqlite"];
+        if (defaultStoreURL) {
+            [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
+        }
+    }
+    // FIXME
+    // [Converter createSeeds:self.managedObjectContext];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
