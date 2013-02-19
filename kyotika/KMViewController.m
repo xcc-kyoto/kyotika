@@ -339,7 +339,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     
     UIImage* oraimage = [UIImage imageNamed:@"ora"];
     UIImageView* orav = [[UIImageView alloc] initWithImage:oraimage];
-    orav.frame = CGRectMake(0, self.view.bounds.size.height - 80, self.view.bounds.size.width, 80);
+    orav.frame = CGRectMake(-40, self.view.bounds.size.height - 80, self.view.bounds.size.width, 80);
     [self.view addSubview:orav];
     CAKeyframeAnimation * oraAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
     keyAttributes = @[
