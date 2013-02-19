@@ -23,7 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _complite = 0.2;
+        _complete = 0.2;
     }
     return self;
 }
@@ -53,7 +53,7 @@
     _imageView.layer.anchorPoint = CGPointMake(1.0,1.0);
     _imageView.layer.frame = frame;
 
-    if (_complite == 2.0) {
+    if (_complete == 2.0) {
         _textView.text = @"これで現在、登録されているスポットはすべて訪ね終わりました。京都チカチカツアーのご利用、誠にありがとうございました。\nでも、二人の旅は始まったばかりだ！";
         return;
     }
@@ -63,7 +63,7 @@
                                       animationWithKeyPath:@"transform"];
     
     float a0 = 0.1;
-    float a1 = _complite;
+    float a1 = _complete;
     animation.values = @[
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(a0, a0, 1.0)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(a1, a1, 1.0)]
@@ -95,7 +95,7 @@
         @"こ、ここは",
         @"お、思い出したワン！\nここが、あの…\n\n「パ、破闘羅主」"
     };
-    int index = (int)(_complite * 10.0) / 2 - 1;
+    int index = (int)(_complete * 10.0) / 2 - 1;
     if (index < 0) index = 0;
     if (index >= 5) index = 4;
     _textView.text = messages[index];
@@ -107,7 +107,7 @@
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     });
 
-    if (_complite < 0.4) {
+    if (_complete < 0.4) {
         double delayInSeconds = 5.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -121,9 +121,9 @@
 }
 - (IBAction)tap
 {
-    if (_complite >= 2.0) {
+    if (_complete >= 2.0) {
         ;
-    } else if (_complite >= 1.0) {
+    } else if (_complete >= 1.0) {
         if (_stage == 0) {
             _stage++;
             _textView.text = @"そんな、まさか、でも\n間違いない…\n懐かしいみすぼらしいチョッキの小僧。\n\n寝露、寝露、寝露ォオオオ";

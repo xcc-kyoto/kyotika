@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface KMEventViewController : UIViewController
-@property (assign) float complite;
+@property (assign) float complete;
 @end
