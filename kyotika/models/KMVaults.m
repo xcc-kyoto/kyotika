@@ -35,7 +35,7 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         for (Landmark *l in array) {
             l.found = [NSNumber numberWithBool:NO];
             KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
-            if (l.passed)
+            if ([l.passed boolValue])
                 _totalPassedCount++;
             a.landmark = l;
             a.title = l.name;
