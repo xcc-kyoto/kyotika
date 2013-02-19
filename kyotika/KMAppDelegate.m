@@ -125,7 +125,7 @@
         if (defaultStoreURL) {
             [fileManager copyItemAtURL:defaultStoreURL toURL:storeURL error:NULL];
         }
-        [[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"complite"];
+        [[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"complete"];
     }
     // FIXME
     // [Converter createSeeds:self.managedObjectContext];

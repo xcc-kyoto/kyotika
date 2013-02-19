@@ -45,7 +45,7 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         }
         //  横20 x 縦20の区画でランドマークをまとめてグループ注釈として返す
 
-        _complite = [[NSUserDefaults standardUserDefaults] floatForKey:@"complite"];
+        _complete = [[NSUserDefaults standardUserDefaults] floatForKey:@"complete"];
     }
     return self;
 }
@@ -289,20 +289,20 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
 {
     NSUInteger numOfAnnotations = [_treasureAnnotations count];
     
-    if (_complite < 1.0) {
+    if (_complete < 1.0) {
         // 進捗率 25% で寝露に出会う。
         float progress = (float)_totalPassedCount / (float)numOfAnnotations * 4;
         int times = progress / 0.2 + 1;
         float value = 0.2 * times;
-        if (value >= _complite) {
-            _complite = value;
+        if (value >= _complete) {
+            _complete = value;
         }
-    } else if ((_complite < 2.0) && (_complite >= 1.0)) {
+    } else if ((_complete < 2.0) && (_complete >= 1.0)) {
         if (_totalPassedCount == numOfAnnotations) {
-            _complite = 2.0;
+            _complete = 2.0;
         }
     }
-    [[NSUserDefaults standardUserDefaults] setFloat:_complite forKey:@"complite"];
+    [[NSUserDefaults standardUserDefaults] setFloat:_complete forKey:@"complete"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
