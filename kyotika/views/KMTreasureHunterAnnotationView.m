@@ -29,18 +29,20 @@
     return walkerImage[index];
 }
 
-+ (NSArray*)contentsRectArrayStand
++ (NSArray*)contentsRectArrayStandbyNero:(BOOL)standbyNero
 {
-    static NSMutableArray* array = nil;
-    if (array == nil) {
-        array = [NSMutableArray arrayWithCapacity:4];
+    int index = standbyNero?1:0;
+    static NSMutableArray* arrays[2];
+    if (arrays[index] == nil) {
+        arrays[index] = [NSMutableArray arrayWithCapacity:4];
         CGRect r = {0,0,0.25,0.25};
+        if (index == 1) r.size.width = 1;
         for (int i = 0; i < 4; i++) {
-            [array addObject:[NSValue valueWithCGRect:r]];
+            [arrays[index] addObject:[NSValue valueWithCGRect:r]];
             r.origin.y += 0.25;
         }
     }
-    return array;
+    return arrays[index];
 }
 
 + (NSArray*)contentsRectArrayWalkWithDirection:(int)direction
@@ -66,16 +68,16 @@
     if (self) {
         // フレームサイズを適切な値に設定する
         CGRect myFrame = self.frame;
-        myFrame.size.width = 40;
-        myFrame.size.height = 40;
+        myFrame.size.width = 48;
+        myFrame.size.height = 48;
         self.frame = myFrame;
         // 不透過プロパティをNOに設定することで、地図コンテンツが、レンダリング対象外のビューの領域を透かして見えるようになる。
         self.opaque = NO;
         
         _walker = [CALayer layer];
-        _walker.frame = CGRectMake(0, 0, 32, 48);
+        _walker.frame = CGRectMake(0, 0, 48, 48);
         _walker.contents = (id)[[self class] imageWithNero:_standbyNero].CGImage;
-        _walker.contentsRect = [(NSValue*)[[self class].contentsRectArrayStand objectAtIndex:0] CGRectValue];
+        _walker.contentsRect = [(NSValue*)[[[self class] contentsRectArrayStandbyNero:_standbyNero] objectAtIndex:0] CGRectValue];
         _direction = -1;
         
         self.layer.cornerRadius = myFrame.size.width / 2;
@@ -95,7 +97,7 @@
 - (void)startAnimation
 {
     CAKeyframeAnimation * walkAnimation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
-    walkAnimation.values = [self class].contentsRectArrayStand;
+    walkAnimation.values = [[self class] contentsRectArrayStandbyNero:_standbyNero];
     walkAnimation.calculationMode = kCAAnimationDiscrete;
     
     walkAnimation.duration= 1;
@@ -137,6 +139,8 @@
 {
     _standbyNero = standbyNero;
     _walker.contents = (id)[[self class] imageWithNero:_standbyNero].CGImage;
+    _walker.contentsRect = [(NSValue*)[[[self class] contentsRectArrayStandbyNero:_standbyNero] objectAtIndex:0] CGRectValue];
+    [self startAnimation];
 }
 
 - (id < CAAction >)actionForLayer:(CALayer *)layer forKey:(NSString *)key
@@ -167,7 +171,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.layer.contents = (id)[KMTreasureHunterAnnotationView imageWithNero:NO].CGImage;
-        self.layer.contentsRect = [(NSValue*)[[KMTreasureHunterAnnotationView contentsRectArrayStand] objectAtIndex:0] CGRectValue];
+        self.layer.contentsRect = [(NSValue*)[[KMTreasureHunterAnnotationView contentsRectArrayStandbyNero:NO] objectAtIndex:0] CGRectValue];
         [self startAnimation];
     }
     return self;

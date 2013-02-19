@@ -110,7 +110,6 @@
 		3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMTreasureHunterAnnotation.m; path = models/KMTreasureHunterAnnotation.m; sourceTree = "<group>"; };
 		3807E78D16B4C49300A116A0 /* KMVaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMVaults.h; path = models/KMVaults.h; sourceTree = "<group>"; };
 		3807E78E16B4C49300A116A0 /* KMVaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMVaults.m; path = models/KMVaults.m; sourceTree = "<group>"; };
-		3807E79516B4C54300A116A0 /* icon.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.psd; sourceTree = "<group>"; };
 		3807E7A716B4C54E00A116A0 /* keywordList.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = keywordList.png; sourceTree = "<group>"; };
 		3807E7A816B4C54E00A116A0 /* keywordList@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "keywordList@2x.png"; sourceTree = "<group>"; };
 		3807E7A916B4C54E00A116A0 /* KMKeywordListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMKeywordListController.h; sourceTree = "<group>"; };
@@ -174,6 +173,8 @@
 		386481E816C34DCA0078377C /* arrow.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = arrow.psd; sourceTree = "<group>"; };
 		386481E916C34DCA0078377C /* hunter.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = hunter.psd; sourceTree = "<group>"; };
 		386481EA16C34DCA0078377C /* roundrect.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = roundrect.psd; sourceTree = "<group>"; };
+		38715B4516D354300046800F /* patorash_nero.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = patorash_nero.psd; sourceTree = "<group>"; };
+		38715B4616D354300046800F /* patorash.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = patorash.psd; sourceTree = "<group>"; };
 		3871A07C16BBB052004F8B84 /* searcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searcher.png; sourceTree = "<group>"; };
 		3871A07D16BBB052004F8B84 /* searcher.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = searcher.psd; sourceTree = "<group>"; };
 		3871A07E16BBB052004F8B84 /* searcher@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searcher@2x.png"; sourceTree = "<group>"; };
@@ -320,7 +321,6 @@
 			children = (
 				EE506C3916CCABDB00159F98 /* mayumaro2.png */,
 				EE506C3716CC61CB00159F98 /* mayumaro.png */,
-				3807E79516B4C54300A116A0 /* icon.psd */,
 				3871A07C16BBB052004F8B84 /* searcher.png */,
 				3871A07D16BBB052004F8B84 /* searcher.psd */,
 				3871A07E16BBB052004F8B84 /* searcher@2x.png */,
@@ -401,6 +401,8 @@
 				38208F9E16C5E1CF0065F7F8 /* Landmark-target-passed.png */,
 				38208F9F16C5E1CF0065F7F8 /* Landmark-target-passed@2x.png */,
 				383B467F16BCAA9F0067E1A5 /* shines.png */,
+				38715B4516D354300046800F /* patorash_nero.psd */,
+				38715B4616D354300046800F /* patorash.psd */,
 				386481E816C34DCA0078377C /* arrow.psd */,
 				386481E916C34DCA0078377C /* hunter.psd */,
 				386481EA16C34DCA0078377C /* roundrect.psd */,
