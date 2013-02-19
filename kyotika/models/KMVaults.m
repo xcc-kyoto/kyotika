@@ -35,7 +35,7 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         for (Landmark *l in array) {
             l.found = [NSNumber numberWithBool:NO];
             KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
-            if (l.passed)
+            if ([l.passed boolValue])
                 _totalPassedCount++;
             a.landmark = l;
             a.title = l.name;
@@ -45,7 +45,7 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         }
         //  横20 x 縦20の区画でランドマークをまとめてグループ注釈として返す
 
-        _complite = [[NSUserDefaults standardUserDefaults] floatForKey:@"complite"];
+        _complete = [[NSUserDefaults standardUserDefaults] floatForKey:@"complete"];
     }
     return self;
 }
@@ -282,15 +282,27 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
             }
         }
     }
-    if (_complite < 1.0)
-        _complite += 0.2;
-    else if ((_complite < 2.0) && (_complite >= 1.0)) {
-        _complite = 2.0;
-        if (_totalPassedCount == [_treasureAnnotations count]) {
-            _complite = 2.0;
+    [self handleProgress];
+}
+
+- (void)handleProgress
+{
+    NSUInteger numOfAnnotations = [_treasureAnnotations count];
+    
+    if (_complete < 1.0) {
+        // 進捗率 25% で寝露に出会う。
+        float progress = (float)_totalPassedCount / (float)numOfAnnotations * 4;
+        int times = progress / 0.2 + 1;
+        float value = 0.2 * times;
+        if (value >= _complete) {
+            _complete = value;
+        }
+    } else if ((_complete < 2.0) && (_complete >= 1.0)) {
+        if (_totalPassedCount == numOfAnnotations) {
+            _complete = 2.0;
         }
     }
-    [[NSUserDefaults standardUserDefaults] setFloat:_complite forKey:@"complite"];
+    [[NSUserDefaults standardUserDefaults] setFloat:_complete forKey:@"complete"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

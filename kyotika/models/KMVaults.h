@@ -47,7 +47,7 @@
 - (void)save;
 + (int)gropuIndexForRegion:(MKCoordinateRegion)region;
 
-@property (assign) float complite;
+@property (assign) float complete;
 @property (readonly) int totalPassedCount;
 @end
 

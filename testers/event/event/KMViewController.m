@@ -23,17 +23,17 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    static float complite = 0.2;
+    static float complete = 0.2;
     [super viewDidAppear:animated];
-    if (complite > 1.0)
+    if (complete > 1.0)
         return;
 
     double delayInSeconds = 0.5;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         KMEventViewController* eventViewController = [[KMEventViewController alloc] init];
-        eventViewController.complite = complite;
-        complite += 0.2;
+        eventViewController.complete = complete;
+        complete += 0.2;
         eventViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self presentModalViewController:eventViewController animated:YES];
     });
