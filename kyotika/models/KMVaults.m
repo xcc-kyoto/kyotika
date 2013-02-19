@@ -282,11 +282,23 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
             }
         }
     }
-    if (_complite < 1.0)
-        _complite += 0.2;
-    else if ((_complite < 2.0) && (_complite >= 1.0)) {
-        _complite = 2.0;
-        if (_totalPassedCount == [_treasureAnnotations count]) {
+    [self handleProgress];
+}
+
+- (void)handleProgress
+{
+    NSUInteger numOfAnnotations = [_treasureAnnotations count];
+    
+    if (_complite < 1.0) {
+        // 進捗率 25% で寝露に出会う。
+        float progress = (float)_totalPassedCount / (float)numOfAnnotations * 4;
+        int times = progress / 0.2 + 1;
+        float value = 0.2 * times;
+        if (value >= _complite) {
+            _complite = value;
+        }
+    } else if ((_complite < 2.0) && (_complite >= 1.0)) {
+        if (_totalPassedCount == numOfAnnotations) {
             _complite = 2.0;
         }
     }
