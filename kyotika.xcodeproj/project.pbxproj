@@ -203,6 +203,7 @@
 		38816AD616CFC4E400F221AD /* lock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lock@2x.png"; sourceTree = "<group>"; };
 		3892A4BC16B4C78800EA614B /* KMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMViewController.h; sourceTree = "<group>"; };
 		3892A4BD16B4C78800EA614B /* KMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMViewController.m; sourceTree = "<group>"; };
+		389D331016D4985700A7473C /* Landmark-star.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Landmark-star.psd"; sourceTree = "<group>"; };
 		38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMAreaAnnotationView.h; sourceTree = "<group>"; };
 		38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAreaAnnotationView.m; sourceTree = "<group>"; };
 		38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMAreaAnnotation.h; path = models/KMAreaAnnotation.h; sourceTree = "<group>"; };
@@ -428,6 +429,7 @@
 				386481E816C34DCA0078377C /* arrow.psd */,
 				386481E916C34DCA0078377C /* hunter.psd */,
 				386481EA16C34DCA0078377C /* roundrect.psd */,
+				389D331016D4985700A7473C /* Landmark-star.psd */,
 				383B468316BCAAAC0067E1A5 /* Landmark.psd */,
 				383B468416BCAAAC0067E1A5 /* shine.psd */,
 				383B468516BCAAAC0067E1A5 /* shines.psd */,

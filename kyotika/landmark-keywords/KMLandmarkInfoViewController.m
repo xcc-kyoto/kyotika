@@ -12,6 +12,7 @@
     UIWebView*  _webView;
     UIActivityIndicatorView* _activitiIndicator;
     UILabel*    _errorLabel;
+    NSURL*      _url;
 }
 
 @end
@@ -42,10 +43,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    if (_urlString) {
+    if ((_url == nil) && _urlString) {
         _activitiIndicator.frame = _webView.bounds;
-        NSString* url = [_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        [_webView  loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        _url = [NSURL URLWithString:[_urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [_webView  loadRequest:[NSURLRequest requestWithURL:_url]];
     }
 }
 - (void)didReceiveMemoryWarning

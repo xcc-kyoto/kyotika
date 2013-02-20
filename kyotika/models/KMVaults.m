@@ -33,7 +33,6 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         _treasureAnnotations = [NSMutableArray arrayWithCapacity:[array count]];
         _totalPassedCount = 0;
         for (Landmark *l in array) {
-            l.found = [NSNumber numberWithBool:NO];
             KMTreasureAnnotation *a = [[KMTreasureAnnotation alloc] init];
             if ([l.passed boolValue])
                 _totalPassedCount++;
@@ -104,13 +103,6 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
     }
     return index;
 }
-
-typedef struct {
-    CLLocationDegrees  minlatitude;
-    CLLocationDegrees  maxlatitude;
-    CLLocationDegrees  minlongitude;
-    CLLocationDegrees  maxlongitude;
-} KMRegion;
 
 KMRegion KMRegionFromMKCoordinateRegion(MKCoordinateRegion region)
 {

@@ -26,10 +26,10 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     KMViewController* controller = [[KMViewController alloc] init];
+    controller.prologue = YES;
     controller.vaults = vaults;
     self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
-    [controller showProlog];
     return YES;
 }
 

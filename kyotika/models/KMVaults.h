@@ -51,3 +51,13 @@
 @property (readonly) int totalPassedCount;
 @end
 
+
+typedef struct {
+    CLLocationDegrees  minlatitude;
+    CLLocationDegrees  maxlatitude;
+    CLLocationDegrees  minlongitude;
+    CLLocationDegrees  maxlongitude;
+} KMRegion;
+
+KMRegion KMRegionFromMKCoordinateRegion(MKCoordinateRegion region);
+BOOL MKCoordinateInKMRegion(CLLocationCoordinate2D coordinate, KMRegion region);

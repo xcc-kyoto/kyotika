@@ -123,7 +123,7 @@
         
         CABasicAnimation* animation = [CABasicAnimation animation];
         animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)];
-        animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.6, 1.6, 1.0)];
+        animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)];
         animation.duration = 1;
         animation.removedOnCompletion = NO;
         animation.autoreverses = YES;

@@ -28,7 +28,7 @@
 
 static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅をデフォルト位置にする　latitude：34.985 longitude：135.758
 
-@interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate> {
+@interface KMViewController ()<MKMapViewDelegate, KMLocationManagerDelegate, KMQuizeViewControllerDelegate, KMVaultViewControllerDelegate, KMLandmarkViewControllerDelegate, KMEventViewControllerDelegate> {
     MKMapView*                      _mapView;
     MKCoordinateRegion              _kyotoregion;
     KMTreasureHunterAnnotation*     _hunterAnnotation;
@@ -37,7 +37,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     NSArray*                        _targets;
     UIView*                         _stopTargetModeButton;          /// 目的地表示
     UIButton*                       _currentLocationButton;         /// 現在地を探す
-    BOOL                            _prologue;                      /// 一度だけYESになる
     UIView*                         _searchAnimationView;
     UIView*                         _searchAnimationView2;
 }
@@ -116,6 +115,13 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     _mapView.region = _kyotoregion;  //  アニメーション抜き
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (_prologue) {
+        [self showValuts];
+    }
+}
 /*
  バーチャルモード切り替えスイッチの追加
  */
@@ -169,8 +175,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
             [annotationView restoreAnimation];
         }
     }
-    [[NSUserDefaults standardUserDefaults] synchronize];
-[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"started"];       //  デバッグ用
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"started"] == NO) {
         //  最初の起動ではGPSチェックで移動させない。必ずJR京都駅に配置。
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"started"];
@@ -219,15 +223,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     [c.view sendSubviewToBack:imageView];
     
     [self presentModalViewController:c animated:YES];
-}
-
-/*
- プロローグを見せる
- */
-- (void)showProlog
-{
-    _prologue = YES;
-    [self showValuts];
 }
 
 /*
@@ -361,6 +356,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     _searchAnimationView = nil;
     [_searchAnimationView2 removeFromSuperview];
     _searchAnimationView2 = nil;
+    [UIView animateWithDuration:0.3 animations:^{
+        _currentLocationButton.alpha = 1;
+    }];
+    [_vaults search:_mapView.region.center radiusMeter:1000];
+    [self mapView:_mapView regionDidChangeAnimated:NO];
 }
 /*
  位置が更新された
@@ -369,15 +369,13 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 {
     CLLocationCoordinate2D newLocation = locationManager.curtLocation.coordinate;   //  stopしても値が残っているのが保証されているかわからないので
     [_locationManager stop];
-    [UIView animateWithDuration:0.3 animations:^{
-        _currentLocationButton.alpha = 1;
-    }];
     if (coordinateInRegion(newLocation, _kyotoregion) == NO) {
+        [UIView animateWithDuration:0.3 animations:^{
+            _currentLocationButton.alpha = 1;
+        }];
         [self showOutOfBoundsAlert];
         return;
     }
-
-    [_vaults search:locationManager.curtLocation.coordinate radiusMeter:1000];
     MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(locationManager.curtLocation.coordinate,
                                                       1000.0,  //  1km
                                                       1000.0);
@@ -537,12 +535,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     MKCoordinateRegion krgn = [_mapView regionThatFits:region];
     MKCoordinateRegion mrgn = _mapView.region;
     
-    printf("%f %f %f %f\n",
-           fabs(krgn.center.latitude - mrgn.center.latitude),
-           fabs(krgn.center.longitude - mrgn.center.longitude),
-           fabs(krgn.span.latitudeDelta - mrgn.span.latitudeDelta),
-           fabs(krgn.span.longitudeDelta - mrgn.span.longitudeDelta));
-    
     if (fabs(krgn.center.latitude - mrgn.center.latitude) > 0.0001)
         return NO;
     if (fabs(krgn.center.longitude - mrgn.center.longitude) > 0.0001)
@@ -559,11 +551,18 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)zoomOut
 {
     //  必要な領域を決める
-    CLLocationCoordinate2D coordinate = _hunterAnnotation.coordinate;
-    CLLocationDegrees minlatitude = coordinate.latitude;
-    CLLocationDegrees maxlatitude = minlatitude;
-    CLLocationDegrees minlongitude = coordinate.longitude;
-    CLLocationDegrees maxlongitude = minlongitude;
+    MKCoordinateRegion curtRegion = _mapView.region;
+    //  地図中心が京都チカチカのエリア外なら修正
+    KMRegion hr = KMRegionFromMKCoordinateRegion(_kyotoregion);    //  _kyotoregionで指定された範囲を決定
+    if (MKCoordinateInKMRegion(curtRegion.center, hr) == NO) {
+        curtRegion = _kyotoregion;
+    }
+    
+    CLLocationCoordinate2D coordinate = curtRegion.center;
+    CLLocationDegrees minlatitude = coordinate.latitude - curtRegion.span.latitudeDelta / 2;
+    CLLocationDegrees maxlatitude = minlatitude + curtRegion.span.latitudeDelta / 2;
+    CLLocationDegrees minlongitude = coordinate.longitude - curtRegion.span.longitudeDelta / 2;
+    CLLocationDegrees maxlongitude = minlongitude + curtRegion.span.longitudeDelta / 2;;
     for (KMTreasureAnnotation* a in _targets) {
         coordinate = a.coordinate;
         if (minlatitude > coordinate.latitude)
@@ -575,11 +574,12 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         else if (maxlongitude < coordinate.longitude)
             maxlongitude = coordinate.longitude;
     }
-    static const CLLocationDegrees minDelta = 0.001;
-    MKCoordinateRegion tmpRgn;
-    tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * 1.5;
+    static const float ExpandCoefficient = 1.2;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
+    static const CLLocationDegrees minDelta = 0.001;    //  あまり小さい領域にならないようにする
+    MKCoordinateRegion tmpRgn;  //  設定する領域
+    tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * ExpandCoefficient;
     if (tmpRgn.span.longitudeDelta < minDelta) tmpRgn.span.longitudeDelta = minDelta;   //  minDelta以下にはしない
-    tmpRgn.span.latitudeDelta = (maxlatitude - minlatitude) * 1.5;
+    tmpRgn.span.latitudeDelta = (maxlatitude - minlatitude) * ExpandCoefficient;
     if (tmpRgn.span.latitudeDelta < minDelta) tmpRgn.span.latitudeDelta = minDelta;     //  minDelta以下にはしない
     tmpRgn.center.longitude = minlongitude + (tmpRgn.span.longitudeDelta / 2);
     tmpRgn.center.latitude = minlatitude + (tmpRgn.span.latitudeDelta / 2);
@@ -700,18 +700,23 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     [self mapView:_mapView regionDidChangeAnimated:NO];
     [self dismissModalViewControllerAnimated:YES];
     if (newcomplete != complete) {
-        if (newcomplete == 1.0)
-            [_hunterAnnotationView setStandbyNero:YES];
-        [_hunterAnnotationView startAnimation];
         double delayInSeconds = 1.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             KMEventViewController* c = [[KMEventViewController alloc] init];
+            c.delegate = self;
             c.complete = newcomplete;
             c.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentModalViewController:c animated:YES];
         });
     }
+}
+
+- (void)eventViewControllerDone:(KMEventViewController*)vc
+{
+    if (vc.complete == 1.0)
+        [_hunterAnnotationView setStandbyNero:YES];
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end
 

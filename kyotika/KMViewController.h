@@ -11,5 +11,5 @@
 
 @interface KMViewController : UIViewController
 @property (retain, nonatomic) KMVaults* vaults;
-- (void)showProlog;
+@property BOOL prologue;                      /// 一度だけYESになる
 @end
