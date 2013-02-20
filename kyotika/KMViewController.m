@@ -180,7 +180,10 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"started"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     } else {
+//  アプリのリジューム時にGPSサーチをおこなうなら1にする
+#if AUTO_START_MAP_SEARCH
         [self startTracking];
+#endif
     }
 }
 
@@ -574,7 +577,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         else if (maxlongitude < coordinate.longitude)
             maxlongitude = coordinate.longitude;
     }
-    static const float ExpandCoefficient = 1.2;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
+    static const float ExpandCoefficient = 1.3;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
     static const CLLocationDegrees minDelta = 0.001;    //  あまり小さい領域にならないようにする
     MKCoordinateRegion tmpRgn;  //  設定する領域
     tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * ExpandCoefficient;
