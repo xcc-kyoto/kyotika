@@ -255,24 +255,51 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     return [_treasureAnnotations count];
 }
 
+- (void)setFindAnnotationRelationalKeyword:(Tag*)keyword
+{
+    for (KMTreasureAnnotation* a in _treasureAnnotations) {
+        int index = [a.keywords indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+            if (keyword == obj) {
+                return YES;
+            }
+            return NO;
+        }];
+        if (index != NSNotFound) {
+            a.find = YES;
+        }
+    }
+}
+
+/*
+ annotationが持つキーワードと同じものを持つランドマークのfindをYESにする。
+ ただし以下のキーワードは、他に検索キーワードを持ってない場合のみ使う
+    寺社 文化財
+ */
 - (void)setPassedAnnotation:(KMTreasureAnnotation*)annotation
 {
     if (annotation.passed == NO) {
         _totalPassedCount++;
         annotation.passed = YES;
     }
+    BOOL checked = NO;
+    Tag* candidate_keyword[2] = {nil, nil};
     for (Tag* keyword in annotation.keywords) {
-        for (KMTreasureAnnotation* a in _treasureAnnotations) {
-            int index = [a.keywords indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-                if (keyword == obj) {
-                    return YES;
-                }
-                return NO;
-            }];
-            if (index != NSNotFound) {
-                a.find = YES;
-            }
+        if ([keyword.name isEqualToString:@"寺社"]) {
+            candidate_keyword[0] = keyword;
+            continue;
         }
+        if ([keyword.name isEqualToString:@"文化財"]) {
+            candidate_keyword[1] = keyword;
+            continue;
+        }
+        checked = YES;
+        [self setFindAnnotationRelationalKeyword:keyword];
+    }
+    if (checked == NO) {
+        if (candidate_keyword[0])
+            [self setFindAnnotationRelationalKeyword:candidate_keyword[0]];
+        else if (candidate_keyword[1])
+            [self setFindAnnotationRelationalKeyword:candidate_keyword[1]];
     }
     [self handleProgress];
 }
