@@ -93,16 +93,27 @@
     return;
 }
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
+{
+    CGRect frame = _contentsView.frame;
+    frame.origin.x = (self.view.bounds.size.width - _scrollView.contentSize.width) / 2;
+    _contentsView.frame = frame;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [_scrollView flashScrollIndicators];
     _scrollView.contentSize = _contentsView.bounds.size;
+    CGRect frame = _contentsView.frame;
+    frame.origin.x = (self.view.bounds.size.width - _scrollView.contentSize.width) / 2;
+    _contentsView.frame = frame;
     [_scrollView addSubview:_contentsView];
     if (_pop)
         [self popMayumaro];
     _pop = NO;
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
