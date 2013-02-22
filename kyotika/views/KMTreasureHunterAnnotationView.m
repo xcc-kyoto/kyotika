@@ -15,6 +15,10 @@
     CALayer*     _searcher;
     int _direction;
     BOOL    _standbyNero;
+    UIView*                         _searchAnimationView;
+    UIView*                         _searchAnimationView2;
+    id      _searchNotifierTarget;
+     SEL     _searchNotifierAction;
 }
 @end
 
@@ -161,6 +165,81 @@
     [_searcher addAnimation:animation forKey:@"walk"];
 }
 
+- (void)searchAnimationOnView:(UIView*)view target:(id)target action:(SEL)action
+{
+    if (_searchAnimationView)
+        return;
+    [_searcher removeAnimationForKey:@"searcher"];
+    _searcher.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+    _searchNotifierTarget = target;
+    _searchNotifierAction = action;
+    UIImage* image = [UIImage imageNamed:@"search"];
+    UIImageView* v = [[UIImageView alloc] initWithImage:image];
+    v.layer.anchorPoint = CGPointMake(0.0,1.0);
+    CGRect frame = v.frame;
+    float length = view.bounds.size.width;
+    if (length < view.bounds.size.height)
+        length = view.bounds.size.height;
+    length /= 2;
+    float scale = (length * 1.0) / frame.size.width;
+    frame.size.width *= scale;
+    frame.size.height *= scale;
+    frame.origin.x = view.bounds.size.width / 2;
+    frame.origin.y = view.bounds.size.height / 2 - frame.size.height;
+    v.frame = frame;
+    
+    CAKeyframeAnimation * searchAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    NSArray* keyAttributes = @[
+                               [NSValue valueWithCATransform3D:CATransform3DIdentity],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 , 0, 0, 1)],
+                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2 , 0, 0, 1)]
+                               ];
+    searchAnimation.values = keyAttributes;
+    searchAnimation.duration= 2;
+    _searchAnimationView = v;
+    
+    UIImage* oraimage = [UIImage imageNamed:@"ora"];
+    UIImageView* orav = [[UIImageView alloc] initWithImage:oraimage];
+    orav.frame = CGRectMake(-40, view.bounds.size.height - 80, view.bounds.size.width, 80);
+    CAKeyframeAnimation * oraAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    keyAttributes = @[
+                      [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(orav.frame.size.width, 0, 1)],
+                      [NSValue valueWithCATransform3D:CATransform3DIdentity]
+                      ];
+    oraAnimation.values = keyAttributes;
+    oraAnimation.duration= 2;
+    oraAnimation.delegate = self;
+    _searchAnimationView2 = orav;
+
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [view addSubview:v];
+        [view addSubview:orav];
+        [v.layer addAnimation:searchAnimation forKey:@"searcher"];
+        [orav.layer addAnimation:oraAnimation forKey:@"ora"];
+    });
+}
+
+- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    _searcher.transform = CATransform3DIdentity;
+    
+    double delayInSeconds = 0.3;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self setSearcherHidden:YES];
+        [self setSearcherHidden:NO];
+    });
+    [_searchAnimationView removeFromSuperview];
+    _searchAnimationView = nil;
+    [_searchAnimationView2 removeFromSuperview];
+    _searchAnimationView2 = nil;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [_searchNotifierTarget performSelector:_searchNotifierAction withObject:self];
+#pragma clang diagnostic pop
+}
 @end
 
 

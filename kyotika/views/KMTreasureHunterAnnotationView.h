@@ -14,6 +14,7 @@
 @interface KMTreasureHunterAnnotationView : KMAnnotationView
 - (void)setSearcherHidden:(BOOL)hidden;
 - (void)setStandbyNero:(BOOL)standbyNero;
+- (void)searchAnimationOnView:(UIView*)view target:(id)target action:(SEL)action;
 @property (assign) KMTreasureHunterAnnotation* hunterAnnotation;
 @end
 

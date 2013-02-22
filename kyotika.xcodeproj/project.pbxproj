@@ -76,6 +76,8 @@
 		38816AD716CFC4E400F221AD /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 38816AD516CFC4E400F221AD /* lock.png */; };
 		38816AD816CFC4E400F221AD /* lock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38816AD616CFC4E400F221AD /* lock@2x.png */; };
 		3892A4BE16B4C78800EA614B /* KMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3892A4BD16B4C78800EA614B /* KMViewController.m */; };
+		38A2D74316D7188F00E393A0 /* help1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2D74116D7188F00E393A0 /* help1@2x.png */; };
+		38A2D74416D7188F00E393A0 /* help2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A2D74216D7188F00E393A0 /* help2@2x.png */; };
 		38A5D75716BCE8F000D04BFE /* KMAreaAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */; };
 		38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */; };
 		38A5D76816BD3E8500D04BFE /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76616BD3E8500D04BFE /* ggg.png */; };
@@ -204,6 +206,8 @@
 		3892A4BC16B4C78800EA614B /* KMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMViewController.h; sourceTree = "<group>"; };
 		3892A4BD16B4C78800EA614B /* KMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMViewController.m; sourceTree = "<group>"; };
 		389D331016D4985700A7473C /* Landmark-star.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Landmark-star.psd"; sourceTree = "<group>"; };
+		38A2D74116D7188F00E393A0 /* help1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help1@2x.png"; sourceTree = "<group>"; };
+		38A2D74216D7188F00E393A0 /* help2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "help2@2x.png"; sourceTree = "<group>"; };
 		38A5D75516BCE8F000D04BFE /* KMAreaAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMAreaAnnotationView.h; sourceTree = "<group>"; };
 		38A5D75616BCE8F000D04BFE /* KMAreaAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMAreaAnnotationView.m; sourceTree = "<group>"; };
 		38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMAreaAnnotation.h; path = models/KMAreaAnnotation.h; sourceTree = "<group>"; };
@@ -359,7 +363,9 @@
 			isa = PBXGroup;
 			children = (
 				38372EDA16C7716B007D60AD /* help1.png */,
+				38A2D74116D7188F00E393A0 /* help1@2x.png */,
 				38200E9516CB62240096C70C /* help2.png */,
+				38A2D74216D7188F00E393A0 /* help2@2x.png */,
 				383B467916BCAA5E0067E1A5 /* About.png */,
 				383B467A16BCAA5E0067E1A5 /* About@2x.png */,
 				3871A08A16BC20EC004F8B84 /* KMPrologController.h */,
@@ -607,6 +613,8 @@
 				38715B4E16D367480046800F /* icon72@2x.png in Resources */,
 				38715B5116D369510046800F /* patorash_nero@2x.png in Resources */,
 				38715B5216D369510046800F /* patorash@2x.png in Resources */,
+				38A2D74316D7188F00E393A0 /* help1@2x.png in Resources */,
+				38A2D74416D7188F00E393A0 /* help2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

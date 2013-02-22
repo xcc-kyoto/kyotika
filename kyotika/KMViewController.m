@@ -303,68 +303,6 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     }];
 }
 
-- (void)searchAnimation
-{
-    if (_searchAnimationView)
-        return;
-    UIImage* image = [UIImage imageNamed:@"search"];
-    UIImageView* v = [[UIImageView alloc] initWithImage:image];
-    v.layer.anchorPoint = CGPointMake(0.0,1.0);
-    CGRect frame = v.frame;
-    float length = self.view.bounds.size.width;
-    if (length < self.view.bounds.size.height)
-        length = self.view.bounds.size.height;
-    length /= 2;
-    float scale = (length * 1.0) / frame.size.width;
-    frame.size.width *= scale;
-    frame.size.height *= scale;
-    frame.origin.x = self.view.bounds.size.width / 2;
-    frame.origin.y = self.view.bounds.size.height / 2 - frame.size.height;
-    v.frame = frame;
-    [self.view addSubview:v];
-    
-    CAKeyframeAnimation * searchAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    NSArray* keyAttributes = @[
-                               [NSValue valueWithCATransform3D:CATransform3DIdentity],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 , 0, 0, 1)],
-                               [NSValue valueWithCATransform3D:CATransform3DMakeRotation(3.14 * 2 , 0, 0, 1)]
-                               ];
-    searchAnimation.values = keyAttributes;
-    searchAnimation.duration= 2;
-    _searchAnimationView = v;
-
-    
-    
-    UIImage* oraimage = [UIImage imageNamed:@"ora"];
-    UIImageView* orav = [[UIImageView alloc] initWithImage:oraimage];
-    orav.frame = CGRectMake(-40, self.view.bounds.size.height - 80, self.view.bounds.size.width, 80);
-    [self.view addSubview:orav];
-    CAKeyframeAnimation * oraAnimation =[CAKeyframeAnimation animationWithKeyPath:@"transform"];
-    keyAttributes = @[
-                                [NSValue valueWithCATransform3D:CATransform3DMakeTranslation(orav.frame.size.width, 0, 1)],
-                                [NSValue valueWithCATransform3D:CATransform3DIdentity]
-                               ];
-    oraAnimation.values = keyAttributes;
-    oraAnimation.duration= 2;
-    oraAnimation.delegate = self;
-    _searchAnimationView2 = orav;
-
-    [v.layer addAnimation:searchAnimation forKey:@"searcher"];
-    [orav.layer addAnimation:oraAnimation forKey:@"ora"];
-}
-
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{
-    [_searchAnimationView removeFromSuperview];
-    _searchAnimationView = nil;
-    [_searchAnimationView2 removeFromSuperview];
-    _searchAnimationView2 = nil;
-    [UIView animateWithDuration:0.3 animations:^{
-        _currentLocationButton.alpha = 1;
-    }];
-    [_vaults search:_mapView.region.center radiusMeter:1000];
-    [self mapView:_mapView regionDidChangeAnimated:NO];
-}
 /*
  位置が更新された
  */
@@ -387,9 +325,17 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self searchAnimation];
+        [_hunterAnnotationView searchAnimationOnView:self.view target:self action:@selector(searchFinished)];
     });
-    
+}
+
+- (void)searchFinished
+{    
+    [UIView animateWithDuration:0.3 animations:^{
+        _currentLocationButton.alpha = 1;
+    }];
+    [_vaults search:_mapView.region.center radiusMeter:1000];
+    [self mapView:_mapView regionDidChangeAnimated:NO];
 }
 
 #pragma mark - MKMapView delegate
