@@ -27,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
     CGRect frame = self.view.bounds;
     frame.size.height = 20;
     UIView* view = [[UIView alloc] initWithFrame:frame];
@@ -57,8 +56,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     id obj = [_landmarks objectAtIndex:indexPath.row];
     NSString* title = [_landmarksDelegate landmarkListControllerLandmark:self fromObject:obj];
     if (title)
