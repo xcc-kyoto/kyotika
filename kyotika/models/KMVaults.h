@@ -26,10 +26,11 @@
  
  @in region  領域指定
  @in hunter  パトラッシュの位置
+ @in hitTreasureAnnotation  パトラッシュと交差したとみなすKMTreasureAnnotation（1つ）
  
  @return    指定された領域のKMTreasureAnnotationのセット
  */
-- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter;
+- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter hitTreasureAnnotation:(KMTreasureAnnotation**)hitTreasureAnnotation;
 
 /**
  指定された中心から、指定された半径の円範囲のランドマークのfindをYESにする。

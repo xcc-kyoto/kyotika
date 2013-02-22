@@ -141,7 +141,7 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     そして、検索されなかったLandmarkを持つKMTreasureAnnotationは_treasureAnnotationsからとりはぶく
     といった作業が必要。
  */
-- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter
+- (NSSet*)treasureAnnotationsInRegion:(MKCoordinateRegion)region hunter:(CLLocationCoordinate2D)hunter hitTreasureAnnotation:(KMTreasureAnnotation**)hitTreasureAnnotation
 {
     NSMutableSet* set = [NSMutableSet set];
     KMRegion r = KMRegionFromMKCoordinateRegion(region);    //  regionで指定された範囲を決定
@@ -192,14 +192,12 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
         }
         [set addObject:a];
     }
-    if (hitAnnotation) {
-        double delayInSeconds = 0.1;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-            [hitAnnotation notificationHitIfNeed];
-        });
+    if (hitTreasureAnnotation) {
+        *hitTreasureAnnotation = nil;
+        if (hitAnnotation) {
+            *hitTreasureAnnotation = hitAnnotation;
+        }
     }
-
     return set;
 }
 
@@ -222,12 +220,12 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
     NSMutableArray* result = [NSMutableArray arrayWithCapacity:[array count]];
     for (Landmark* landmark in array) {
         int index = [_treasureAnnotations indexOfObjectPassingTest:^BOOL(KMTreasureAnnotation* obj, NSUInteger idx, BOOL *stop) {
-            if (obj.landmark == landmark) {
+            if ((obj.landmark == landmark) && obj.find){
                 return YES;
             }
             return NO;
         }];
-        if (index != NSNotFound) {
+        if (index != NSNotFound){
             [result addObject:[_treasureAnnotations objectAtIndex:index]];
         }
     }
