@@ -279,15 +279,28 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
         _totalPassedCount++;
         annotation.passed = YES;
     }
-    NSSet* set = [NSSet setWithObjects:@"寺社", @"重要文化財", @"国宝", @"公共施設", @"商業施設", nil];
-    NSMutableSet* filterdKeywords  = [NSMutableSet setWithArray:annotation.keywords];
-    [filterdKeywords minusSet:set];
-    if ([filterdKeywords count] == 0) {
+
+    const int seedKeywordCount = 5;
+    NSString* seedKeywords[] = {@"寺社", @"重要文化財", @"国宝", @"公共施設", @"商業施設", nil};
+    NSMutableArray* array = [NSMutableArray arrayWithCapacity:[annotation.keywords count]];
+    for (Tag* keyword in annotation.keywords) {
+        BOOL found = NO;
+        for (int i = 0; i < seedKeywordCount; i++) {
+            if (seedKeywords[i] && [keyword.name isEqualToString:seedKeywords[i]]) {
+                found = YES;
+                seedKeywords[i] = nil;
+                break;
+            }
+        }
+        if (!found) {
+            [array addObject:keyword];
+        }
+    }
+    if ([array count] == 0) {
         //  最初のキーワードで検索
         [self setFindAnnotationRelationalKeyword:[annotation.keywords objectAtIndex:0]];
     } else {
-        NSArray* keywords = filterdKeywords.allObjects;
-        for (Tag* keyword in keywords) {
+        for (Tag* keyword in array) {
             [self setFindAnnotationRelationalKeyword:keyword];
         }
     }
