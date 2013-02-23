@@ -426,9 +426,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     スポットモードの切り替え
         ON：指定されたランドマークの強調表示
  */
-- (void)setTargetMode:(BOOL)targetMode
+- (void)setTargetMode:(NSString*)title
 {
-    if (targetMode) {
+    if (title) {
         //  ターゲットモード解除用のビューを画面上部に貼付ける。
         CGRect frame = self.view.bounds;
         frame.size.height = 44;
@@ -444,10 +444,12 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         UILabel* titleLabel = [[UILabel alloc] initWithFrame:frame];
         [_stopTargetModeButton addSubview:titleLabel];
         titleLabel.backgroundColor = [UIColor clearColor];
-        titleLabel.text = @"スポットモード";
+        titleLabel.adjustsFontSizeToFitWidth = YES;
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:14];
         titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.text = [NSString stringWithFormat:@"スポットモード（%@）", title];
+        
 
         frame.origin.y += frame.size.height;
         frame.size.height = 16;
@@ -472,7 +474,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (void)stopTargetMode
 {
-    [self setTargetMode:NO];    
+    [self setTargetMode:nil];
 }
 
 /*
@@ -586,15 +588,16 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
     _prologue = NO;
-    [self setTargetMode:NO];
-    NSArray* landmarks = [_vaults landmarksForKey :object];
+    [self setTargetMode:nil];
+    NSArray* landmarks = [_vaults landmarksForKey:object];
     for (KMTreasureAnnotation* a in landmarks) {
         a.target = YES;
         KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
         [v startAnimation];
     }
     _targets = [NSArray arrayWithArray:landmarks];
-    [self setTargetMode:YES];
+    Tag *t = object;
+    [self setTargetMode:t.name];
     [self dismissModalViewControllerAnimated:YES];
     [self showAllTarget];
 }
@@ -622,11 +625,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 - (void)landmarkListControllerShowLocation:(KMLandmarkListController*)controller object:(id)object
 {
     _prologue = NO;
-    [self setTargetMode:NO];
+    [self setTargetMode:nil];
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
     a.target = YES;
     _targets = [NSArray arrayWithObject:a];
-    [self setTargetMode:YES];
+    [self setTargetMode:a.title];
    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
     [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
