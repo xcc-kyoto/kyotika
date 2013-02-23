@@ -32,6 +32,7 @@ const static float LeverImageSize = 44.0;
         
         //  可動範囲
         CALayer* ereaLayer = [CALayer layer];
+        //  contentsScale = [UIScreen mainScreen].scale は特に必要ない contentsGravity = kCAGravityResizeなので
         ereaLayer.backgroundColor = [UIColor grayColor].CGColor;
         ereaLayer.opacity = 0.5;
         ereaLayer.frame = self.bounds;

@@ -63,11 +63,11 @@
     popAnimation.values = keyAttributes;
     popAnimation.keyTimes = @[
                                      @0.0,
-                                     @0.2,
-                                     @0.25,
-                                     @0.3,
+                                     @0.4,
+                                     @0.5,
+                                     @0.6,
                                      @1.0];
-    popAnimation.duration= 2;
+    popAnimation.duration= 1.0;
     popAnimation.delegate = self;
     [_imageView.layer addAnimation:popAnimation forKey:@"popAnimation"];
 }
@@ -85,7 +85,7 @@
     }
     CABasicAnimation* fadeoutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     fadeoutAnimation.toValue = @0.0;
-    fadeoutAnimation.duration= 2;
+    fadeoutAnimation.duration= 0.5;
     fadeoutAnimation.fillMode = kCAFillModeForwards;
     fadeoutAnimation.removedOnCompletion = NO;
     fadeoutAnimation.delegate = self;

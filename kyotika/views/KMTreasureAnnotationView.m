@@ -105,22 +105,24 @@
         _locker = nil;
         [_blinker removeFromSuperlayer];
         _blinker = nil;
-        self.image = a.target ? self.imageTargetBox : self.imageBox;
+        self.image = self.imageBox;
         return;
     }
     if (_blinker == nil) {
         _blinker = [CALayer layer];
+        _blinker.contentsScale = [UIScreen mainScreen].scale;
         [self.layer addSublayer:_blinker];
     }
-
+    [CATransaction begin];
     self.image = nil;
+    _blinker.frame = self.bounds;
+    _blinker.transform = CATransform3DIdentity;
+    _blinker.contentsGravity = kCAGravityCenter;
     if (a.target) {
-        _blinker.frame = self.bounds;
         UIImage* image = a.passed ? self.imageTargetPassedBox : self.imageTargetBox;
         _blinker.contents = (id)image.CGImage;
         _blinker.contentsRect = CGRectMake(0,0,1,1);
-        _blinker.contentsGravity = kCAGravityCenter;
-        
+                
         CABasicAnimation* animation = [CABasicAnimation animation];
         animation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0.8, 0.8, 1.0)];
         animation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1.2, 1.2, 1.0)];
@@ -131,10 +133,8 @@
         [_blinker removeAnimationForKey:@"shine"];
         [_blinker addAnimation:animation forKey:@"transform"];
     } else {
-        _blinker.frame = CGRectMake(-16, -16, 48, 48);
         _blinker.contents = (id)self.imageShine.CGImage;
         _blinker.contentsRect = [(NSValue*)[self.contentsRectArray objectAtIndex:0] CGRectValue];
-        _blinker.contentsGravity = kCAGravityResizeAspect;
         
         CAKeyframeAnimation * animation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
         animation.values = self.contentsRectArray;
@@ -148,6 +148,7 @@
     if (a.locking) {
         if (_locker == nil) {
             _locker = [CALayer layer];
+            _locker.contentsScale = [UIScreen mainScreen].scale;
             _locker.frame = self.layer.bounds;
             _locker.contents = (id)self.imageLock.CGImage;
             _locker.contentsGravity = kCAGravityCenter;
@@ -157,6 +158,7 @@
         [_locker removeFromSuperlayer];
         _locker = nil;        
     }
+    [CATransaction commit];
 }
 
 - (void)restoreAnimation

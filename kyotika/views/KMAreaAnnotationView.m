@@ -53,6 +53,7 @@
         _blinker.contents = (id)self.image.CGImage;
         _blinker.contentsRect = [(NSValue*)[self.contentsRectArray objectAtIndex:0] CGRectValue];
         _blinker.contentsGravity = kCAGravityResizeAspect;
+        //  contentsScale = [UIScreen mainScreen].scale は特に必要ない contentsGravity = kCAGravityResizeAspectなので
         
         CAKeyframeAnimation * animation =[CAKeyframeAnimation animationWithKeyPath:@"contentsRect"];
         animation.values = self.contentsRectArray;

@@ -37,8 +37,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     NSArray*                        _targets;
     UIView*                         _stopTargetModeButton;          /// 目的地表示
     UIButton*                       _currentLocationButton;         /// 現在地を探す
-    UIView*                         _searchAnimationView;
-    UIView*                         _searchAnimationView2;
 }
 @end
 
@@ -91,8 +89,8 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     //  京都駅をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
     CLLocationCoordinate2D center = kyotoCenter;
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
-                                                      10500.0,  //  15km
-                                                      10500.0);
+                                                      15000.0,  //  15km
+                                                      15000.0);
     [_vaults makeArea:_kyotoregion];
     //  位置情報　（地図側は最大縮尺だとぶれまくるので使わない）
     if (_locationManager == nil) {
@@ -104,8 +102,12 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     _mapView.delegate = self;
     [self.view addSubview:_mapView];
-    //  バーチャルモード切り替えスイッチ
-    [self addVirtualSwitch];
+    
+    //  サーチボタン準備
+    UIImage* roundrect = [[UIImage imageNamed:@"roundrect"] stretchableImageWithLeftCapWidth:6 topCapHeight:14];
+    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 60, 30, 30);
+    _currentLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"arrow"] action:@selector(startTracking)];
+    _currentLocationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     
     //  ハンター追加
     _hunterAnnotation = [[KMTreasureHunterAnnotation alloc] init];
@@ -121,16 +123,6 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     if (_prologue) {
         [self showValuts];
     }
-}
-/*
- バーチャルモード切り替えスイッチの追加
- */
-- (void)addVirtualSwitch
-{
-    UIImage* roundrect = [[UIImage imageNamed:@"roundrect"] stretchableImageWithLeftCapWidth:6 topCapHeight:14];
-    CGRect frame = CGRectMake(10, self.view.bounds.size.height - 60, 30, 30);
-    _currentLocationButton = [self addButton:frame backgroundImage:roundrect image:[UIImage imageNamed:@"arrow"] action:@selector(startTracking)];
-    _currentLocationButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
 }
 
 /*
@@ -241,27 +233,30 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
  */
 - (void)hitTreasure:(NSNotification*)notification
 {
+    if (self.modalViewController != nil) {
+        return;
+    }
     KMTreasureAnnotation* annotation = [notification.userInfo objectForKey:@"annotation"];
 
     if (annotation.passed) {
         //  キーワードを見る
-        KMLandmarkViewController* c = [[KMLandmarkViewController alloc] init];
-        c.title = annotation.title;
-        c.keywords = annotation.keywords;
-        c.urlString = annotation.landmark.url;
-        c.landmarkDelegate = self;
-        c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentModalViewController:c animated:YES];
+        KMLandmarkViewController* viewController = [[KMLandmarkViewController alloc] init];
+        viewController.title = annotation.title;
+        viewController.keywords = annotation.keywords;
+        viewController.urlString = annotation.landmark.url;
+        viewController.landmarkDelegate = self;
+        viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        [self presentModalViewController:viewController animated:YES];
         return;
     }
     
-    KMQuizeViewController* c = [[KMQuizeViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    c.question = annotation.question;
-    c.answers = annotation.answers;
-    c.userRef = annotation;
-    c.quizeDelegate = self;
-    c.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:c animated:YES];
+    KMQuizeViewController* viewController = [[KMQuizeViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    viewController.question = annotation.question;
+    viewController.answers = annotation.answers;
+    viewController.userRef = annotation;
+    viewController.quizeDelegate = self;
+    viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:viewController animated:YES];
 }
 
 
@@ -394,7 +389,10 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     [_hunterAnnotationView setSearcherHidden:[KMVaults gropuIndexForRegion:_mapView.region] >= 0];
     _hunterAnnotation.coordinate = _mapView.region.center;
     
-    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region hunter: _hunterAnnotation.coordinate] mutableCopy];
+    KMTreasureAnnotation* hitAnnotation = nil;
+    NSMutableSet* treasureAnnotations = [[_vaults treasureAnnotationsInRegion:_mapView.region
+                                                                       hunter: _hunterAnnotation.coordinate
+                                                        hitTreasureAnnotation:&hitAnnotation] mutableCopy];
     NSArray* array = [_mapView annotations];
     NSMutableSet* set = [NSMutableSet setWithArray:array];
     [set minusSet:treasureAnnotations];
@@ -406,6 +404,14 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
     if ([treasureAnnotations count] > 0)
         [_mapView addAnnotations:treasureAnnotations.allObjects];
+
+    if (hitAnnotation) {
+        double delayInSeconds = 0.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [hitAnnotation notificationHitIfNeed];
+        });
+    }
 }
 
 #pragma mark - KMVaultViewController delegate
@@ -567,6 +573,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
  */
 - (void)keywordListControllerShowLocation:(KMKeywordListController*)controller object:(id)object
 {
+    _prologue = NO;
     [self setTargetMode:NO];
     NSArray* landmarks = [_vaults landmarksForKey :object];
     for (KMTreasureAnnotation* a in landmarks) {
@@ -602,6 +609,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
  */
 - (void)landmarkListControllerShowLocation:(KMLandmarkListController*)controller object:(id)object
 {
+    _prologue = NO;
     [self setTargetMode:NO];
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
     a.target = YES;
