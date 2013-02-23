@@ -23,6 +23,7 @@
 @dynamic passed;
 @dynamic question;
 @dynamic url;
+@dynamic hiragana;
 @dynamic tags;
 
 + (NSEntityDescription *)entityDescription:(NSManagedObjectContext *)moc
@@ -59,6 +60,8 @@
     [req setEntity:[self entityDescription:moc]];
     if (predicate)
         [req setPredicate:predicate];
+    NSSortDescriptor *hiragana = [[NSSortDescriptor alloc] initWithKey:@"hiragana" ascending:YES];
+    [req setSortDescriptors:[NSArray arrayWithObject:hiragana]];
     NSError *err = nil;
     NSArray *results = [moc executeFetchRequest:req error:&err];
     if (err == nil) {
