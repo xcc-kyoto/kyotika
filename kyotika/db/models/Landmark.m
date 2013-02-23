@@ -107,7 +107,9 @@
     for (Landmark *l in [self allPassed:moc]) {
         [result addObjectsFromArray:[l.tags allObjects]];
     }
-    return [[NSSet setWithArray:result] allObjects];
+    NSArray* array = [[NSSet setWithArray:result] allObjects]; // 重複を省く
+    NSSortDescriptor *name = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    return [array sortedArrayUsingDescriptors:@[name]];
 }
 
 @end
