@@ -79,6 +79,7 @@
         self.opaque = NO;
         
         _walker = [CALayer layer];
+        //  contentsScale = [UIScreen mainScreen].scale は特に必要ない contentsGravity = kCAGravityResizeなので
         _walker.frame = CGRectMake(0, 0, 48, 48);
         _walker.contents = (id)[[self class] imageWithNero:_standbyNero].CGImage;
         _walker.contentsRect = [(NSValue*)[[[self class] contentsRectArrayStandbyNero:_standbyNero] objectAtIndex:0] CGRectValue];
@@ -121,6 +122,7 @@
     }
     if (_searcher == nil) {
         _searcher = [CALayer layer];
+        //  contentsScale = [UIScreen mainScreen].scale は特に必要ない contentsGravity = kCAGravityResizeなので
         _searcher.frame = CGRectInset(self.bounds, -20, -20);
         _searcher.contents = (id)[UIImage imageNamed:@"searcher"].CGImage;
     }
