@@ -629,7 +629,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     KMTreasureAnnotation* a = (KMTreasureAnnotation*)object;
     a.target = YES;
     _targets = [NSArray arrayWithObject:a];
-    [self setTargetMode:a.title];
+    [self setTargetMode:a.passed ? a.title : @"？"];
    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
     [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
