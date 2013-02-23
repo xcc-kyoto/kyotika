@@ -542,12 +542,14 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         else if (maxlongitude < coordinate.longitude)
             maxlongitude = coordinate.longitude;
     }
-    static const float ExpandCoefficient = 1.3;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
     MKCoordinateRegion tmpRgn;  //  設定する領域
-    tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * ExpandCoefficient;
-    tmpRgn.span.latitudeDelta = (maxlatitude - minlatitude) * ExpandCoefficient;
+    tmpRgn.span.longitudeDelta = maxlongitude - minlongitude;
+    tmpRgn.span.latitudeDelta = maxlatitude - minlatitude;
     tmpRgn.center.longitude = minlongitude + (tmpRgn.span.longitudeDelta / 2);
     tmpRgn.center.latitude = minlatitude + (tmpRgn.span.latitudeDelta / 2);
+    static const float ExpandCoefficient = 1.3;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
+    tmpRgn.span.longitudeDelta *= ExpandCoefficient;
+    tmpRgn.span.latitudeDelta *= ExpandCoefficient;
     
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
