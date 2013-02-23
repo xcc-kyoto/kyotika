@@ -145,13 +145,13 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
  */
 - (void)startTracking
 {
+    [UIView animateWithDuration:0.3 animations:^{
+        _currentLocationButton.alpha = 0;
+    }];
     if ([CLLocationManager locationServicesEnabled]) {
-        [UIView animateWithDuration:0.3 animations:^{
-            _currentLocationButton.alpha = 0;
-        }];
         [_locationManager start];
     } else {
-        _currentLocationButton.hidden = YES;
+        [self showLocationMessage:NSLocalizedString(@"locationServices not enable", @"locationServices not enable")];
     }
 }
 
@@ -278,13 +278,13 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 /*
     領域外アラート　自動消滅
  */
-- (void)showOutOfBoundsAlert
+- (void)showLocationMessage:(NSString*)message
 {
     CGRect frame = self.view.bounds;
     frame.size.height /= 5;
     frame.origin.y += frame.size.height;
     UILabel* alert = [[UILabel alloc] initWithFrame:CGRectInset(frame, 20, 0)];
-    alert.text = @"現在、京都チカチカの範囲外です。";
+    alert.text = message;
     alert.numberOfLines = 2;
     alert.textAlignment = NSTextAlignmentCenter;
     alert.textColor = [UIColor whiteColor];
@@ -295,6 +295,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         alert.alpha = 0;
     } completion:^(BOOL finished) {
         [alert removeFromSuperview];
+        [UIView animateWithDuration:0.3 animations:^{
+            _currentLocationButton.alpha = 1;
+        }];
     }];
 }
 
@@ -307,10 +310,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     CLLocationCoordinate2D newLocation = locationManager.curtLocation.coordinate;   //  stopしても値が残っているのが保証されているかわからないので
     [_locationManager stop];
     if (coordinateInRegion(newLocation, _kyotoregion) == NO) {
-        [UIView animateWithDuration:0.3 animations:^{
-            _currentLocationButton.alpha = 1;
-        }];
-        [self showOutOfBoundsAlert];
+        [self showLocationMessage:NSLocalizedString(@"Out of bounds Kyoto Region", @"Out of bounds Kyoto Region")];
         return;
     }
     MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(locationManager.curtLocation.coordinate,
@@ -325,6 +325,10 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     });
 }
 
+- (void)locationManager:(KMLocationManager *)locationManager didFailWithError:(NSError *)error
+{
+    [self showLocationMessage:NSLocalizedString(@"locationServices not enable", @"locationServices not enable")];
+}
 /*
     レーダーアニメーション終了
     2kmx2km園内のランドマークを発見済みにする

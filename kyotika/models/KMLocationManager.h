@@ -11,6 +11,7 @@
 
 @protocol KMLocationManagerDelegate <NSObject>
 - (void)locationManagerUpdate:(KMLocationManager*)locationManager;
+- (void)locationManager:(KMLocationManager *)locationManager didFailWithError:(NSError *)error;
 @end
 
 @interface KMLocationManager : NSObject
