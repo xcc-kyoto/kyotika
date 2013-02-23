@@ -74,7 +74,7 @@
 
 - (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return @"慎重に…　間違えると\n2分間チャレンジできなくなるワン";
+    return NSLocalizedString(@"Carefully. You cannot challenge it for two minutes when wrong", @"Carefully. You cannot challenge it for two minutes when wrong");
 }
 
 #pragma mark - Table view delegate

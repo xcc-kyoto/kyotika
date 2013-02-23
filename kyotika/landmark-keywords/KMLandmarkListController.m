@@ -37,7 +37,7 @@
     label.font = [UIFont systemFontOfSize:14];
     label.numberOfLines = 2;
     label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"項目をタップすると地図で場所が表示されます";
+    label.text = NSLocalizedString(@"Location is displayed on a map when ypu tap", @"Location is displayed on a map when ypu tap");
     [view addSubview:label];
     self.tableView.tableHeaderView = view;
     self.view.backgroundColor = [UIColor clearColor];

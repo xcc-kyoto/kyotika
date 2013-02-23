@@ -54,7 +54,7 @@
     _imageView.layer.frame = frame;
 
     if (_complete == 2.0) {
-        _textView.text = @"これで現在、登録されているスポットはすべて訪ね終わりました。京都チカチカツアーのご利用、誠にありがとうございました。\nでも、二人の旅は始まったばかりだ！";
+        _textView.text = NSLocalizedString(@"Complite Message", @"Complite Message");
         return;
     }
     
@@ -89,11 +89,11 @@
     [_imageView.layer addAnimation:theGroup forKey:@"puyopuyo"];
     
     NSString* messages[] = {
-        @"な、なんだか思い出せそうだワン",
-        @"あ、あれは確か…、\nそうか、ここが…",
-        @"お、思いだっ、ぎゃわん、頭が…\n急に頭がぁああ\nやっぱり思い出せないワォオオオン",
-        @"こ、ここは",
-        @"お、思い出したワン！\nここが、あの…\n\n「パ、破闘羅主」"
+        NSLocalizedString(@"Event Message 0", @"Event Message 0"),
+        NSLocalizedString(@"Event Message 1", @"Event Message 1"),
+        NSLocalizedString(@"Event Message 2", @"Event Message 2"),
+        NSLocalizedString(@"Event Message 3", @"Event Message 3"),
+        NSLocalizedString(@"Event Message 4", @"Event Message 4")
     };
     int index = (int)(_complete * 10.0) / 2 - 1;
     if (index < 0) index = 0;
@@ -126,21 +126,21 @@
     } else if (_complete >= 1.0) {
         if (_stage == 0) {
             _stage++;
-            _textView.text = @"そんな、まさか、でも\n間違いない…\n懐かしいみすぼらしいチョッキの小僧。\n\n寝露、寝露、寝露ォオオオ";
+            _textView.text = NSLocalizedString(@"Meet Message 1", @"Meet Message 1");
             [_imageView.layer removeAnimationForKey:@"puyopuyo"];
             UIImage* image = [UIImage imageNamed:@"meet-again-1"];
             _imageView.image = image;
             return;
         } else if (_stage == 1) {
             _stage++;
-            _textView.text = @"「破闘羅主ーーー」\n「アォオオオオオーーーン」\nもう大丈夫だー。心配ない寝露、これからはいつでも一緒だああ。";
+            _textView.text = NSLocalizedString(@"Meet Message 2", @"Meet Message 2");
             UIImage* image = [UIImage imageNamed:@"meet-again-2"];
             _imageView.image = image;
             return;
         } else if (_stage == 2) {
             _imageView.image = nil;
             _stage++;
-            _textView.text = @"「どこ行ってたんだよぉ、勝手にいなくなってえええ。どんだけ心配かけさせたら気が済むんだこの駄犬があぁああ。」\n\nええええええええええ\n「ワキャン、キャン、キャィイイン」\n\n寝露が破闘羅主のお尻を叩く。\n「いっつも迷惑ばっかかけてええ」\n叩きながらもそれでも寝露は嬉しそうだ。\n破闘羅主も笑っている。お日様も笑ってるぅ、る〜るる、るるっる〜♩\nとにかく二人は再会できた。さあ、これからは二人で京都見学だ。\n\nレッツゴー京都！";
+            _textView.text = NSLocalizedString(@"Meet Message 3", @"Meet Message 3");
             return;
         }
     }

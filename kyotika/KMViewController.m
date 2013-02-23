@@ -452,15 +452,14 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont systemFontOfSize:14];
         titleLabel.textColor = [UIColor whiteColor];
-        titleLabel.text = [NSString stringWithFormat:@"スポットモード（%@）", title];
+        titleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Spot mode(%@)", @"Spot mode(%@)"), title];
         
-
-        frame.origin.y += frame.size.height;
+                frame.origin.y += frame.size.height;
         frame.size.height = 16;
         UILabel* subtitleLabel = [[UILabel alloc] initWithFrame:frame];
         [_stopTargetModeButton addSubview:subtitleLabel];
         subtitleLabel.backgroundColor = [UIColor clearColor];
-        subtitleLabel.text = @"ここをタップすると通常モードに戻ります";
+        subtitleLabel.text = NSLocalizedString(@"Return normal mode", @@"Return normal mode");
         subtitleLabel.textAlignment = NSTextAlignmentCenter;
         subtitleLabel.font = [UIFont systemFontOfSize:12];
         subtitleLabel.textColor = [UIColor whiteColor];
