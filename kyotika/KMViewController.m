@@ -300,6 +300,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 /*
  位置が更新された
+ 新しい位置を中心に2kmx2km園内を表示、レーダーアニメーション開始
  */
 - (void)locationManagerUpdate:(KMLocationManager*)locationManager
 {
@@ -324,6 +325,10 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     });
 }
 
+/*
+    レーダーアニメーション終了
+    2kmx2km園内のランドマークを発見済みにする
+ */
 - (void)searchFinished
 {    
     [UIView animateWithDuration:0.3 animations:^{
@@ -417,6 +422,10 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 #pragma mark - KMVaultViewController delegate
 //  お宝表示デリゲート
 
+/*
+    スポットモードの切り替え
+        ON：指定されたランドマークの強調表示
+ */
 - (void)setTargetMode:(BOOL)targetMode
 {
     if (targetMode) {
@@ -501,9 +510,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     return YES;
 }
 /*
- ターゲットを見せるため、ズームアウト
+ すべてのターゲットを見せるため、必要なズームアウトをおこなう。
  */
-- (void)zoomOut
+- (void)showAllTarget
 {
     //  必要な領域を決める
     MKCoordinateRegion curtRegion = _mapView.region;
@@ -512,6 +521,10 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     if (MKCoordinateInKMRegion(curtRegion.center, hr) == NO) {
         curtRegion = _kyotoregion;
     }
+    //  現在地を中心に、ターゲットに合わせて範囲を広げる。
+    static const CLLocationDegrees startDelta = 0.001;    //  中心から最大この範囲から開始。ターゲットに合わせて広げていく
+    if (curtRegion.span.latitudeDelta > startDelta) curtRegion.span.latitudeDelta = startDelta;
+    if (curtRegion.span.longitudeDelta > startDelta) curtRegion.span.longitudeDelta = startDelta;
     
     CLLocationCoordinate2D coordinate = curtRegion.center;
     CLLocationDegrees minlatitude = coordinate.latitude - curtRegion.span.latitudeDelta / 2;
@@ -530,12 +543,9 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
             maxlongitude = coordinate.longitude;
     }
     static const float ExpandCoefficient = 1.3;         //  領域がギリギリだとマークが切れてしまうので、4インチも考慮して大きめにする
-    static const CLLocationDegrees minDelta = 0.001;    //  あまり小さい領域にならないようにする
     MKCoordinateRegion tmpRgn;  //  設定する領域
     tmpRgn.span.longitudeDelta = (maxlongitude - minlongitude) * ExpandCoefficient;
-    if (tmpRgn.span.longitudeDelta < minDelta) tmpRgn.span.longitudeDelta = minDelta;   //  minDelta以下にはしない
     tmpRgn.span.latitudeDelta = (maxlatitude - minlatitude) * ExpandCoefficient;
-    if (tmpRgn.span.latitudeDelta < minDelta) tmpRgn.span.latitudeDelta = minDelta;     //  minDelta以下にはしない
     tmpRgn.center.longitude = minlongitude + (tmpRgn.span.longitudeDelta / 2);
     tmpRgn.center.latitude = minlatitude + (tmpRgn.span.latitudeDelta / 2);
     
@@ -584,7 +594,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     _targets = [NSArray arrayWithArray:landmarks];
     [self setTargetMode:YES];
     [self dismissModalViewControllerAnimated:YES];
-    [self zoomOut];
+    [self showAllTarget];
 }
 
 /*
@@ -618,7 +628,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
    KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:a];
     [v startAnimation];
     [self dismissModalViewControllerAnimated:YES];
-    [self zoomOut];
+    [self showAllTarget];
 }
 
 /*
