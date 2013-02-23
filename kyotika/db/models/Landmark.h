@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSNumber * passed;
 @property (nonatomic, retain) NSString * question;
 @property (nonatomic, retain) NSString * url;
+@property (nonatomic, retain) NSString * hiragana;
 @property (nonatomic, retain) NSSet *tags;
 @end
 

@@ -6,6 +6,7 @@
         <attribute name="answer3" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="correct" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="found" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="hiragana" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,7 +20,7 @@
         <relationship name="landmarks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Landmark" inverseName="tags" inverseEntity="Landmark" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Landmark" positionX="160" positionY="200" width="128" height="223"/>
+        <element name="Landmark" positionX="160" positionY="200" width="128" height="240"/>
         <element name="Tag" positionX="-81" positionY="197" width="128" height="73"/>
     </elements>
 </model>

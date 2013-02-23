@@ -44,6 +44,7 @@
         l.answer2= [items objectAtIndex:7];
         l.answer3= [items objectAtIndex:8];
         l.correct= [NSNumber numberWithDouble:[[items objectAtIndex:9] intValue]];
+        l.hiragana = [items objectAtIndex:13];
         if (![moc save:nil]) {
             // FIXME
         }
@@ -109,7 +110,7 @@
     r.span.latitudeDelta = 0;
     r.span.longitudeDelta = 0;
     for (Landmark *l in [Landmark locations:moc inRegion:r]) {
-        NSLog(@"%@ %@", l.name, l.latitude);
+        NSLog(@"%@ %@ %@", l.name, l.latitude, l.hiragana);
         for (Tag *t in l.tags) {
             NSLog(@"- %@", t.name);
         }
