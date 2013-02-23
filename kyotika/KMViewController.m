@@ -483,7 +483,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
     if (_prologue == NO)
         return;
     _prologue = NO;
-    double delayInSeconds = 2.0;
+    double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         MKCoordinateRegion rgn = MKCoordinateRegionMakeWithDistance(_mapView.region.center,
