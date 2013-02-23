@@ -10,3 +10,5 @@
 "Show in map" = "地図で一覧";
 "About" = "これまでのお話";
 "LandmarkInfo" = "場所の情報";
+"locationServices not enable" = "位置情報が利用できないようです";
+"Out of bounds Kyoto Region" = "現在、京都チカチカの範囲外です。";

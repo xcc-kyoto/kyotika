@@ -62,6 +62,7 @@
 {
     if ([error code] != kCLErrorLocationUnknown) {
         [self stop];
+        [_delegate locationManager:self didFailWithError:error];
     }
 }
 
