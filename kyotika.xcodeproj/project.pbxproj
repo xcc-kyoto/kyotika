@@ -105,10 +105,6 @@
 		973DCB5C16C2360700B7C4FB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
 		973DCB6116C2387B00B7C4FB /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */; };
 		973DCB6816C23AA900B7C4FB /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB6716C23AA900B7C4FB /* Tag.m */; };
-		973DCB6E16C23C7400B7C4FB /* landmarks.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6B16C23C7400B7C4FB /* landmarks.tab */; };
-		973DCB6F16C23C7400B7C4FB /* taggings.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6C16C23C7400B7C4FB /* taggings.tab */; };
-		973DCB7016C23C7400B7C4FB /* tags.tab in Resources */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
-		973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
 		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
 		97806DBB16D22AA3009A3970 /* Vaults.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 97806DBA16D22A89009A3970 /* Vaults.sqlite */; };
 		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
@@ -533,6 +529,9 @@
 		97357B7416DC51B600E655EA /* Vaults */ = {
 			isa = PBXGroup;
 			children = (
+				973DCB6A16C23AE400B7C4FB /* seeds */,
+				973DCB8916C23D9400B7C4FB /* Converter.h */,
+				973DCB8A16C23D9400B7C4FB /* Converter.m */,
 				97357B7516DC51B600E655EA /* main.m */,
 				97357B7C16DC51B600E655EA /* Vaults.1 */,
 				97357B7716DC51B600E655EA /* Supporting Files */,
@@ -553,11 +552,8 @@
 			children = (
 				973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */,
 				97806DBA16D22A89009A3970 /* Vaults.sqlite */,
-				973DCB6A16C23AE400B7C4FB /* seeds */,
 				973DCB6916C23ADD00B7C4FB /* migrate */,
 				973DCB6216C23A1800B7C4FB /* models */,
-				973DCB8916C23D9400B7C4FB /* Converter.h */,
-				973DCB8A16C23D9400B7C4FB /* Converter.m */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -688,9 +684,6 @@
 				3832956716C0F673007591CB /* rainbow.png in Resources */,
 				3832957416C1EBEB007591CB /* meet-again-1.png in Resources */,
 				3832957516C1EBEB007591CB /* meet-again-2.png in Resources */,
-				973DCB6E16C23C7400B7C4FB /* landmarks.tab in Resources */,
-				973DCB6F16C23C7400B7C4FB /* taggings.tab in Resources */,
-				973DCB7016C23C7400B7C4FB /* tags.tab in Resources */,
 				386481DE16C33A8E0078377C /* arrow.png in Resources */,
 				386481DF16C33A8E0078377C /* arrow@2x.png in Resources */,
 				386481E216C33B240078377C /* roundrect.png in Resources */,
@@ -757,7 +750,6 @@
 				38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */,
 				973DCB6116C2387B00B7C4FB /* Vaults.xcdatamodeld in Sources */,
 				973DCB6816C23AA900B7C4FB /* Tag.m in Sources */,
-				973DCB8B16C23D9400B7C4FB /* Converter.m in Sources */,
 				973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */,
 				3878D11716C56E5B003F7263 /* KMAnnotationView.m in Sources */,
 			);
