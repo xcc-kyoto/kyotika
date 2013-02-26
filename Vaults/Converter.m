@@ -87,13 +87,13 @@
         }
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
         NSUInteger landmarkNo = [[items objectAtIndex:1] unsignedIntValue] - 1;
-        NSUInteger TagNo = [[items objectAtIndex:2] unsignedIntValue] - 1;
+        NSUInteger tagNo = [[items objectAtIndex:2] unsignedIntValue] - 1;
 #else
         NSUInteger landmarkNo = [[items objectAtIndex:1] intValue] - 1;
-        NSUInteger TagNo = [[items objectAtIndex:2] intValue] - 1;
+        NSUInteger tagNo = [[items objectAtIndex:2] intValue] - 1;
 #endif
         Landmark *l = [landmarks objectAtIndex:landmarkNo];
-        Tag *t = [tags objectAtIndex:TagNo];
+        Tag *t = [tags objectAtIndex:tagNo];
         [l addTagsObject:t];
         if (![moc save:nil]) {
             // FIXME
