@@ -79,6 +79,7 @@ int main(int argc, const char * argv[])
         }
         
         [Converter createSeeds:context];
+        [Converter displayInRegion:context];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         if ([fileManager fileExistsAtPath:[storeURL() path]]) {

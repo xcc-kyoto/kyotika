@@ -109,13 +109,32 @@
     NSMutableArray *sortedLandmarks = [self insertNewLandmarks:moc];
     NSMutableArray *sortedTags = [self insertNewTags:moc];
     [self bindEntities:moc Landmarks:sortedLandmarks Tag:sortedTags];
+}
+
++ (NSPredicate *)inRegion:(MKCoordinateRegion)region
+{
+    double minlatitude = region.center.latitude - region.span.latitudeDelta;
+    double maxlatitude = region.center.latitude + region.span.latitudeDelta;
+    double minlongitude = region.center.longitude - region.span.longitudeDelta;
+    double maxlongitude = region.center.longitude + region.span.longitudeDelta;
     
+    return [NSPredicate predicateWithFormat:@"%lf <= latitude AND latitude <= %lf AND %lf <= longitude AND longitude <= %lf", minlatitude, maxlatitude, minlongitude, maxlongitude];
+}
+
++ (NSArray *)locations:(NSManagedObjectContext *)moc
+              inRegion:(MKCoordinateRegion)region
+{
+    return [Landmark fetch:moc predicate:[self inRegion:region]];
+}
+
++ (void)displayInRegion:(NSManagedObjectContext *)moc
+{
     MKCoordinateRegion r;
     r.center.latitude = 34.9875;
     r.center.longitude = 135.759;
     r.span.latitudeDelta = 0;
     r.span.longitudeDelta = 0;
-    for (Landmark *l in [Landmark locations:moc inRegion:r]) {
+    for (Landmark *l in [self locations:moc inRegion:r]) {
         NSLog(@"%@ %@ %@", l.name, l.latitude, l.hiragana);
         for (Tag *t in l.tags) {
             NSLog(@"- %@", t.name);

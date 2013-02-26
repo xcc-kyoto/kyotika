@@ -31,16 +31,6 @@
     return [NSEntityDescription entityForName:@"Landmark" inManagedObjectContext:moc];
 }
 
-+ (NSPredicate *)inRegion:(MKCoordinateRegion)region
-{
-    double minlatitude = region.center.latitude - region.span.latitudeDelta;
-    double maxlatitude = region.center.latitude + region.span.latitudeDelta;
-    double minlongitude = region.center.longitude - region.span.longitudeDelta;
-    double maxlongitude = region.center.longitude + region.span.longitudeDelta;
-    
-    return [NSPredicate predicateWithFormat:@"%lf <= latitude AND latitude <= %lf AND %lf <= longitude AND longitude <= %lf", minlatitude, maxlatitude, minlongitude, maxlongitude];
-}
-
 + (NSArray *)fetch:(NSManagedObjectContext *)moc predicate:(NSPredicate *)predicate
 {
     NSFetchRequest *req = [[NSFetchRequest alloc] init];
@@ -55,12 +45,6 @@
         // FIXME
     }
     return results;
-}
-
-+ (NSArray *)locations:(NSManagedObjectContext *)moc
-              inRegion:(MKCoordinateRegion)region
-{
-    return [self fetch:moc predicate:[self inRegion:region]];
 }
 
 + (NSPredicate *)found

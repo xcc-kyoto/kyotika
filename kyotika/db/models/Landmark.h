@@ -52,8 +52,7 @@ typedef struct {
 - (void)addTags:(NSSet *)values;
 - (void)removeTags:(NSSet *)values;
 
-+ (NSArray *)locations:(NSManagedObjectContext *)moc
-              inRegion:(MKCoordinateRegion)region;
++ (NSArray *)fetch:(NSManagedObjectContext *)moc predicate:(NSPredicate *)predicate;
 + (NSArray *)allFound:(NSManagedObjectContext *)moc;
 + (NSArray *)tagsPassed:(NSManagedObjectContext *)moc;
 
