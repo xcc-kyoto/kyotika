@@ -101,9 +101,6 @@
     }
 }
 
-//
-// sqlite> select Z_PK, ZNAME from ZLANDMARK;
-//
 + (void)createSeeds:(NSManagedObjectContext *)moc
 {
     NSMutableArray *sortedLandmarks = [self insertNewLandmarks:moc];

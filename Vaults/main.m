@@ -41,6 +41,20 @@ static void deleteStoredFile()
     }
 }
 
+static void moveStoredFileToDesktop()
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:[storeURL() path]]) {
+        NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop/Vaults.sqlite"];
+        NSURL *dstURL = [NSURL fileURLWithPath:path];
+        NSError *error = nil;
+        [fileManager moveItemAtURL:storeURL() toURL:dstURL error:&error];
+        if (error) {
+            NSLog(@"Copy failed: %@", error);
+        }
+    }
+}
+
 static NSManagedObjectContext *managedObjectContext()
 {
     static NSManagedObjectContext *context = nil;
@@ -65,6 +79,10 @@ static NSManagedObjectContext *managedObjectContext()
     return context;
 }
 
+//
+// $ sqlite3 ~/Desktop/Vaults.sqlite
+// sqlite> select Z_PK, ZNAME from ZLANDMARK;
+//
 int main(int argc, const char * argv[])
 {
 
@@ -81,15 +99,7 @@ int main(int argc, const char * argv[])
         [Converter createSeeds:context];
         [Converter displayInRegion:context];
         
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-        if ([fileManager fileExistsAtPath:[storeURL() path]]) {
-            NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Desktop/Vaults.sqlite"];
-            NSURL *dstURL = [NSURL fileURLWithPath:path];
-            [fileManager moveItemAtURL:storeURL() toURL:dstURL error:&error];
-            if (error) {
-                NSLog(@"Copy failed: %@", error);
-            }
-        }
+        moveStoredFileToDesktop();
     }
     return 0;
 }
