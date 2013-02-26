@@ -9,7 +9,6 @@
 #import "KMAppDelegate.h"
 #import "KMViewController.h"
 #import "KMVaultViewController.h"
-#import "Converter.h"
 #import "KMVaults.h"
 
 @implementation KMAppDelegate
@@ -127,8 +126,6 @@
         }
         [[NSUserDefaults standardUserDefaults] setFloat:0 forKey:@"complete"];
     }
-    // FIXME
-    // [Converter createSeeds:self.managedObjectContext];
     
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

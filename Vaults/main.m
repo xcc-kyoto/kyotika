@@ -29,6 +29,18 @@ static NSURL *storeURL()
     return [NSURL fileURLWithPath:[path stringByAppendingPathExtension:@"sqlite"]];
 }
 
+static void deleteStoredFile()
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:[storeURL() path]]) {
+        NSError *error = nil;
+        [fileManager removeItemAtURL:storeURL() error:&error];
+        if (error) {
+            NSLog(@"Delete failed: %@", error);
+        }
+    }
+}
+
 static NSManagedObjectContext *managedObjectContext()
 {
     static NSManagedObjectContext *context = nil;
@@ -57,11 +69,9 @@ int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
-        // Create the managed object context
-        NSManagedObjectContext *context = managedObjectContext();
+        deleteStoredFile();
         
-        // Custom code here...
-        // Save the managed object context
+        NSManagedObjectContext *context = managedObjectContext();
         NSError *error = nil;
         if (![context save:&error]) {
             NSLog(@"Error while saving %@", ([error localizedDescription] != nil) ? [error localizedDescription] : @"Unknown Error");

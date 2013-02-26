@@ -31,19 +31,6 @@
     return [NSEntityDescription entityForName:@"Landmark" inManagedObjectContext:moc];
 }
 
-+ (void)deleteAll:(NSManagedObjectContext *)moc
-{
-    NSFetchRequest *req = [[NSFetchRequest alloc] init];
-    [req setEntity:[self entityDescription:moc]];
-    [req setIncludesPropertyValues:NO];
-    NSError *err = nil;
-    NSArray *objs = [moc executeFetchRequest:req error:&err];
-    for (NSManagedObject *obj in objs) {
-        [moc deleteObject:obj];
-    }
-    [moc save:&err];
-}
-
 + (NSPredicate *)inRegion:(MKCoordinateRegion)region
 {
     double minlatitude = region.center.latitude - region.span.latitudeDelta;
@@ -74,11 +61,6 @@
               inRegion:(MKCoordinateRegion)region
 {
     return [self fetch:moc predicate:[self inRegion:region]];
-}
-
-+ (NSArray *)all:(NSManagedObjectContext *)moc
-{
-    return [self fetch:moc predicate:nil];
 }
 
 + (NSPredicate *)found
