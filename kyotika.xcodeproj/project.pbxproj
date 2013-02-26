@@ -91,6 +91,17 @@
 		38ADD8C616D21B4500FA9F18 /* patorash.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADD8C416D21B4500FA9F18 /* patorash.png */; };
 		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
+		97357B7216DC51B600E655EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
+		97357B7316DC51B600E655EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
+		97357B7616DC51B600E655EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97357B7516DC51B600E655EA /* main.m */; };
+		97357B7D16DC51B600E655EA /* Vaults.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 97357B7C16DC51B600E655EA /* Vaults.1 */; };
+		97357B8116DC51F000E655EA /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */; };
+		97357B8316DC529000E655EA /* Converter.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8A16C23D9400B7C4FB /* Converter.m */; };
+		97357B8516DC53F200E655EA /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
+		97357B8716DC53F200E655EA /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB6716C23AA900B7C4FB /* Tag.m */; };
+		97357B9316DC585A00E655EA /* landmarks.tab in CopyFiles */ = {isa = PBXBuildFile; fileRef = 973DCB6B16C23C7400B7C4FB /* landmarks.tab */; };
+		97357B9416DC585A00E655EA /* taggings.tab in CopyFiles */ = {isa = PBXBuildFile; fileRef = 973DCB6C16C23C7400B7C4FB /* taggings.tab */; };
+		97357B9516DC585A00E655EA /* tags.tab in CopyFiles */ = {isa = PBXBuildFile; fileRef = 973DCB6D16C23C7400B7C4FB /* tags.tab */; };
 		973DCB5C16C2360700B7C4FB /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
 		973DCB6116C2387B00B7C4FB /* Vaults.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB5F16C2387B00B7C4FB /* Vaults.xcdatamodeld */; };
 		973DCB6816C23AA900B7C4FB /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB6716C23AA900B7C4FB /* Tag.m */; };
@@ -103,6 +114,31 @@
 		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
 		EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		97357B6F16DC51B600E655EA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				97357B7D16DC51B600E655EA /* Vaults.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		97357B9216DC584E00E655EA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				97357B9316DC585A00E655EA /* landmarks.tab in CopyFiles */,
+				97357B9416DC585A00E655EA /* taggings.tab in CopyFiles */,
+				97357B9516DC585A00E655EA /* tags.tab in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3807E6EA16B4BA5400A116A0 /* kyotika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kyotika.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,6 +267,10 @@
 		38E8140216BD7785002FF900 /* KMEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMEventViewController.h; sourceTree = "<group>"; };
 		38E8140316BD7785002FF900 /* KMEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMEventViewController.m; sourceTree = "<group>"; };
 		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
+		97357B7116DC51B600E655EA /* Vaults */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Vaults; sourceTree = BUILT_PRODUCTS_DIR; };
+		97357B7516DC51B600E655EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		97357B7816DC51B600E655EA /* Vaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vaults-Prefix.pch"; sourceTree = "<group>"; };
+		97357B7C16DC51B600E655EA /* Vaults.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Vaults.1; sourceTree = "<group>"; };
 		973DCB5B16C2360700B7C4FB /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		973DCB6016C2387B00B7C4FB /* Vaults.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vaults.xcdatamodel; sourceTree = "<group>"; };
 		973DCB6616C23AA900B7C4FB /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
@@ -262,6 +302,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97357B6E16DC51B600E655EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97357B7216DC51B600E655EA /* CoreData.framework in Frameworks */,
+				97357B7316DC51B600E655EA /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -269,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				3807E6F416B4BA5400A116A0 /* kyotika */,
+				97357B7416DC51B600E655EA /* Vaults */,
 				3807E6ED16B4BA5400A116A0 /* Frameworks */,
 				3807E6EB16B4BA5400A116A0 /* Products */,
 			);
@@ -278,6 +328,7 @@
 			isa = PBXGroup;
 			children = (
 				3807E6EA16B4BA5400A116A0 /* kyotika.app */,
+				97357B7116DC51B600E655EA /* Vaults */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -479,6 +530,24 @@
 			path = virtual;
 			sourceTree = "<group>";
 		};
+		97357B7416DC51B600E655EA /* Vaults */ = {
+			isa = PBXGroup;
+			children = (
+				97357B7516DC51B600E655EA /* main.m */,
+				97357B7C16DC51B600E655EA /* Vaults.1 */,
+				97357B7716DC51B600E655EA /* Supporting Files */,
+			);
+			path = Vaults;
+			sourceTree = "<group>";
+		};
+		97357B7716DC51B600E655EA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97357B7816DC51B600E655EA /* Vaults-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		973DCB5E16C2385B00B7C4FB /* db */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +610,24 @@
 			productReference = 3807E6EA16B4BA5400A116A0 /* kyotika.app */;
 			productType = "com.apple.product-type.application";
 		};
+		97357B7016DC51B600E655EA /* Vaults */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97357B8016DC51B600E655EA /* Build configuration list for PBXNativeTarget "Vaults" */;
+			buildPhases = (
+				97357B6D16DC51B600E655EA /* Sources */,
+				97357B6E16DC51B600E655EA /* Frameworks */,
+				97357B6F16DC51B600E655EA /* CopyFiles */,
+				97357B9216DC584E00E655EA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vaults;
+			productName = Vaults;
+			productReference = 97357B7116DC51B600E655EA /* Vaults */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -565,6 +652,7 @@
 			projectRoot = "";
 			targets = (
 				3807E6E916B4BA5400A116A0 /* kyotika */,
+				97357B7016DC51B600E655EA /* Vaults */,
 			);
 		};
 /* End PBXProject section */
@@ -675,6 +763,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97357B6D16DC51B600E655EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97357B8516DC53F200E655EA /* Landmark.m in Sources */,
+				97357B8716DC53F200E655EA /* Tag.m in Sources */,
+				97357B8316DC529000E655EA /* Converter.m in Sources */,
+				97357B8116DC51F000E655EA /* Vaults.xcdatamodeld in Sources */,
+				97357B7616DC51B600E655EA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -775,6 +875,43 @@
 			};
 			name = Release;
 		};
+		97357B7E16DC51B600E655EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Vaults/Vaults-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VAULTS = 1;
+			};
+			name = Debug;
+		};
+		97357B7F16DC51B600E655EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Vaults/Vaults-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				VAULTS = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -792,6 +929,15 @@
 			buildConfigurations = (
 				3807E70916B4BA5500A116A0 /* Debug */,
 				3807E70A16B4BA5500A116A0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97357B8016DC51B600E655EA /* Build configuration list for PBXNativeTarget "Vaults" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97357B7E16DC51B600E655EA /* Debug */,
+				97357B7F16DC51B600E655EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
