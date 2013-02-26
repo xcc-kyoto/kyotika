@@ -85,8 +85,13 @@
         if (i == 0) {
             continue;
         }
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
         NSUInteger landmarkNo = [[items objectAtIndex:1] unsignedIntValue] - 1;
         NSUInteger TagNo = [[items objectAtIndex:2] unsignedIntValue] - 1;
+#else
+        NSUInteger landmarkNo = [[items objectAtIndex:1] intValue] - 1;
+        NSUInteger TagNo = [[items objectAtIndex:2] intValue] - 1;
+#endif
         Landmark *l = [landmarks objectAtIndex:landmarkNo];
         Tag *t = [tags objectAtIndex:TagNo];
         [l addTagsObject:t];
@@ -103,7 +108,6 @@
     NSMutableArray *sortedTags = [self insertNewTags:moc];
     [self bindEntities:moc Landmarks:sortedLandmarks Tag:sortedTags];
     
-    // FIXME
     MKCoordinateRegion r;
     r.center.latitude = 34.9875;
     r.center.longitude = 135.759;

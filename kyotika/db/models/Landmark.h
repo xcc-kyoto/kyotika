@@ -8,7 +8,23 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
 #import <MapKit/MapKit.h>
+#else
+typedef double CLLocationDegrees;
+typedef struct {
+    CLLocationDegrees latitude;
+    CLLocationDegrees longitude;
+} CLLocationCoordinate2D;
+typedef struct {
+    CLLocationDegrees latitudeDelta;
+    CLLocationDegrees longitudeDelta;
+} MKCoordinateSpan;
+typedef struct {
+    CLLocationCoordinate2D center;
+    MKCoordinateSpan span;
+} MKCoordinateRegion;
+#endif
 
 @class Tag;
 

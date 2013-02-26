@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'Vaults' target in the 'Vaults' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <CoreData/CoreData.h>
+#endif
