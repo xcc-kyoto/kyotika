@@ -431,12 +431,12 @@
 				3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */,
 				3807E78D16B4C49300A116A0 /* KMVaults.h */,
 				3807E78E16B4C49300A116A0 /* KMVaults.m */,
+				970B24EC16DDA2A100B35280 /* KMProgress.h */,
+				970B24ED16DDA2A100B35280 /* KMProgress.m */,
 				3871A08216BBB538004F8B84 /* KMLocationManager.h */,
 				3871A08316BBB538004F8B84 /* KMLocationManager.m */,
 				38A5D75816BCE93500D04BFE /* KMAreaAnnotation.h */,
 				38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */,
-				970B24EC16DDA2A100B35280 /* KMProgress.h */,
-				970B24ED16DDA2A100B35280 /* KMProgress.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
