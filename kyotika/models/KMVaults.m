@@ -24,11 +24,6 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
 
 @synthesize progress = _progress;
 
-- (float)complete
-{
-    return _progress.complete;
-}
-
 - (id)initWithContext:(NSManagedObjectContext *)moc
 {
     self = [super init];

@@ -13,6 +13,9 @@
 - (id)initWithUserDefaults
 {
     _complete = [[NSUserDefaults standardUserDefaults] floatForKey:@"complete"];
+    if (_complete == 0.0f) {
+        _complete = 0.2f;
+    }
     return self;
 }
 
@@ -36,6 +39,39 @@
 {
     [[NSUserDefaults standardUserDefaults] setFloat:_complete forKey:@"complete"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (BOOL)isWaitingForNero
+{
+    return (_complete < 0.4f);
+}
+
+- (BOOL)canStandbyNero
+{
+    return (_complete == 1.0f);
+}
+
+- (BOOL)isTogetherWithNero
+{
+    return (_complete >= 1.0f);
+}
+
+- (BOOL)isJustComplete
+{
+    return (_complete == 2.0f);
+}
+
+- (BOOL)isCompleted
+{
+    return (_complete >= 2.0f);
+}
+
+- (int)messageIndex
+{
+    int index = (int)(_complete * 10.0) / 2 - 1;
+    if (index < 0) index = 0;
+    if (index >= 5) index = 4;
+    return index;
 }
 
 @end

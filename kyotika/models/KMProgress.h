@@ -13,5 +13,12 @@
 - (void)updateAnnotations:(NSUInteger)amount passed:(int)totalPassedCount;
 - (void)save;
 
+- (BOOL)isWaitingForNero;
+- (BOOL)canStandbyNero;
+- (BOOL)isTogetherWithNero;
+- (BOOL)isJustComplete;
+- (BOOL)isCompleted;
+- (int)messageIndex;
+
 @property (assign) float complete;
 @end
