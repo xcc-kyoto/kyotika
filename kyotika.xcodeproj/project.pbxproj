@@ -91,6 +91,7 @@
 		38ADD8C616D21B4500FA9F18 /* patorash.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADD8C416D21B4500FA9F18 /* patorash.png */; };
 		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
+		9712FD5916DD85060071377B /* SampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712FD5816DD85060071377B /* SampleSpec.m */; };
 		97357B7216DC51B600E655EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
 		97357B7316DC51B600E655EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
 		97357B7616DC51B600E655EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97357B7516DC51B600E655EA /* main.m */; };
@@ -107,6 +108,11 @@
 		973DCB6816C23AA900B7C4FB /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB6716C23AA900B7C4FB /* Tag.m */; };
 		973DCB8E16C23E9A00B7C4FB /* Landmark.m in Sources */ = {isa = PBXBuildFile; fileRef = 973DCB8D16C23E9A00B7C4FB /* Landmark.m */; };
 		97806DBB16D22AA3009A3970 /* Vaults.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 97806DBA16D22A89009A3970 /* Vaults.sqlite */; };
+		97A746C116DD8414008719CB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97A746C016DD8414008719CB /* SenTestingKit.framework */; };
+		97A746C216DD8414008719CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6EE16B4BA5400A116A0 /* UIKit.framework */; };
+		97A746C316DD8414008719CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
+		97A746C916DD8414008719CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97A746C716DD8414008719CB /* InfoPlist.strings */; };
+		D5328B68ECA6453EA7E813FF /* libPods-KyotikaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA405722E954D59BC277212 /* libPods-KyotikaTests.a */; };
 		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
 		EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
 /* End PBXBuildFile section */
@@ -137,6 +143,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KyotikaTests.xcconfig"; path = "Pods/Pods-KyotikaTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3807E6EA16B4BA5400A116A0 /* kyotika.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = kyotika.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3807E6EE16B4BA5400A116A0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3807E6F016B4BA5400A116A0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -263,6 +270,7 @@
 		38E8140216BD7785002FF900 /* KMEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMEventViewController.h; sourceTree = "<group>"; };
 		38E8140316BD7785002FF900 /* KMEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMEventViewController.m; sourceTree = "<group>"; };
 		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
+		9712FD5816DD85060071377B /* SampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSpec.m; sourceTree = "<group>"; };
 		97357B7116DC51B600E655EA /* Vaults */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Vaults; sourceTree = BUILT_PRODUCTS_DIR; };
 		97357B7516DC51B600E655EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97357B7816DC51B600E655EA /* Vaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vaults-Prefix.pch"; sourceTree = "<group>"; };
@@ -279,6 +287,12 @@
 		973DCB8C16C23E9A00B7C4FB /* Landmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Landmark.h; sourceTree = "<group>"; };
 		973DCB8D16C23E9A00B7C4FB /* Landmark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Landmark.m; sourceTree = "<group>"; };
 		97806DBA16D22A89009A3970 /* Vaults.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vaults.sqlite; sourceTree = "<group>"; };
+		97A746BF16DD8414008719CB /* KyotikaTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KyotikaTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97A746C016DD8414008719CB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		97A746C616DD8414008719CB /* KyotikaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KyotikaTests-Info.plist"; sourceTree = "<group>"; };
+		97A746C816DD8414008719CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		97A746CD16DD8414008719CB /* KyotikaTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KyotikaTests-Prefix.pch"; sourceTree = "<group>"; };
+		BEA405722E954D59BC277212 /* libPods-KyotikaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KyotikaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE506C3716CC61CB00159F98 /* mayumaro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro.png; sourceTree = "<group>"; };
 		EE506C3916CCABDB00159F98 /* mayumaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -307,6 +321,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97A746BB16DD8414008719CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97A746C116DD8414008719CB /* SenTestingKit.framework in Frameworks */,
+				97A746C216DD8414008719CB /* UIKit.framework in Frameworks */,
+				97A746C316DD8414008719CB /* Foundation.framework in Frameworks */,
+				D5328B68ECA6453EA7E813FF /* libPods-KyotikaTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -315,8 +340,10 @@
 			children = (
 				3807E6F416B4BA5400A116A0 /* kyotika */,
 				97357B7416DC51B600E655EA /* Vaults */,
+				97A746C416DD8414008719CB /* KyotikaTests */,
 				3807E6ED16B4BA5400A116A0 /* Frameworks */,
 				3807E6EB16B4BA5400A116A0 /* Products */,
+				0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -325,6 +352,7 @@
 			children = (
 				3807E6EA16B4BA5400A116A0 /* kyotika.app */,
 				97357B7116DC51B600E655EA /* Vaults */,
+				97A746BF16DD8414008719CB /* KyotikaTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,6 +367,8 @@
 				3807E6EE16B4BA5400A116A0 /* UIKit.framework */,
 				3807E6F016B4BA5400A116A0 /* Foundation.framework */,
 				3807E6F216B4BA5400A116A0 /* CoreGraphics.framework */,
+				97A746C016DD8414008719CB /* SenTestingKit.framework */,
+				BEA405722E954D59BC277212 /* libPods-KyotikaTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -586,6 +616,25 @@
 			path = seeds;
 			sourceTree = "<group>";
 		};
+		97A746C416DD8414008719CB /* KyotikaTests */ = {
+			isa = PBXGroup;
+			children = (
+				97A746C516DD8414008719CB /* Supporting Files */,
+				9712FD5816DD85060071377B /* SampleSpec.m */,
+			);
+			path = KyotikaTests;
+			sourceTree = "<group>";
+		};
+		97A746C516DD8414008719CB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97A746C616DD8414008719CB /* KyotikaTests-Info.plist */,
+				97A746C716DD8414008719CB /* InfoPlist.strings */,
+				97A746CD16DD8414008719CB /* KyotikaTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -624,6 +673,25 @@
 			productReference = 97357B7116DC51B600E655EA /* Vaults */;
 			productType = "com.apple.product-type.tool";
 		};
+		97A746BE16DD8414008719CB /* KyotikaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97A746D016DD8414008719CB /* Build configuration list for PBXNativeTarget "KyotikaTests" */;
+			buildPhases = (
+				97A746BA16DD8414008719CB /* Sources */,
+				97A746BB16DD8414008719CB /* Frameworks */,
+				97A746BC16DD8414008719CB /* Resources */,
+				97A746BD16DD8414008719CB /* ShellScript */,
+				209F1DBAAA6F46DEA8BB3A14 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KyotikaTests;
+			productName = KyotikaTests;
+			productReference = 97A746BF16DD8414008719CB /* KyotikaTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -632,7 +700,7 @@
 			attributes = {
 				CLASSPREFIX = KM;
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = "國居貴浩";
+				ORGANIZATIONNAME = "ÂúãÂ±ÖË≤¥Êµ©";
 			};
 			buildConfigurationList = 3807E6E416B4BA5400A116A0 /* Build configuration list for PBXProject "kyotika" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -649,6 +717,7 @@
 			targets = (
 				3807E6E916B4BA5400A116A0 /* kyotika */,
 				97357B7016DC51B600E655EA /* Vaults */,
+				97A746BE16DD8414008719CB /* KyotikaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -721,7 +790,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97A746BC16DD8414008719CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97A746C916DD8414008719CB /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		209F1DBAAA6F46DEA8BB3A14 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-KyotikaTests-resources.sh\"\n";
+		};
+		97A746BD16DD8414008719CB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3807E6E616B4BA5400A116A0 /* Sources */ = {
@@ -767,6 +874,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97A746BA16DD8414008719CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9712FD5916DD85060071377B /* SampleSpec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -786,6 +901,14 @@
 				38208FA616C5F3430065F7F8 /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		97A746C716DD8414008719CB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				97A746C816DD8414008719CB /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -904,6 +1027,46 @@
 			};
 			name = Release;
 		};
+		97A746CE16DD8414008719CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KyotikaTests/KyotikaTests-Prefix.pch";
+				INFOPLIST_FILE = "KyotikaTests/KyotikaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		97A746CF16DD8414008719CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KyotikaTests/KyotikaTests-Prefix.pch";
+				INFOPLIST_FILE = "KyotikaTests/KyotikaTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -930,6 +1093,15 @@
 			buildConfigurations = (
 				97357B7E16DC51B600E655EA /* Debug */,
 				97357B7F16DC51B600E655EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97A746D016DD8414008719CB /* Build configuration list for PBXNativeTarget "KyotikaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97A746CE16DD8414008719CB /* Debug */,
+				97A746CF16DD8414008719CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
