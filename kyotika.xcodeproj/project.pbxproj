@@ -93,7 +93,7 @@
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
 		970B24EE16DDA2A100B35280 /* KMProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 970B24ED16DDA2A100B35280 /* KMProgress.m */; };
 		970B24EF16DDA36E00B35280 /* KMProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 970B24ED16DDA2A100B35280 /* KMProgress.m */; };
-		9712FD5916DD85060071377B /* SampleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712FD5816DD85060071377B /* SampleSpec.m */; };
+		9712FD5916DD85060071377B /* ProgressSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712FD5816DD85060071377B /* ProgressSpec.m */; };
 		97357B7216DC51B600E655EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
 		97357B7316DC51B600E655EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
 		97357B7616DC51B600E655EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97357B7516DC51B600E655EA /* main.m */; };
@@ -274,7 +274,7 @@
 		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
 		970B24EC16DDA2A100B35280 /* KMProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMProgress.h; path = models/KMProgress.h; sourceTree = "<group>"; };
 		970B24ED16DDA2A100B35280 /* KMProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMProgress.m; path = models/KMProgress.m; sourceTree = "<group>"; };
-		9712FD5816DD85060071377B /* SampleSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleSpec.m; sourceTree = "<group>"; };
+		9712FD5816DD85060071377B /* ProgressSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressSpec.m; sourceTree = "<group>"; };
 		97357B7116DC51B600E655EA /* Vaults */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Vaults; sourceTree = BUILT_PRODUCTS_DIR; };
 		97357B7516DC51B600E655EA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97357B7816DC51B600E655EA /* Vaults-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vaults-Prefix.pch"; sourceTree = "<group>"; };
@@ -626,7 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				97A746C516DD8414008719CB /* Supporting Files */,
-				9712FD5816DD85060071377B /* SampleSpec.m */,
+				9712FD5816DD85060071377B /* ProgressSpec.m */,
 			);
 			path = KyotikaTests;
 			sourceTree = "<group>";
@@ -885,7 +885,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9712FD5916DD85060071377B /* SampleSpec.m in Sources */,
+				9712FD5916DD85060071377B /* ProgressSpec.m in Sources */,
 				970B24EF16DDA36E00B35280 /* KMProgress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
