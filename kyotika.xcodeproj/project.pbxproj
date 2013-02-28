@@ -92,7 +92,6 @@
 		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
 		970B24EE16DDA2A100B35280 /* KMProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 970B24ED16DDA2A100B35280 /* KMProgress.m */; };
-		970B24EF16DDA36E00B35280 /* KMProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 970B24ED16DDA2A100B35280 /* KMProgress.m */; };
 		9712FD5916DD85060071377B /* ProgressSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 9712FD5816DD85060071377B /* ProgressSpec.m */; };
 		97357B7216DC51B600E655EA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 973DCB5B16C2360700B7C4FB /* CoreData.framework */; };
 		97357B7316DC51B600E655EA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
@@ -886,7 +885,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9712FD5916DD85060071377B /* ProgressSpec.m in Sources */,
-				970B24EF16DDA36E00B35280 /* KMProgress.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1039,6 +1037,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/kyotika.app/kyotika";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -1051,6 +1050,7 @@
 				INFOPLIST_FILE = "KyotikaTests/KyotikaTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -1059,6 +1059,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0F74459167074F6399A198FB /* Pods-KyotikaTests.xcconfig */;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/kyotika.app/kyotika";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -1071,6 +1072,7 @@
 				INFOPLIST_FILE = "KyotikaTests/KyotikaTests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
