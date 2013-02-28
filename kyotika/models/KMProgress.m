@@ -13,9 +13,6 @@
 - (id)initWithUserDefaults
 {
     _complete = [[NSUserDefaults standardUserDefaults] floatForKey:@"complete"];
-    if (_complete == 0.0f) {
-        _complete = 0.2f;
-    }
     return self;
 }
 

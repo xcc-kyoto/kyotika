@@ -23,7 +23,7 @@ describe(@"Progress", ^{
             [[ud should] receive:@selector(floatForKey:) andReturn:theValue(0.0f) withArguments:@"complete"];
             
             KMProgress *p = [[KMProgress alloc] initWithUserDefaults];
-            [[theValue(p.complete) should] equal:theValue(0.2f)];
+            [[theValue(p.complete) should] equal:theValue(0.0f)];
             [[theValue(p.isWaitingForNero) should] beTrue];
             [[theValue(p.canStandbyNero) should] beFalse];
             [[theValue(p.isTogetherWithNero) should] beFalse];
