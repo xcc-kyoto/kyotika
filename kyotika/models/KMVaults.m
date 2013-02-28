@@ -22,6 +22,8 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
     NSDictionary*  _groupAnnotations[3];
 }
 
+@synthesize progress = _progress;
+
 - (id)initWithContext:(NSManagedObjectContext *)moc
 {
     self = [super init];
@@ -44,7 +46,7 @@ static const CLLocationDistance KMVaultsAreaThresholdSpan = 2000;
         }
         //  横20 x 縦20の区画でランドマークをまとめてグループ注釈として返す
 
-        _complete = [[NSUserDefaults standardUserDefaults] floatForKey:@"complete"];
+        _progress = [[KMProgress alloc] initWithUserDefaults];
     }
     return self;
 }
@@ -309,23 +311,8 @@ static KMTreasureAnnotation* hitAnnotationCheck(KMTreasureAnnotation* a, KMRegio
 
 - (void)handleProgress
 {
-    NSUInteger numOfAnnotations = [_treasureAnnotations count];
-    
-    if (_complete < 1.0) {
-        // 進捗率 25% で寝露に出会う。
-        float progress = (float)_totalPassedCount / (float)numOfAnnotations * 4;
-        int times = progress / 0.2 + 1;
-        float value = 0.2 * times;
-        if (value >= _complete) {
-            _complete = value;
-        }
-    } else if ((_complete < 2.0) && (_complete >= 1.0)) {
-        if (_totalPassedCount == numOfAnnotations) {
-            _complete = 2.0;
-        }
-    }
-    [[NSUserDefaults standardUserDefaults] setFloat:_complete forKey:@"complete"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [_progress updateAnnotations:[_treasureAnnotations count] passed:_totalPassedCount];
+    [_progress save];
 }
 
 - (void)save

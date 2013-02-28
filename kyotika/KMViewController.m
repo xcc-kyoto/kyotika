@@ -366,7 +366,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         pinView.canShowCallout = NO;
         [pinView startAnimation];
         _hunterAnnotationView = pinView;
-        [_hunterAnnotationView setStandbyNero:_vaults.complete >= 1.0];
+        [_hunterAnnotationView setStandbyNero:_vaults.progress.isTogetherWithNero];
         return pinView;
     }
     if ([annotation isKindOfClass:[KMAreaAnnotation class]]) {
@@ -655,14 +655,14 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (void)quizeViewControllerAnswer:(KMQuizeViewController*)controller
 {
-    float complete = _vaults.complete;
+    float complete = _vaults.progress.complete;
     float newcomplete = complete;
     __weak KMTreasureAnnotation* annotation = (KMTreasureAnnotation*)controller.userRef;
     annotation.lastAtackDate = [NSDate date];
     KMTreasureAnnotationView* v = (KMTreasureAnnotationView*)[_mapView viewForAnnotation:annotation];
     if (controller.selectedIndex == annotation.correctAnswerIndex) {
         [_vaults setPassedAnnotation :annotation];
-        newcomplete = _vaults.complete;
+        newcomplete = _vaults.progress.complete;
     } else {
         double delayInSeconds = KMTreasureAnnotationPenaltyDuration + 0.2;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -680,7 +680,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             KMEventViewController* c = [[KMEventViewController alloc] init];
             c.delegate = self;
-            c.complete = newcomplete;
+            c.progress = _vaults.progress;
             c.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentModalViewController:c animated:YES];
         });
@@ -689,7 +689,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
 - (void)eventViewControllerDone:(KMEventViewController*)vc
 {
-    if (vc.complete == 1.0)
+    if (vc.progress.canStandbyNero)
         [_hunterAnnotationView setStandbyNero:YES];
     [self dismissModalViewControllerAnimated:YES];
 }
