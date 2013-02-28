@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 #import "Tag.h"
+#import "KMProgress.h"
 
 @class KMTreasureAnnotation;
 
@@ -48,7 +49,7 @@
 - (void)save;
 + (int)gropuIndexForRegion:(MKCoordinateRegion)region;
 
-@property (assign) float complete;
+@property (strong, nonatomic) KMProgress *progress;
 @property (readonly) int totalPassedCount;
 @end
 

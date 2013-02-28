@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KMProgress.h"
 
 @class KMEventViewController;
 @protocol KMEventViewControllerDelegate <NSObject>
@@ -14,6 +15,6 @@
 @end
 
 @interface KMEventViewController : UIViewController
-@property (assign) float complete;
+@property (strong, nonatomic) KMProgress *progress;
 @property (assign) id<KMEventViewControllerDelegate> delegate;
 @end

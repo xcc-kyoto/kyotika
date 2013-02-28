@@ -18,12 +18,13 @@
 
 @implementation KMEventViewController
 
+@synthesize progress = _progress;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        _complete = 0.2;
     }
     return self;
 }
@@ -53,7 +54,7 @@
     _imageView.layer.anchorPoint = CGPointMake(1.0,1.0);
     _imageView.layer.frame = frame;
 
-    if (_complete == 2.0) {
+    if (_progress.isJustComplete) {
         _textView.text = NSLocalizedString(@"Complite Message", @"Complite Message");
         return;
     }
@@ -63,7 +64,7 @@
                                       animationWithKeyPath:@"transform"];
     
     float a0 = 0.1;
-    float a1 = _complete;
+    float a1 = _progress.complete;
     animation.values = @[
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(a0, a0, 1.0)],
                          [NSValue valueWithCATransform3D:CATransform3DMakeScale(a1, a1, 1.0)]
@@ -95,10 +96,7 @@
         NSLocalizedString(@"Event Message 3", @"Event Message 3"),
         NSLocalizedString(@"Event Message 4", @"Event Message 4")
     };
-    int index = (int)(_complete * 10.0) / 2 - 1;
-    if (index < 0) index = 0;
-    if (index >= 5) index = 4;
-    _textView.text = messages[index];
+    _textView.text = messages[_progress.messageIndex];
     
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     double delayInSeconds = 1.0;
@@ -107,7 +105,7 @@
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     });
 
-    if (_complete < 0.4) {
+    if (_progress.isWaitingForNero) {
         double delayInSeconds = 5.0;
         dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -121,9 +119,9 @@
 }
 - (IBAction)tap
 {
-    if (_complete >= 2.0) {
+    if (_progress.isCompleted) {
         ;
-    } else if (_complete >= 1.0) {
+    } else if (_progress.isTogetherWithNero) {
         if (_stage == 0) {
             _stage++;
             _textView.text = NSLocalizedString(@"Meet Message 1", @"Meet Message 1");
