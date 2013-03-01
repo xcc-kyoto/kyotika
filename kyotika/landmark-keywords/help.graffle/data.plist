@@ -226,13 +226,15 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{450, 1060.8981628417969}, {302.06802368164062, 453.10202026367188}}</string>
+			<string>{{152, 1148.0000287059315}, {640, 873.99993896484375}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>ID</key>
 			<integer>76</integer>
 			<key>ImageID</key>
 			<integer>17</integer>
+			<key>ManualSizeImage</key>
+			<string>YES</string>
 			<key>Shape</key>
 			<string>Rectangle</string>
 			<key>Style</key>
@@ -241,6 +243,11 @@
 				<dict>
 					<key>Draws</key>
 					<string>NO</string>
+				</dict>
+				<key>image fill</key>
+				<dict>
+					<key>ImageSizing</key>
+					<integer>0</integer>
 				</dict>
 				<key>shadow</key>
 				<dict>
@@ -1356,7 +1363,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-02-22 03:14:06 +0000</string>
+	<string>2013-02-25 03:09:43 +0000</string>
 	<key>Modifier</key>
 	<string>kunii</string>
 	<key>NotesVisible</key>
@@ -1432,7 +1439,7 @@
 		<key>ExpandedCanvases</key>
 		<array/>
 		<key>Frame</key>
-		<string>{{97, 85}, {1363, 1093}}</string>
+		<string>{{53, 85}, {1363, 1093}}</string>
 		<key>ListView</key>
 		<true/>
 		<key>OutlineWidth</key>
@@ -1446,7 +1453,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{-669, 652}, {2456, 1908}}</string>
+		<string>{{-669, 582}, {2456, 1908}}</string>
 		<key>Zoom</key>
 		<real>0.5</real>
 		<key>ZoomValues</key>
