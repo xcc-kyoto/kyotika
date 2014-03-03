@@ -13,9 +13,6 @@
 		3807E6F916B4BA5400A116A0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3807E6F716B4BA5400A116A0 /* InfoPlist.strings */; };
 		3807E6FB16B4BA5400A116A0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E6FA16B4BA5400A116A0 /* main.m */; };
 		3807E6FF16B4BA5500A116A0 /* KMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */; };
-		3807E70116B4BA5500A116A0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70016B4BA5500A116A0 /* Default.png */; };
-		3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70216B4BA5500A116A0 /* Default@2x.png */; };
-		3807E70516B4BA5500A116A0 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3807E70416B4BA5500A116A0 /* Default-568h@2x.png */; };
 		3807E78F16B4C49300A116A0 /* KMTreasureAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78A16B4C49300A116A0 /* KMTreasureAnnotation.m */; };
 		3807E79016B4C49300A116A0 /* KMTreasureHunterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78C16B4C49300A116A0 /* KMTreasureHunterAnnotation.m */; };
 		3807E79116B4C49300A116A0 /* KMVaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 3807E78E16B4C49300A116A0 /* KMVaults.m */; };
@@ -79,16 +76,9 @@
 		38A5D75A16BCE93500D04BFE /* KMAreaAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A5D75916BCE93500D04BFE /* KMAreaAnnotation.m */; };
 		38A5D76816BD3E8500D04BFE /* ggg.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76616BD3E8500D04BFE /* ggg.png */; };
 		38A5D76916BD3E8500D04BFE /* ggg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38A5D76716BD3E8500D04BFE /* ggg@2x.png */; };
-		38AAF09216D739EB0051929E /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08A16D739EB0051929E /* Default-Landscape@2x~ipad.png */; };
-		38AAF09316D739EB0051929E /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08B16D739EB0051929E /* Default-Landscape~ipad.png */; };
-		38AAF09416D739EB0051929E /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08C16D739EB0051929E /* Default-Portrait@2x~ipad.png */; };
-		38AAF09516D739EB0051929E /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08D16D739EB0051929E /* Default-Portrait~ipad.png */; };
-		38AAF09616D739EB0051929E /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08E16D739EB0051929E /* icon.png */; };
-		38AAF09716D739EB0051929E /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF08F16D739EB0051929E /* icon@2x.png */; };
-		38AAF09816D739EB0051929E /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF09016D739EB0051929E /* icon72.png */; };
-		38AAF09916D739EB0051929E /* icon72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38AAF09116D739EB0051929E /* icon72@2x.png */; };
 		38ADD8C516D21B4500FA9F18 /* patorash_nero.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADD8C316D21B4500FA9F18 /* patorash_nero.png */; };
 		38ADD8C616D21B4500FA9F18 /* patorash.png in Resources */ = {isa = PBXBuildFile; fileRef = 38ADD8C416D21B4500FA9F18 /* patorash.png */; };
+		38BBBD8D18C4183200D6B6F3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38BBBD8C18C4183200D6B6F3 /* Images.xcassets */; };
 		38E8140516BD7785002FF900 /* KMEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E8140316BD7785002FF900 /* KMEventViewController.m */; };
 		38E8140616BD7785002FF900 /* KMEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38E8140416BD7785002FF900 /* KMEventViewController.xib */; };
 		970B24EE16DDA2A100B35280 /* KMProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 970B24ED16DDA2A100B35280 /* KMProgress.m */; };
@@ -114,8 +104,6 @@
 		97A746C316DD8414008719CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3807E6F016B4BA5400A116A0 /* Foundation.framework */; };
 		97A746C916DD8414008719CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97A746C716DD8414008719CB /* InfoPlist.strings */; };
 		D5328B68ECA6453EA7E813FF /* libPods-KyotikaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA405722E954D59BC277212 /* libPods-KyotikaTests.a */; };
-		EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3916CCABDB00159F98 /* mayumaro2.png */; };
-		EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */ = {isa = PBXBuildFile; fileRef = EE506C3716CC61CB00159F98 /* mayumaro.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -155,9 +143,6 @@
 		3807E6FC16B4BA5400A116A0 /* kyotika-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "kyotika-Prefix.pch"; sourceTree = "<group>"; };
 		3807E6FD16B4BA5400A116A0 /* KMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMAppDelegate.h; sourceTree = "<group>"; };
 		3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMAppDelegate.m; sourceTree = "<group>"; };
-		3807E70016B4BA5500A116A0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		3807E70216B4BA5500A116A0 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		3807E70416B4BA5500A116A0 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3807E78916B4C49300A116A0 /* KMTreasureAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMTreasureAnnotation.h; path = models/KMTreasureAnnotation.h; sourceTree = "<group>"; };
 		3807E78A16B4C49300A116A0 /* KMTreasureAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KMTreasureAnnotation.m; path = models/KMTreasureAnnotation.m; sourceTree = "<group>"; };
 		3807E78B16B4C49300A116A0 /* KMTreasureHunterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KMTreasureHunterAnnotation.h; path = models/KMTreasureHunterAnnotation.h; sourceTree = "<group>"; };
@@ -258,16 +243,9 @@
 		38A5D76116BD3E4800D04BFE /* shines.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = shines.psd; sourceTree = "<group>"; };
 		38A5D76616BD3E8500D04BFE /* ggg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ggg.png; sourceTree = "<group>"; };
 		38A5D76716BD3E8500D04BFE /* ggg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ggg@2x.png"; sourceTree = "<group>"; };
-		38AAF08A16D739EB0051929E /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
-		38AAF08B16D739EB0051929E /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
-		38AAF08C16D739EB0051929E /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		38AAF08D16D739EB0051929E /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
-		38AAF08E16D739EB0051929E /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		38AAF08F16D739EB0051929E /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		38AAF09016D739EB0051929E /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72.png; sourceTree = "<group>"; };
-		38AAF09116D739EB0051929E /* icon72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon72@2x.png"; sourceTree = "<group>"; };
 		38ADD8C316D21B4500FA9F18 /* patorash_nero.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patorash_nero.png; sourceTree = "<group>"; };
 		38ADD8C416D21B4500FA9F18 /* patorash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = patorash.png; sourceTree = "<group>"; };
+		38BBBD8C18C4183200D6B6F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		38E8140216BD7785002FF900 /* KMEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMEventViewController.h; sourceTree = "<group>"; };
 		38E8140316BD7785002FF900 /* KMEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KMEventViewController.m; sourceTree = "<group>"; };
 		38E8140416BD7785002FF900 /* KMEventViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KMEventViewController.xib; sourceTree = "<group>"; };
@@ -296,8 +274,6 @@
 		97A746C816DD8414008719CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		97A746CD16DD8414008719CB /* KyotikaTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KyotikaTests-Prefix.pch"; sourceTree = "<group>"; };
 		BEA405722E954D59BC277212 /* libPods-KyotikaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KyotikaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE506C3716CC61CB00159F98 /* mayumaro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro.png; sourceTree = "<group>"; };
-		EE506C3916CCABDB00159F98 /* mayumaro2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mayumaro2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,6 +367,7 @@
 				3807E6FE16B4BA5500A116A0 /* KMAppDelegate.m */,
 				3892A4BC16B4C78800EA614B /* KMViewController.h */,
 				3892A4BD16B4C78800EA614B /* KMViewController.m */,
+				38BBBD8C18C4183200D6B6F3 /* Images.xcassets */,
 				3807E6F516B4BA5400A116A0 /* Supporting Files */,
 			);
 			path = kyotika;
@@ -403,17 +380,6 @@
 				3807E6F716B4BA5400A116A0 /* InfoPlist.strings */,
 				3807E6FA16B4BA5400A116A0 /* main.m */,
 				3807E6FC16B4BA5400A116A0 /* kyotika-Prefix.pch */,
-				38AAF08A16D739EB0051929E /* Default-Landscape@2x~ipad.png */,
-				38AAF08B16D739EB0051929E /* Default-Landscape~ipad.png */,
-				38AAF08C16D739EB0051929E /* Default-Portrait@2x~ipad.png */,
-				38AAF08D16D739EB0051929E /* Default-Portrait~ipad.png */,
-				38AAF08E16D739EB0051929E /* icon.png */,
-				38AAF08F16D739EB0051929E /* icon@2x.png */,
-				38AAF09016D739EB0051929E /* icon72.png */,
-				38AAF09116D739EB0051929E /* icon72@2x.png */,
-				3807E70016B4BA5500A116A0 /* Default.png */,
-				3807E70216B4BA5500A116A0 /* Default@2x.png */,
-				3807E70416B4BA5500A116A0 /* Default-568h@2x.png */,
 				38A2D77F16D7362000E393A0 /* Default-Landscape.psd */,
 				38A2D78016D7362000E393A0 /* Default-Portrait.psd */,
 				38208FA316C5F33B0065F7F8 /* Localizable.strings */,
@@ -443,8 +409,6 @@
 		3807E79316B4C54300A116A0 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				EE506C3916CCABDB00159F98 /* mayumaro2.png */,
-				EE506C3716CC61CB00159F98 /* mayumaro.png */,
 				3871A07C16BBB052004F8B84 /* searcher.png */,
 				3871A07D16BBB052004F8B84 /* searcher.psd */,
 				3871A07E16BBB052004F8B84 /* searcher@2x.png */,
@@ -704,7 +668,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KM;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "ÂúãÂ±ÖË≤¥Êµ©";
 			};
 			buildConfigurationList = 3807E6E416B4BA5400A116A0 /* Build configuration list for PBXProject "kyotika" */;
@@ -732,12 +696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEF8708416CCCD1C006BE303 /* mayumaro2.png in Resources */,
-				EEF8708516CCCD1C006BE303 /* mayumaro.png in Resources */,
 				3807E6F916B4BA5400A116A0 /* InfoPlist.strings in Resources */,
-				3807E70116B4BA5500A116A0 /* Default.png in Resources */,
-				3807E70316B4BA5500A116A0 /* Default@2x.png in Resources */,
-				3807E70516B4BA5500A116A0 /* Default-568h@2x.png in Resources */,
 				3807E7B716B4C54E00A116A0 /* keywordList.png in Resources */,
 				3807E7B816B4C54E00A116A0 /* keywordList@2x.png in Resources */,
 				3807E7BE16B4C54E00A116A0 /* landmarkList.png in Resources */,
@@ -749,6 +708,7 @@
 				383B467C16BCAA5E0067E1A5 /* About@2x.png in Resources */,
 				383B468016BCAA9F0067E1A5 /* Landmark-target.png in Resources */,
 				383B468116BCAA9F0067E1A5 /* Landmark-target@2x.png in Resources */,
+				38BBBD8D18C4183200D6B6F3 /* Images.xcassets in Resources */,
 				383B468216BCAA9F0067E1A5 /* shines.png in Resources */,
 				383B468816BCAB250067E1A5 /* Landmark.png in Resources */,
 				383B468916BCAB250067E1A5 /* Landmark@2x.png in Resources */,
@@ -783,14 +743,6 @@
 				38715B5216D369510046800F /* patorash@2x.png in Resources */,
 				38A2D74316D7188F00E393A0 /* help1@2x.png in Resources */,
 				38A2D74416D7188F00E393A0 /* help2@2x.png in Resources */,
-				38AAF09216D739EB0051929E /* Default-Landscape@2x~ipad.png in Resources */,
-				38AAF09316D739EB0051929E /* Default-Landscape~ipad.png in Resources */,
-				38AAF09416D739EB0051929E /* Default-Portrait@2x~ipad.png in Resources */,
-				38AAF09516D739EB0051929E /* Default-Portrait~ipad.png in Resources */,
-				38AAF09616D739EB0051929E /* icon.png in Resources */,
-				38AAF09716D739EB0051929E /* icon@2x.png in Resources */,
-				38AAF09816D739EB0051929E /* icon72.png in Resources */,
-				38AAF09916D739EB0051929E /* icon72@2x.png in Resources */,
 				3888C32616D8529F00B18DF6 /* shines@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -973,6 +925,8 @@
 		3807E70916B4BA5500A116A0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kyotika/kyotika-Prefix.pch";
 				INFOPLIST_FILE = "kyotika/kyotika-Info.plist";
@@ -986,6 +940,8 @@
 		3807E70A16B4BA5500A116A0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "kyotika/kyotika-Prefix.pch";
 				INFOPLIST_FILE = "kyotika/kyotika-Info.plist";
@@ -999,7 +955,6 @@
 		97357B7E16DC51B600E655EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -1017,7 +972,6 @@
 		97357B7F16DC51B600E655EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;

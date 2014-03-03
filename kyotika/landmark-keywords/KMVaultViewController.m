@@ -32,6 +32,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //  iOS 7用タブバーアイコン位置調整
+    if ([self.tabBar respondsToSelector:@selector(setItemPositioning:)])
+        self.tabBar.itemPositioning = UITabBarItemPositioningCentered;
+    
     viewController1 = [[KMLandmarkListController alloc] initWithStyle:UITableViewStylePlain];
     viewController1.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     
@@ -54,7 +58,6 @@
                                         viewController1.title,
                                         [_landmarks count],
                                         _totalLandmarkCount];
-    viewController3.pop = (self.selectedIndex == 2);
 }
 - (void)viewDidAppear:(BOOL)animated
 {

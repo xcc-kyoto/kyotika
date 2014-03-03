@@ -86,6 +86,10 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //  self.viewをステータスバーの下にもぐり込ませる
+    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     //  京都駅をデフォルト位置にする　latitude：35.0212466 longitude：135.7555968
     CLLocationCoordinate2D center = kyotoCenter;
     _kyotoregion = MKCoordinateRegionMakeWithDistance(center,
@@ -201,23 +205,8 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     c.keywords = [_vaults keywords];
     c.landmarks= [_vaults landmarks];
     c.totalLandmarkCount = _vaults.totalLandmarkCount;
-    c.selectedIndex = _prologue ? 2 : 0;
-
-    // 背景にまゆまろ
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"mayumaro2" ofType:@"png"];
-    UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    [imageView sizeToFit];
-    CGRect imageRect = imageView.frame;
-    CGRect frame = self.view.frame;
-    CGFloat newX = (frame.size.width - imageRect.size.width)/2.0;
-    CGFloat newY = (frame.size.height - imageRect.size.height)/2.0 + 40;
-    imageView.frame = CGRectMake(newX, newY,
-                                 imageRect.size.width, imageRect.size.height);
-    [c.view addSubview:imageView];
-    [c.view sendSubviewToBack:imageView];
-    
-    [self presentModalViewController:c animated:YES];
+    c.selectedIndex = _prologue ? 2 : 0;    
+    [self presentViewController:c animated:YES completion:nil];
 }
 
 /*
@@ -246,7 +235,7 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
         viewController.urlString = annotation.landmark.url;
         viewController.landmarkDelegate = self;
         viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-        [self presentModalViewController:viewController animated:YES];
+        [self presentViewController:viewController animated:YES completion:nil];
         return;
     }
     
@@ -256,7 +245,7 @@ static CLLocationCoordinate2D kyotoCenter = {34.985, 135.758};  //  JR京都駅�
     viewController.userRef = annotation;
     viewController.quizeDelegate = self;
     viewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-    [self presentModalViewController:viewController animated:YES];
+    [self presentViewController:viewController animated:YES completion:nil];
 }
 
 
@@ -436,6 +425,11 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
         //  ターゲットモード解除用のビューを画面上部に貼付ける。
         CGRect frame = self.view.bounds;
         frame.size.height = 44;
+        CGFloat topBarOffset = 0;   //  iOS 7のステータスバー対応
+        if ([self respondsToSelector:@selector(topLayoutGuide)]) {
+            topBarOffset = self.topLayoutGuide.length;
+            frame.size.height += topBarOffset;
+        }
         _stopTargetModeButton = [[UIView alloc] initWithFrame:frame];
         _stopTargetModeButton.backgroundColor = [UIColor colorWithHue:0.6 saturation:1 brightness:0.2 alpha:0.8];
         UITapGestureRecognizer* tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(stopTargetMode)];
@@ -444,6 +438,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
 
         frame = _stopTargetModeButton.bounds;
         frame.origin.y += 4;
+        frame.origin.y += topBarOffset;
         frame.size.height = 20;
         UILabel* titleLabel = [[UILabel alloc] initWithFrame:frame];
         [_stopTargetModeButton addSubview:titleLabel];
@@ -682,7 +677,7 @@ static BOOL coordinateInRegion(CLLocationCoordinate2D a, MKCoordinateRegion regi
             c.delegate = self;
             c.progress = _vaults.progress;
             c.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentModalViewController:c animated:YES];
+            [self presentViewController:c animated:YES completion:nil];
         });
     }
 }
